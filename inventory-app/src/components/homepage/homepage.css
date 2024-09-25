@@ -1,14 +1,135 @@
 .homepage {
     display: flex;
     width: 100%;
+    height: 100%;
 
     .cardDetails {
         flex: 3;
         border: 1px solid white;
     }
-    
+
     .details {
         flex: 1;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
         border: 1px solid white;
+        overflow: hidden;
+
+        .utilities {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex: 8;
+            border: 1px solid white;
+
+            .cardSearch {
+                flex: 3;
+                padding: 10px;
+                height: 100%;
+                overflow: hidden;
+
+                form {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+
+                    input {
+                        padding: 8px;
+                        border: none;
+                        outline: none;
+                        background-color: rgba(17, 25, 40, 1);
+                        color: white;
+                        border-radius: 5px;
+                        width: 80%;
+
+                        &:focus {
+                            border: 1px solid rgba(60, 110, 208, 1);
+                        }
+                    }
+
+                    button {
+                        width: 30%;
+                        padding: 8px;
+                        border: none;
+                        background-color: rgba(60, 110, 208, 0.8);
+                        color: white;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-weight: 500;
+
+                        &:hover {
+                            background-color: rgba(60, 110, 208, 1);
+                        }
+                    }
+                }
+
+                .searchResults {
+                    margin: 10px auto;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    width: 100%;
+                    max-height: 100%;
+                    overflow-y: scroll;
+
+                    .result {
+                        display: flex;
+                        height: 15%;
+                        width: 100%;
+                        align-items: center;
+                        justify-content: start;
+                        border: 1px solid white;
+
+                        img {
+                            width: 40px;
+                            height: 50px;
+                            object-fit: contain;
+                            margin: none;
+                        }
+
+                        .cardInfo {
+                            display: flex;
+                            flex-direction: column;
+                            padding: 5px;
+
+                            span {
+                                font-size: 16px;
+                            }
+
+                            p {
+                                font-size: 10px;
+                                justify-content: start;
+                                padding: 0;
+                                text-align: left;
+                                font-weight: lighter;
+                                color: rgba(255, 255, 255, 0.548);
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            .separator {
+                width: 95%;
+                height: 2px;
+                background-color: rgba(255, 255, 255, 0.125);
+            }
+
+            .inventory {
+                flex: 2;
+                border: 1px solid white;
+                height: 100%;
+            }
+        }
+
+
+        .userDetails {
+            flex: 1;
+            border: 1px solid white;
+            height: 100%;
+        }
     }
 }
