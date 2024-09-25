@@ -1,0 +1,14 @@
+.homepage {
+    display: flex;
+    width: 100%;
+
+    .cardDetails {
+        flex: 3;
+        border: 1px solid white;
+    }
+    
+    .details {
+        flex: 1;
+        border: 1px solid white;
+    }
+}
