@@ -6,6 +6,7 @@ const Homepage = () => {
   return (
     <div className="homepage">
       <div className="cardDetails">Card Information</div>
+      <div className="mainSeparator"></div>
       <div className="details">
         <div className="utilities">
           <div className="cardSearch">
@@ -120,7 +121,24 @@ const Homepage = () => {
             </div>
           </div>
           <div className="separator"></div>
-          <div className="inventory">Inventory</div>
+          <h3>Mathmech Circular</h3>
+          <div className="inventory">
+            <div className="sets">
+              <div className="resultSet">
+                <div className="setInfo">
+                  <p>Power of The Elements</p>
+                  <div className="set">
+                    <span>Quarter Century Super Rare (POTE-EN028)</span>
+                  </div>
+                </div>
+                <form>
+                  <input type="text" name="cardCount" placeholder="0" />
+                  <button>+</button>
+                  <button className="removeButton">-</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="userDetails">
           <UserInfo />
