@@ -11,6 +11,7 @@ function App() {
 
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
+      console.log(auth.currentUser);
       if (user) {
         setIsLoggedIn(true);
       } else {
