@@ -6,6 +6,63 @@
 
     .cardDetails {
         flex: 3;
+        display: flex;
+
+        .cardImage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .pictureContainer {
+                height: 80%;
+                width: 80%;
+                background-color: rgba(255, 255, 255, 0.125);
+                border-radius: 5%;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+
+                img {
+                    height: 80%;
+                }
+            }
+        }
+
+        .cardDetailsExpanded {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .description {
+                height: 80%;
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                margin-top: 100px;
+                text-align: left;
+
+                .header {
+                    flex: 1;
+                    margin-top: 68px;
+                }
+
+                .cardDescription {
+                    flex: 6;
+
+                    h3 {
+                        margin-bottom: 10px;
+                    }
+
+                    .cardAttributes {
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
     }
 
     .mainSeparator {

@@ -5,7 +5,52 @@ import UserInfo from "./user/UserInfo";
 const Homepage = () => {
   return (
     <div className="homepage">
-      <div className="cardDetails">Card Information</div>
+      <div className="cardDetails">
+        <div className="cardImage">
+          <div className="pictureContainer">
+            <img src="../../../images/MathmechCircular.png" alt="card image" />
+          </div>
+        </div>
+        <div className="cardDetailsExpanded">
+          <div className="description">
+            <div className="header">
+              <h3>Mathmech Circular - Power of the Elements (POTE)</h3>
+              <p>Power of the Elements</p>
+            </div>
+            <div className="cardDescription">
+              <h3>Card Details</h3>
+              <p className="effect">
+                You can send 1 "Mathmech" monster, except "Mathmech Circular",
+                from your Deck to your GY; Special Summon this card from your
+                hand, also you can only attack with 1 monster for the rest of
+                this turn. If a "Mathmech" monster is Normal or Special Summoned
+                to your field while you control this monster (except during the
+                Damage Step): You can add 1 "Mathmech" Spell/Trap from your Deck
+                to your hand. You can only use each effect of "Mathmech
+                Circular" once per turn.
+              </p>
+              <div className="cardAttributes">
+                <p>
+                  <b>Number:</b> POTE-EN028
+                </p>
+                <p>
+                  <b>Rarity:</b> Super Rare
+                </p>
+                <p>
+                  <b>Attribute, Monster Type, Card Type:</b> LIGHT, Cyberse,
+                  Effect Monster
+                </p>
+                <p>
+                  <b>Level:</b> 4
+                </p>
+                <p>
+                  <b>A/D:</b> 1500/1500
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="mainSeparator"></div>
       <div className="details">
         <div className="utilities">
