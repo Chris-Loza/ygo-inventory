@@ -4,6 +4,71 @@
     height: 100%;
     position: relative;
 
+    .toggleSwitch {
+        position: absolute;
+        left: 37.5%;
+        top: 2%;
+
+        input {
+            appearance: none;
+            position: relative;
+            width: 100px;
+            height: 30px;
+            border-radius: 25px;
+            background-color: rgba(255, 255, 255, 0.125);
+            transition: background .3s;
+            outline: none;
+            cursor: pointer;
+        }
+
+
+        input::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            height: 1.25rem;
+            width: 1.25rem;
+            background-color: white;
+            transition: left .3s;
+        }
+
+        input:checked {
+            background-color: rgba(60, 110, 208, 1);
+        }
+
+        input:checked::before {
+            left: 85%;
+        }
+
+        input::after {
+            position: absolute;
+            content: "Home";
+            color: white;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+        }
+
+        input:checked::after {
+            position: absolute;
+            content: "Inventory";
+            color: white;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .inventoryMode {
+        flex: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .cardDetails {
         flex: 3;
         display: flex;

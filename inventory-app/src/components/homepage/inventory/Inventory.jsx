@@ -1,7 +1,12 @@
 import React from "react";
+import "./inventory.css";
 
 const Inventory = () => {
-  return <div>Inventory</div>;
+  return (
+    <div className="inventoryModeComp">
+        inventory
+    </div>
+  );
 };
 
 export default Inventory;
