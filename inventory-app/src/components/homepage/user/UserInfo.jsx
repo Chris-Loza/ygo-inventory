@@ -5,7 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 const UserInfo = () => {
   const [currentUser, setCurrentUser] = useState({});
-  console.log(auth.currentUser.uid);
+  // console.log(auth.currentUser.uid);
 
   useEffect(() => {
     if(!auth.currentUser) return;
@@ -13,7 +13,7 @@ const UserInfo = () => {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
 
-      console.log(docSnap.data());
+      // console.log(docSnap.data());
       setCurrentUser(docSnap.data());
     };
 
@@ -23,7 +23,7 @@ const UserInfo = () => {
     };
   }, [auth.currentUser]);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div className="userInfo">
