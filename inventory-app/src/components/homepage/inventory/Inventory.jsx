@@ -28,6 +28,16 @@ const Inventory = () => {
     }
   };
 
+  const handleCardEntry = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const { cardName, attributes, stats, setNumber } =
+      Object.fromEntries(formData);
+
+    console.log(cardName, attributes, stats, setNumber);
+  };
+
   return (
     <div className="inventoryModeComp">
       <div className="inventorySearch">
@@ -46,7 +56,8 @@ const Inventory = () => {
           {modal && (
             <div className="modalContainer" onClick={closeModal} ref={modalRef}>
               <div className="modal">
-                <form>
+                <img onClick={handleModal} className="closeIcon" src="../../../../images/CloseIcon.svg" alt="close button" />
+                <form onSubmit={handleCardEntry}>
                   <label htmlFor="file">
                     <img
                       src={
@@ -74,11 +85,10 @@ const Inventory = () => {
                     placeholder="Set-Number"
                     name="setNumber"
                   />
+                  <div className="buttons">
+                    <button>Enter</button>
+                  </div>
                 </form>
-                <div className="buttons">
-                  <button>Enter</button>
-                  <button onClick={handleModal}>Close</button>
-                </div>
               </div>
             </div>
           )}
@@ -99,16 +109,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -121,16 +123,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -143,16 +137,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -165,16 +151,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -187,16 +165,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -208,6 +178,51 @@ const Inventory = () => {
                 <span>Mathmech Circular</span>
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
           </div>
@@ -226,16 +241,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -248,16 +255,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -270,16 +269,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -292,16 +283,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -314,16 +297,8 @@ const Inventory = () => {
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
               </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
             <div className="item">
@@ -335,6 +310,51 @@ const Inventory = () => {
                 <span>Mathmech Circular</span>
                 <p>Light/Cyberse Level 4</p>
                 <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
+              </div>
+            </div>
+            <div className="item">
+              <img
+                src="../../../../images/MathmechCircular.png"
+                alt="Card Image"
+              />
+              <div className="itemInfo">
+                <span>Mathmech Circular</span>
+                <p>Light/Cyberse Level 4</p>
+                <p>1500/1500</p>
+              </div>
+              <div className="owned">
+                <span>Amount: 3</span>
               </div>
             </div>
           </div>

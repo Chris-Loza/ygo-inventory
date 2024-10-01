@@ -10,6 +10,10 @@ const Homepage = () => {
     setInventoryMode(!inventoryMode);
   };
 
+  // const basicForm = (e) => {
+  //   e.preventDefault();
+  // }
+
   return (
     <div className="homepage">
       <div className="toggleSwitch">
