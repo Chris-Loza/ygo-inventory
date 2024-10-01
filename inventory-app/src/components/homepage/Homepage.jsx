@@ -205,6 +205,32 @@ const Homepage = () => {
                   <button className="removeButton">-</button>
                 </form>
               </div>
+              <div className="resultSet">
+                <div className="setInfo">
+                  <p>Power of The Elements</p>
+                  <div className="set">
+                    <span>Quarter Century Super Rare (POTE-EN028)</span>
+                  </div>
+                </div>
+                <form onSubmit={basicForm}>
+                  <input type="text" name="cardCount" placeholder="0" />
+                  <button>+</button>
+                  <button className="removeButton">-</button>
+                </form>
+              </div>
+              <div className="resultSet">
+                <div className="setInfo">
+                  <p>Power of The Elements</p>
+                  <div className="set">
+                    <span>Quarter Century Super Rare (POTE-EN028)</span>
+                  </div>
+                </div>
+                <form onSubmit={basicForm}>
+                  <input type="text" name="cardCount" placeholder="0" />
+                  <button>+</button>
+                  <button className="removeButton">-</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
