@@ -8,4 +8,193 @@
     width: 90%;
     height: 85%;
 
+    .inventorySearch {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 10px;
+            margin-left: 25px;
+
+            input {
+                padding: 8px;
+                border: none;
+                outline: none;
+                background-color: rgba(17, 25, 40, 0.75);
+                color: white;
+                border-radius: 5px;
+                width: 80%;
+
+                &:focus {
+                    border: 1px solid rgba(60, 110, 208, 1);
+                }
+            }
+
+            button {
+                width: 30%;
+                padding: 8px;
+                border: none;
+                background-color: rgba(60, 110, 208, 0.8);
+                color: white;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: 500;
+
+                &:hover {
+                    background-color: rgba(60, 110, 208, 1);
+                }
+            }
+        }
+    }
+    
+    .searchListsSeparator {
+        width: 95%;
+        margin: 10px auto;
+        height: 2px;
+        background-color: rgba(255, 255, 255, 0.125);
+    }
+
+    .lists {
+        flex: 12;
+        display: flex;
+        margin-bottom: 15px;
+        width: 95%;
+        overflow: hidden;
+
+        .inventoryList {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-height: 100%;
+            position: relative;
+
+            h3 {
+                position: absolute;
+                left: 42.5%;
+            }
+
+            .items {
+                margin-top: 30px;
+                overflow-y: scroll;
+
+                .item {
+                    display: flex;
+                    height: 12%;
+                    width: 95%;
+                    margin: 8px auto;
+                    align-items: center;
+                    justify-content: start;
+                    border: 1px solid rgba(255, 255, 255, 0.125);
+                    border-radius: 2px;
+                    padding: 2px;
+                    cursor: pointer;
+
+                    img {
+                        width: 40px;
+                        height: 50px;
+                        object-fit: contain;
+                        margin: none;
+                    }
+
+                    .itemInfo {
+                        display: flex;
+                        flex-direction: column;
+                        padding: 5px;
+                        gap: 2px;
+
+                        span {
+                            font-size: 16px;
+                        }
+
+                        p {
+                            font-size: 10px;
+                            justify-content: start;
+                            padding: 0;
+                            text-align: left;
+                            font-weight: lighter;
+                            color: rgba(255, 255, 255, 0.548);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .listsSeparator {
+            width: 2px;
+            margin: auto;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.125);
+        }
+
+        .wishList {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-height: 100%;
+            position: relative;
+
+            h3 {
+                position: absolute;
+                left: 42.5%;
+            }
+
+            .items {
+                margin-top: 30px;
+                overflow-y: scroll;
+
+                .item {
+                    display: flex;
+                    height: 12%;
+                    width: 95%;
+                    margin: 8px auto;
+                    align-items: center;
+                    justify-content: start;
+                    border: 1px solid rgba(255, 255, 255, 0.125);
+                    border-radius: 2px;
+                    padding: 2px;
+                    cursor: pointer;
+
+                    img {
+                        width: 40px;
+                        height: 50px;
+                        object-fit: contain;
+                        margin: none;
+                    }
+
+                    .itemInfo {
+                        display: flex;
+                        flex-direction: column;
+                        padding: 5px;
+                        gap: 2px;
+
+                        span {
+                            font-size: 16px;
+                        }
+
+                        p {
+                            font-size: 10px;
+                            justify-content: start;
+                            padding: 0;
+                            text-align: left;
+                            font-weight: lighter;
+                            color: rgba(255, 255, 255, 0.548);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

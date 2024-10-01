@@ -4,7 +4,7 @@ import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
 
 const Homepage = () => {
-  const [inventoryMode, setInventoryMode] = useState(false);
+  const [inventoryMode, setInventoryMode] = useState(true);
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
