@@ -10,9 +10,9 @@ const Homepage = () => {
     setInventoryMode(!inventoryMode);
   };
 
-  // const basicForm = (e) => {
-  //   e.preventDefault();
-  // }
+  const basicForm = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <div className="homepage">
@@ -78,7 +78,7 @@ const Homepage = () => {
       <div className="details">
         <div className="utilities">
           <div className="cardSearch">
-            <form>
+            <form onSubmit={basicForm}>
               <input
                 type="text"
                 name="cardname"
@@ -199,7 +199,7 @@ const Homepage = () => {
                     <span>Quarter Century Super Rare (POTE-EN028)</span>
                   </div>
                 </div>
-                <form>
+                <form onSubmit={basicForm}>
                   <input type="text" name="cardCount" placeholder="0" />
                   <button>+</button>
                   <button className="removeButton">-</button>
