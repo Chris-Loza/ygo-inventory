@@ -119,94 +119,16 @@ const Homepage = () => {
                   <p>1500/1500</p>
                 </div>
               </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
+              {filteredCards.map((card) => (
+                <div className="result" key={card.id}>
+                  <img src={card.card_images[0].image_url_small} alt="result image" />
+                  <div className="cardInfo">
+                    <span>{card.name}</span>
+                    <p>{card.attribute}/{card.race} Level{card.level}</p>
+                    <p>{card.atk}/{card.def}</p>
+                  </div>
                 </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
           <div className="separator"></div>
