@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./homepage.css";
 import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
+import { cardList } from "../../lib/cardList";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
@@ -12,7 +13,10 @@ const Homepage = () => {
 
   const basicForm = (e) => {
     e.preventDefault();
-  }
+  };
+
+  console.log(cardList.data[0].name);
+
 
   return (
     <div className="homepage">
