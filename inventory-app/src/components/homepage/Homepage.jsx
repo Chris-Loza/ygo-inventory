@@ -6,6 +6,8 @@ import { cardList } from "../../lib/cardList";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredCards, setFilteredCards] = useState([]);
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
@@ -15,8 +17,10 @@ const Homepage = () => {
     e.preventDefault();
   };
 
-  console.log(cardList.data[0].name);
-
+  // const filteredCards = cardList.data.filter((c) =>
+  //   c.name.toLowerCase().includes(searchInput.toLowerCase())
+  // );
+  console.log(filteredCards);
 
   return (
     <div className="homepage">
@@ -82,14 +86,27 @@ const Homepage = () => {
       <div className="details">
         <div className="utilities">
           <div className="cardSearch">
-            <form onSubmit={basicForm}>
               <input
                 type="text"
                 name="cardname"
                 placeholder="Enter Card Name..."
+                onChange={(e) => {
+                  const newSearchInput = e.target.value;
+                  setSearchInput(newSearchInput);
+
+                  if (newSearchInput === "") {
+                    setFilteredCards([]);
+                  } else {
+                    setFilteredCards(
+                      cardList.data.filter((c) =>
+                        c.name
+                          .toLowerCase()
+                          .includes(newSearchInput.toLowerCase())
+                      )
+                    );
+                  }
+                }}
               />
-              <button>Search</button>
-            </form>
             <div className="searchResults">
               <div className="result">
                 <img

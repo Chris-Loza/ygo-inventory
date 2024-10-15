@@ -42,21 +42,19 @@ const Inventory = () => {
     <div className="inventoryModeComp">
       <div className="inventorySearch">
         <div className="formSearch">
-          <form>
-            <input
-              type="text"
-              name="cardname"
-              placeholder="Enter Card Name..."
-            />
-            <button>Search</button>
-          </form>
+          <input type="text" name="cardname" placeholder="Enter Card Name..." />
         </div>
         <div className="manualEntry">
           <button onClick={handleModal}>Card Entry</button>
           {modal && (
             <div className="modalContainer" onClick={closeModal} ref={modalRef}>
               <div className="modal">
-                <img onClick={handleModal} className="closeIcon" src="../../../../images/CloseIcon.svg" alt="close button" />
+                <img
+                  onClick={handleModal}
+                  className="closeIcon"
+                  src="../../../../images/CloseIcon.svg"
+                  alt="close button"
+                />
                 <form onSubmit={handleCardEntry}>
                   <label htmlFor="file">
                     <img

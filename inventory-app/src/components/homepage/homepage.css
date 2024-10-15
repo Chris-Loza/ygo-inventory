@@ -156,7 +156,22 @@
                 height: 100%;
                 overflow: hidden;
 
-                form {
+                input {
+                    padding: 8px;
+                    margin-right: 18px;
+                    border: none;
+                    outline: none;
+                    background-color: rgba(17, 25, 40, 1);
+                    color: white;
+                    border-radius: 5px;
+                    width: 98%;
+
+                    &:focus {
+                        border: 1px solid rgba(60, 110, 208, 1);
+                    }
+                }
+
+                /* form {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
@@ -190,7 +205,7 @@
                             background-color: rgba(60, 110, 208, 1);
                         }
                     }
-                }
+                } */
 
                 .searchResults {
                     margin: 10px auto;

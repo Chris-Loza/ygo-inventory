@@ -19,51 +19,30 @@
         .formSearch {
             display: flex;
             flex: 8;
+            
+            input {
+                margin-top: 20px;
+                margin-left: 26px;
+                border: 1px solid white;
+                padding: 8px;
+                border: none;
+                outline: none;
+                background-color: rgba(17, 25, 40, 0.75);
+                color: white;
+                border-radius: 5px;
+                width: 30%;
+                align-self: flex-end;
 
-            form {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                margin-top: 10px;
-                margin-left: 25px;
-
-                input {
-                    padding: 8px;
-                    border: none;
-                    outline: none;
-                    background-color: rgba(17, 25, 40, 0.75);
-                    color: white;
-                    border-radius: 5px;
-                    width: 80%;
-
-                    &:focus {
-                        border: 1px solid rgba(60, 110, 208, 1);
-                    }
-                }
-
-                button {
-                    width: 30%;
-                    padding: 8px;
-                    border: none;
-                    background-color: rgba(60, 110, 208, 0.8);
-                    color: white;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    font-weight: 500;
-
-                    &:hover {
-                        background-color: rgba(60, 110, 208, 1);
-                    }
+                &:focus {
+                    border: 1px solid rgba(60, 110, 208, 1);
                 }
             }
-
         }
 
 
         .manualEntry {
             flex: 1;
-            margin-top: 10px;
+            margin-top: 18px;
             margin-right: 12px;
 
             button {
