@@ -7,6 +7,7 @@ import { cardList } from "../../lib/cardList";
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [cardCount, setCardCount] = useState();
   const [filteredCards, setFilteredCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({
     name: "",
@@ -21,7 +22,11 @@ const Homepage = () => {
     atk: "",
     def: "",
     linkval: "",
+    frameType: "",
   });
+
+  const [invCards, setInvCards] = useState([]);
+  const [wishCards, setWishCards] = useState([]);
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
@@ -47,11 +52,62 @@ const Homepage = () => {
       atk: card.atk,
       def: card.def,
       linkval: card.linkval,
+      frameType: card.frameType,
     };
     setSelectedCard(newCard);
-    console.log(newCard);
   };
-  console.log(selectedCard);
+
+  const handleCardAdd = (selectedCard, cardCount, setName, index) => {
+    console.log(selectedCard);
+    const cardExists =
+      invCards.some((card) => card.name === selectedCard.name) &&
+      invCards.some((card) => card.set === setName);
+    const cardIndex = invCards.findIndex((card) => card.set === setName);
+
+    if (!cardExists) {
+      invCards.push({
+        name: selectedCard.name,
+        set: setName,
+        rarity: selectedCard.rarity[index],
+        code: selectedCard.set[index],
+        imageURL: selectedCard.image_url,
+        description: selectedCard.desc,
+        attribute: selectedCard.attribute,
+        race: selectedCard.race,
+        type: selectedCard.humanReadableCardType,
+        level: selectedCard.level,
+        atk: selectedCard.atk,
+        def: selectedCard.def,
+        linkval: selectedCard.linkval,
+        frameType: selectedCard.frameType,
+        count: Number(cardCount),
+      });
+    } else {
+      invCards[cardIndex].count =
+        Number(cardCount) + Number(invCards[cardIndex].count);
+    }
+
+    console.log(invCards);
+  };
+
+  const handleCardRemove = (selectedCard, cardCount, setName, index) => {
+    console.log(selectedCard);
+    const cardExists =
+      invCards.some((card) => card.name === selectedCard.name) &&
+      invCards.some((card) => card.set === setName);
+    const cardIndex = invCards.findIndex((card) => card.set === setName);
+
+    if (!cardExists) {
+      return;
+    } else {
+      invCards[cardIndex].count = Number(invCards[cardIndex].count) - Number(cardCount);
+      if (invCards[cardIndex].count < 1) {
+        invCards.splice(cardIndex, 1);
+      }
+    }
+
+    console.log(invCards);
+  };
 
   return (
     <div className="homepage">
@@ -122,7 +178,12 @@ const Homepage = () => {
                     <p>
                       {selectedCard.level ? (
                         <>
-                          <b>Level:</b> {selectedCard.level}
+                          <b>
+                            {selectedCard.frameType !== "xyz"
+                              ? "Level:"
+                              : "Rank:"}
+                          </b>{" "}
+                          {selectedCard.level}
                         </>
                       ) : (
                         ""
@@ -132,7 +193,8 @@ const Homepage = () => {
                       {selectedCard.atk ? (
                         <>
                           <b>A/D:</b>{" "}
-                          {selectedCard.def !== null && selectedCard.def !== undefined
+                          {selectedCard.def !== null &&
+                          selectedCard.def !== undefined
                             ? `${selectedCard.atk}/${selectedCard.def}`
                             : `${selectedCard.atk}/Link-${selectedCard.linkval}`}
                         </>
@@ -189,9 +251,20 @@ const Homepage = () => {
                       <>
                         <p>
                           {card.attribute ? `${card.attribute}/` : ""}
-                          {card.race} {card.level ? `Level ${card.level}` : ""}
+                          {card.race}{" "}
+                          {card.level
+                            ? card.frameType !== "xyz"
+                              ? `Level ${card.level}`
+                              : `Rank ${card.level}`
+                            : ""}
                         </p>
-                        <p>{(card.atk && card.def !== null && card.def !== undefined) ? `${card.atk}/${card.def}` : `${card.atk}/Link-${card.linkval}`}</p>
+                        <p>
+                          {card.atk &&
+                          card.def !== null &&
+                          card.def !== undefined
+                            ? `${card.atk}/${card.def}`
+                            : `${card.atk}/Link-${card.linkval}`}
+                        </p>
                       </>
                     ) : (
                       <>
@@ -219,9 +292,37 @@ const Homepage = () => {
                     </div>
                   </div>
                   <form onSubmit={basicForm}>
-                    <input type="text" name="cardCount" placeholder="0" />
-                    <button>+</button>
-                    <button className="removeButton">-</button>
+                    <input
+                      type="text"
+                      name="cardCount"
+                      placeholder="0"
+                      onChange={(e) => {
+                        const newCount = e.target.value;
+                        setCardCount(newCount);
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      onClick={() =>
+                        handleCardAdd(selectedCard, cardCount, setName, index)
+                      }
+                    >
+                      +
+                    </button>
+                    <button
+                    type="submit"
+                      className="removeButton"
+                      onClick={() =>
+                        handleCardRemove(
+                          selectedCard,
+                          cardCount,
+                          setName,
+                          index
+                        )
+                      }
+                    >
+                      -
+                    </button>
                   </form>
                 </div>
               ))}
