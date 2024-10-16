@@ -157,5 +157,274 @@ export const cardList = {
             }
           ]
         },
+        {
+          "id": 87804365,
+          "name": "Mathmech Superfactorial",
+          "type": "Trap Card",
+          "humanReadableCardType": "Normal Trap",
+          "frameType": "trap",
+          "desc": "Target up to 3 \"Mathmech\" monsters in your GY with different names, then activate 1 of these effects;\r\n● Special Summon them, but their effects are negated, then, immediately after this effect resolves, Synchro Summon 1 \"Mathmech\" Synchro Monster using only those monsters, and shuffle the materials into the Deck instead of sending them to the GY.\r\n● Special Summon them, but their effects are negated, then, immediately after this effect resolves, Xyz Summon 1 \"Mathmech\" Xyz Monster using only those monsters.\r\nYou can only activate 1 \"Mathmech Superfactorial\" per turn.",
+          "race": "Normal",
+          "archetype": "Mathmech",
+          "ygoprodeck_url": "https://ygoprodeck.com/card/mathmech-superfactorial-10422",
+          "card_sets": [
+            {
+              "set_name": "Mystic Fighters",
+              "set_code": "MYFI-EN012",
+              "set_rarity": "Secret Rare",
+              "set_rarity_code": "(ScR)",
+              "set_price": "12.05"
+            }
+          ],
+          "card_images": [
+            {
+              "id": 87804365,
+              "image_url": "https://images.ygoprodeck.com/images/cards/87804365.jpg",
+              "image_url_small": "https://images.ygoprodeck.com/images/cards_small/87804365.jpg",
+              "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/87804365.jpg"
+            }
+          ],
+          "card_prices": [
+            {
+              "cardmarket_price": "1.61",
+              "tcgplayer_price": "1.08",
+              "ebay_price": "10.49",
+              "amazon_price": "10.94",
+              "coolstuffinc_price": "3.99"
+            }
+          ]
+        },
+        {
+          "id": 14025912,
+          "name": "Mathmech Equation",
+          "type": "Spell Card",
+          "humanReadableCardType": "Normal Spell",
+          "frameType": "spell",
+          "desc": "Target 1 \"Mathmech\" monster in your GY; Special Summon it, and if you do, it gains 1000 ATK until the end of this turn. You can only activate 1 \"Mathmech Equation\" per turn.",
+          "race": "Normal",
+          "archetype": "Mathmech",
+          "ygoprodeck_url": "https://ygoprodeck.com/card/mathmech-equation-10420",
+          "card_sets": [
+            {
+              "set_name": "Battles of Legend: Monstrous Revenge",
+              "set_code": "BLMR-EN092",
+              "set_rarity": "Ultra Rare",
+              "set_rarity_code": "(UR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "Mystic Fighters",
+              "set_code": "MYFI-EN010",
+              "set_rarity": "Secret Rare",
+              "set_rarity_code": "(ScR)",
+              "set_price": "5.4"
+            }
+          ],
+          "card_images": [
+            {
+              "id": 14025912,
+              "image_url": "https://images.ygoprodeck.com/images/cards/14025912.jpg",
+              "image_url_small": "https://images.ygoprodeck.com/images/cards_small/14025912.jpg",
+              "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/14025912.jpg"
+            }
+          ],
+          "card_prices": [
+            {
+              "cardmarket_price": "0.10",
+              "tcgplayer_price": "0.13",
+              "ebay_price": "6.95",
+              "amazon_price": "5.69",
+              "coolstuffinc_price": "0.99"
+            }
+          ]
+        },
+        {
+          "id": 38342335,
+          "name": "Knightmare Unicorn",
+          "typeline": [
+            "Fiend",
+            "Link",
+            "Effect"
+          ],
+          "type": "Link Monster",
+          "humanReadableCardType": "Link Effect Monster",
+          "frameType": "link",
+          "desc": "2+ monsters with different names\r\nIf this card is Link Summoned: You can discard 1 card, then target 1 card on the field; shuffle it into the Deck, then, if this card was co-linked when this effect was activated, you can draw 1 card. You can only use this effect of \"Knightmare Unicorn\" once per turn. While any co-linked \"Knightmare\" monsters are on the field, for your normal draw in your Draw Phase, draw 1 card for each different card name among those co-linked \"Knightmare\" monsters, instead of drawing just 1 card.",
+          "race": "Fiend",
+          "atk": 2200,
+          "def": null,
+          "level": 0,
+          "attribute": "DARK",
+          "archetype": "Knightmare",
+          "linkval": 3,
+          "linkmarkers": [
+            "Left",
+            "Right",
+            "Bottom"
+          ],
+          "ygoprodeck_url": "https://ygoprodeck.com/card/knightmare-unicorn-9235",
+          "card_sets": [
+            {
+              "set_name": "2019 Gold Sarcophagus Tin Mega Pack",
+              "set_code": "MP19-EN028",
+              "set_rarity": "Ultra Rare",
+              "set_rarity_code": "(UR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Collector's Rare",
+              "set_rarity_code": "(CR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Platinum Secret Rare",
+              "set_rarity_code": "(PS)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Quarter Century Secret Rare",
+              "set_rarity_code": "",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Secret Rare",
+              "set_rarity_code": "(ScR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Super Rare",
+              "set_rarity_code": "(SR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Ultimate Rare",
+              "set_rarity_code": "(UtR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "25th Anniversary Rarity Collection",
+              "set_code": "RA01-EN043",
+              "set_rarity": "Ultra Rare",
+              "set_rarity_code": "(UR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "Flames of Destruction",
+              "set_code": "FLOD-EN047",
+              "set_rarity": "Secret Rare",
+              "set_rarity_code": "(ScR)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "Genesis Impact",
+              "set_code": "GEIM-EN050",
+              "set_rarity": "Collector's Rare",
+              "set_rarity_code": "(CR)",
+              "set_price": "1.88"
+            },
+            {
+              "set_name": "Genesis Impact",
+              "set_code": "GEIM-EN050",
+              "set_rarity": "Rare",
+              "set_rarity_code": "(R)",
+              "set_price": "0"
+            },
+            {
+              "set_name": "Maximum Gold: El Dorado",
+              "set_code": "MGED-EN034",
+              "set_rarity": "Premium Gold Rare",
+              "set_rarity_code": "(PG)",
+              "set_price": "0"
+            }
+          ],
+          "card_images": [
+            {
+              "id": 38342335,
+              "image_url": "https://images.ygoprodeck.com/images/cards/38342335.jpg",
+              "image_url_small": "https://images.ygoprodeck.com/images/cards_small/38342335.jpg",
+              "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/38342335.jpg"
+            },
+            {
+              "id": 38342336,
+              "image_url": "https://images.ygoprodeck.com/images/cards/38342336.jpg",
+              "image_url_small": "https://images.ygoprodeck.com/images/cards_small/38342336.jpg",
+              "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/38342336.jpg"
+            }
+          ],
+          "card_prices": [
+            {
+              "cardmarket_price": "0.02",
+              "tcgplayer_price": "0.17",
+              "ebay_price": "1.33",
+              "amazon_price": "4.55",
+              "coolstuffinc_price": "0.99"
+            }
+          ]
+        },
+        {
+          "id": 88021907,
+          "name": "Primathmech Laplacian",
+          "typeline": [
+            "Cyberse",
+            "Xyz",
+            "Effect"
+          ],
+          "type": "XYZ Monster",
+          "humanReadableCardType": "Xyz Effect Monster",
+          "frameType": "xyz",
+          "desc": "3 Level 4 monsters\r\nIf a \"Mathmech\" card(s) you control would be destroyed by card effect, you can detach 1 material from this card instead. If this card is Xyz Summoned: You can detach up to 3 materials from it, then choose that many effects (you cannot choose the same effect twice, and you resolve them in the listed order, skipping any that were not chosen);\r\n● Send 1 random card from your opponent's hand to the GY. ● Send 1 monster your opponent controls to the GY. ● Send 1 Spell/Trap your opponent controls to the GY.\r\nYou can only use this effect of \"Primathmech Laplacian\" once per turn.",
+          "race": "Cyberse",
+          "atk": 2000,
+          "def": 0,
+          "level": 4,
+          "attribute": "EARTH",
+          "archetype": "Mathmech",
+          "ygoprodeck_url": "https://ygoprodeck.com/card/primathmech-laplacian-10419",
+          "card_sets": [
+            {
+              "set_name": "Ghosts From the Past: The 2nd Haunting",
+              "set_code": "GFP2-EN146",
+              "set_rarity": "Ultra Rare",
+              "set_rarity_code": "(UR)",
+              "set_price": "1.36"
+            },
+            {
+              "set_name": "Mystic Fighters",
+              "set_code": "MYFI-EN009",
+              "set_rarity": "Secret Rare",
+              "set_rarity_code": "(ScR)",
+              "set_price": "14.57"
+            }
+          ],
+          "card_images": [
+            {
+              "id": 88021907,
+              "image_url": "https://images.ygoprodeck.com/images/cards/88021907.jpg",
+              "image_url_small": "https://images.ygoprodeck.com/images/cards_small/88021907.jpg",
+              "image_url_cropped": "https://images.ygoprodeck.com/images/cards_cropped/88021907.jpg"
+            }
+          ],
+          "card_prices": [
+            {
+              "cardmarket_price": "0.28",
+              "tcgplayer_price": "0.15",
+              "ebay_price": "0.99",
+              "amazon_price": "0.57",
+              "coolstuffinc_price": "1.99"
+            }
+          ]
+        },
     ]
 };

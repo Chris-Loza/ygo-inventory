@@ -20,6 +20,7 @@ const Homepage = () => {
     level: "",
     atk: "",
     def: "",
+    linkval: "",
   });
 
   const handleSwitch = () => {
@@ -31,6 +32,7 @@ const Homepage = () => {
   };
 
   const handleSets = (card) => {
+    console.log(card);
     const newCard = {
       name: card.name,
       set: card.card_sets.map((set) => set.set_name),
@@ -44,6 +46,7 @@ const Homepage = () => {
       level: card.level,
       atk: card.atk,
       def: card.def,
+      linkval: card.linkval,
     };
     setSelectedCard(newCard);
     console.log(newCard);
@@ -77,31 +80,65 @@ const Homepage = () => {
               <div className="description">
                 <div className="header">
                   <h3>
-                    {selectedCard.name} - {selectedCard.set} (
-                    {selectedCard.code})
+                    {selectedCard.name} -{" "}
+                    {selectedCard.set.length > 1
+                      ? selectedCard.set[0]
+                      : selectedCard.set}{" "}
+                    (
+                    {selectedCard.code.length > 1
+                      ? selectedCard.code[0]
+                      : selectedCard.code}
+                    )
                   </h3>
-                  <p>{selectedCard.set}</p>
+                  <p>
+                    {selectedCard.set.length > 1
+                      ? selectedCard.set[0]
+                      : selectedCard.set}
+                  </p>
                 </div>
                 <div className="cardDescription">
                   <h3>Card Details</h3>
                   <p className="effect">{selectedCard.description}</p>
                   <div className="cardAttributes">
                     <p>
-                      <b>Number:</b> {selectedCard.code}
+                      <b>Number:</b>{" "}
+                      {selectedCard.code.length > 1
+                        ? selectedCard.code[0]
+                        : selectedCard.code}
                     </p>
                     <p>
-                      <b>Rarity:</b> {selectedCard.rarity}
+                      <b>Rarity:</b>{" "}
+                      {selectedCard.rarity.length > 1
+                        ? selectedCard.rarity[0]
+                        : selectedCard.rarity}
                     </p>
                     <p>
-                      <b>Attribute, Monster Type, Card Type:</b>{" "}
-                      {selectedCard.attribute}, {selectedCard.race},{" "}
-                      {selectedCard.type}
+                      <b>Attribute, Type, Card Type:</b>{" "}
+                      {selectedCard.attribute
+                        ? `${selectedCard.attribute},`
+                        : ""}{" "}
+                      {selectedCard.race}, {selectedCard.type}
                     </p>
                     <p>
-                      <b>Level:</b> {selectedCard.level}
+                      {selectedCard.level ? (
+                        <>
+                          <b>Level:</b> {selectedCard.level}
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </p>
                     <p>
-                      <b>A/D:</b> {selectedCard.atk}/{selectedCard.def}
+                      {selectedCard.atk ? (
+                        <>
+                          <b>A/D:</b>{" "}
+                          {selectedCard.def !== null && selectedCard.def !== undefined
+                            ? `${selectedCard.atk}/${selectedCard.def}`
+                            : `${selectedCard.atk}/Link-${selectedCard.linkval}`}
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </p>
                   </div>
                 </div>
@@ -148,12 +185,19 @@ const Homepage = () => {
                   />
                   <div className="cardInfo">
                     <span>{card.name}</span>
-                    <p>
-                      {card.attribute}/{card.race} Level {card.level}
-                    </p>
-                    <p>
-                      {card.atk}/{card.def}
-                    </p>
+                    {card.atk ? (
+                      <>
+                        <p>
+                          {card.attribute ? `${card.attribute}/` : ""}
+                          {card.race} {card.level ? `Level ${card.level}` : ""}
+                        </p>
+                        <p>{(card.atk && card.def !== null && card.def !== undefined) ? `${card.atk}/${card.def}` : `${card.atk}/Link-${card.linkval}`}</p>
+                      </>
+                    ) : (
+                      <>
+                        <p>{card.humanReadableCardType}</p>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
