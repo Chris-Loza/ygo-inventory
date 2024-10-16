@@ -13,6 +13,13 @@ const Homepage = () => {
     set: [],
     rarity: [],
     code: [],
+    imageURL: "",
+    description: "",
+    attribute: "",
+    type: "",
+    level: "",
+    atk: "",
+    def: "",
   });
 
   const handleSwitch = () => {
@@ -29,6 +36,14 @@ const Homepage = () => {
       set: card.card_sets.map((set) => set.set_name),
       rarity: card.card_sets.map((set) => set.set_rarity),
       code: card.card_sets.map((set) => set.set_code),
+      imageURL: card.card_images[0].image_url,
+      description: card.desc,
+      attribute: card.attribute,
+      race: card.race,
+      type: card.humanReadableCardType,
+      level: card.level,
+      atk: card.atk,
+      def: card.def,
     };
     setSelectedCard(newCard);
     console.log(newCard);
@@ -49,49 +64,49 @@ const Homepage = () => {
           <div className="cardImage">
             <div className="pictureContainer">
               <img
-                src="../../../images/MathmechCircular.png"
+                src={
+                  selectedCard.imageURL ||
+                  "../../../images/MathmechCircular.png"
+                }
                 alt="card image"
               />
             </div>
           </div>
           <div className="cardDetailsExpanded">
-            <div className="description">
-              <div className="header">
-                <h3>Mathmech Circular - Power of the Elements (POTE)</h3>
-                <p>Power of the Elements</p>
-              </div>
-              <div className="cardDescription">
-                <h3>Card Details</h3>
-                <p className="effect">
-                  You can send 1 "Mathmech" monster, except "Mathmech Circular",
-                  from your Deck to your GY; Special Summon this card from your
-                  hand, also you can only attack with 1 monster for the rest of
-                  this turn. If a "Mathmech" monster is Normal or Special
-                  Summoned to your field while you control this monster (except
-                  during the Damage Step): You can add 1 "Mathmech" Spell/Trap
-                  from your Deck to your hand. You can only use each effect of
-                  "Mathmech Circular" once per turn.
-                </p>
-                <div className="cardAttributes">
-                  <p>
-                    <b>Number:</b> POTE-EN028
-                  </p>
-                  <p>
-                    <b>Rarity:</b> Super Rare
-                  </p>
-                  <p>
-                    <b>Attribute, Monster Type, Card Type:</b> LIGHT, Cyberse,
-                    Effect Monster
-                  </p>
-                  <p>
-                    <b>Level:</b> 4
-                  </p>
-                  <p>
-                    <b>A/D:</b> 1500/1500
-                  </p>
+            {selectedCard.name && (
+              <div className="description">
+                <div className="header">
+                  <h3>
+                    {selectedCard.name} - {selectedCard.set} (
+                    {selectedCard.code})
+                  </h3>
+                  <p>{selectedCard.set}</p>
+                </div>
+                <div className="cardDescription">
+                  <h3>Card Details</h3>
+                  <p className="effect">{selectedCard.description}</p>
+                  <div className="cardAttributes">
+                    <p>
+                      <b>Number:</b> {selectedCard.code}
+                    </p>
+                    <p>
+                      <b>Rarity:</b> {selectedCard.rarity}
+                    </p>
+                    <p>
+                      <b>Attribute, Monster Type, Card Type:</b>{" "}
+                      {selectedCard.attribute}, {selectedCard.race},{" "}
+                      {selectedCard.type}
+                    </p>
+                    <p>
+                      <b>Level:</b> {selectedCard.level}
+                    </p>
+                    <p>
+                      <b>A/D:</b> {selectedCard.atk}/{selectedCard.def}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}
@@ -121,17 +136,6 @@ const Homepage = () => {
               }}
             />
             <div className="searchResults">
-              <div className="result">
-                <img
-                  src="../../../images/MathmechCircular.png"
-                  alt="Card Image"
-                />
-                <div className="cardInfo">
-                  <span>Mathmech Circular</span>
-                  <p>Light/Cyberse Level 4</p>
-                  <p>1500/1500</p>
-                </div>
-              </div>
               {filteredCards.map((card) => (
                 <div
                   className="result"
@@ -145,7 +149,7 @@ const Homepage = () => {
                   <div className="cardInfo">
                     <span>{card.name}</span>
                     <p>
-                      {card.attribute}/{card.race} Level{card.level}
+                      {card.attribute}/{card.race} Level {card.level}
                     </p>
                     <p>
                       {card.atk}/{card.def}
