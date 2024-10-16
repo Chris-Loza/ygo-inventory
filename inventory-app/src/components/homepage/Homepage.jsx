@@ -8,6 +8,12 @@ const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredCards, setFilteredCards] = useState([]);
+  const [selectedCard, setSelectedCard] = useState({
+    name: "",
+    set: [],
+    rarity: [],
+    code: [],
+  });
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
@@ -17,10 +23,17 @@ const Homepage = () => {
     e.preventDefault();
   };
 
-  // const filteredCards = cardList.data.filter((c) =>
-  //   c.name.toLowerCase().includes(searchInput.toLowerCase())
-  // );
-  console.log(filteredCards);
+  const handleSets = (card) => {
+    const newCard = {
+      name: card.name,
+      set: card.card_sets.map((set) => set.set_name),
+      rarity: card.card_sets.map((set) => set.set_rarity),
+      code: card.card_sets.map((set) => set.set_code),
+    };
+    setSelectedCard(newCard);
+    console.log(newCard);
+  };
+  console.log(selectedCard);
 
   return (
     <div className="homepage">
@@ -86,27 +99,27 @@ const Homepage = () => {
       <div className="details">
         <div className="utilities">
           <div className="cardSearch">
-              <input
-                type="text"
-                name="cardname"
-                placeholder="Enter Card Name..."
-                onChange={(e) => {
-                  const newSearchInput = e.target.value;
-                  setSearchInput(newSearchInput);
+            <input
+              type="text"
+              name="cardname"
+              placeholder="Enter Card Name..."
+              onChange={(e) => {
+                const newSearchInput = e.target.value;
+                setSearchInput(newSearchInput);
 
-                  if (newSearchInput === "") {
-                    setFilteredCards([]);
-                  } else {
-                    setFilteredCards(
-                      cardList.data.filter((c) =>
-                        c.name
-                          .toLowerCase()
-                          .includes(newSearchInput.toLowerCase())
-                      )
-                    );
-                  }
-                }}
-              />
+                if (newSearchInput === "") {
+                  setFilteredCards([]);
+                } else if (newSearchInput.length > 1) {
+                  setFilteredCards(
+                    cardList.data.filter((c) =>
+                      c.name
+                        .toLowerCase()
+                        .includes(newSearchInput.toLowerCase())
+                    )
+                  );
+                }
+              }}
+            />
             <div className="searchResults">
               <div className="result">
                 <img
@@ -120,60 +133,50 @@ const Homepage = () => {
                 </div>
               </div>
               {filteredCards.map((card) => (
-                <div className="result" key={card.id}>
-                  <img src={card.card_images[0].image_url_small} alt="result image" />
+                <div
+                  className="result"
+                  key={card.id}
+                  onClick={() => handleSets(card)}
+                >
+                  <img
+                    src={card.card_images[0].image_url_small}
+                    alt="result image"
+                  />
                   <div className="cardInfo">
                     <span>{card.name}</span>
-                    <p>{card.attribute}/{card.race} Level{card.level}</p>
-                    <p>{card.atk}/{card.def}</p>
+                    <p>
+                      {card.attribute}/{card.race} Level{card.level}
+                    </p>
+                    <p>
+                      {card.atk}/{card.def}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
           <div className="separator"></div>
-          <h3>Mathmech Circular</h3>
+          <h3>{selectedCard.name}</h3>
           <div className="inventory">
             <div className="sets">
-              <div className="resultSet">
-                <div className="setInfo">
-                  <p>Power of The Elements</p>
-                  <div className="set">
-                    <span>Quarter Century Super Rare (POTE-EN028)</span>
+              {selectedCard.set.map((setName, index) => (
+                <div className="resultSet" key={index}>
+                  <div className="setInfo">
+                    <p>{setName}</p>
+                    <div className="set">
+                      <span>
+                        {selectedCard.rarity[index]} ({selectedCard.code[index]}
+                        )
+                      </span>
+                    </div>
                   </div>
+                  <form onSubmit={basicForm}>
+                    <input type="text" name="cardCount" placeholder="0" />
+                    <button>+</button>
+                    <button className="removeButton">-</button>
+                  </form>
                 </div>
-                <form onSubmit={basicForm}>
-                  <input type="text" name="cardCount" placeholder="0" />
-                  <button>+</button>
-                  <button className="removeButton">-</button>
-                </form>
-              </div>
-              <div className="resultSet">
-                <div className="setInfo">
-                  <p>Power of The Elements</p>
-                  <div className="set">
-                    <span>Quarter Century Super Rare (POTE-EN028)</span>
-                  </div>
-                </div>
-                <form onSubmit={basicForm}>
-                  <input type="text" name="cardCount" placeholder="0" />
-                  <button>+</button>
-                  <button className="removeButton">-</button>
-                </form>
-              </div>
-              <div className="resultSet">
-                <div className="setInfo">
-                  <p>Power of The Elements</p>
-                  <div className="set">
-                    <span>Quarter Century Super Rare (POTE-EN028)</span>
-                  </div>
-                </div>
-                <form onSubmit={basicForm}>
-                  <input type="text" name="cardCount" placeholder="0" />
-                  <button>+</button>
-                  <button className="removeButton">-</button>
-                </form>
-              </div>
+              ))}
             </div>
           </div>
         </div>
