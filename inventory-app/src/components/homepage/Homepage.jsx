@@ -70,11 +70,11 @@ const Homepage = () => {
         set: setName,
         rarity: selectedCard.rarity[index],
         code: selectedCard.set[index],
-        imageURL: selectedCard.image_url,
-        description: selectedCard.desc,
+        imageURL: selectedCard.imageURL,
+        description: selectedCard.description,
         attribute: selectedCard.attribute,
         race: selectedCard.race,
-        type: selectedCard.humanReadableCardType,
+        type: selectedCard.type,
         level: selectedCard.level,
         atk: selectedCard.atk,
         def: selectedCard.def,
@@ -91,7 +91,6 @@ const Homepage = () => {
   };
 
   const handleCardRemove = (selectedCard, cardCount, setName, index) => {
-    console.log(selectedCard);
     const cardExists =
       invCards.some((card) => card.name === selectedCard.name) &&
       invCards.some((card) => card.set === setName);
@@ -100,13 +99,12 @@ const Homepage = () => {
     if (!cardExists) {
       return;
     } else {
-      invCards[cardIndex].count = Number(invCards[cardIndex].count) - Number(cardCount);
+      invCards[cardIndex].count =
+        Number(invCards[cardIndex].count) - Number(cardCount);
       if (invCards[cardIndex].count < 1) {
         invCards.splice(cardIndex, 1);
       }
     }
-
-    console.log(invCards);
   };
 
   return (
@@ -116,7 +114,7 @@ const Homepage = () => {
       </div>
       {inventoryMode ? (
         <div className="inventoryMode">
-          <Inventory />
+          <Inventory inventoryList={invCards} />
         </div>
       ) : (
         <div className="cardDetails">
@@ -310,7 +308,7 @@ const Homepage = () => {
                       +
                     </button>
                     <button
-                    type="submit"
+                      type="submit"
                       className="removeButton"
                       onClick={() =>
                         handleCardRemove(
