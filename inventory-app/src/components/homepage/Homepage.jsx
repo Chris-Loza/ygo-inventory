@@ -42,7 +42,6 @@ const Homepage = () => {
   };
 
   const handleSets = (card) => {
-    console.log(card);
     const newCard = {
       name: card.name,
       set: card.card_sets.map((set) => set.set_name),
@@ -141,7 +140,7 @@ const Homepage = () => {
       }
     }
   };
-  
+
   return (
     <div className="homepage">
       <div className="toggleSwitch">
