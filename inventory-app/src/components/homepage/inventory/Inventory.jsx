@@ -11,10 +11,12 @@ const Inventory = (invCards) => {
   const [inventoryList, setInventoryList] = useState(
     invCards.inventoryList || []
   );
+  const [wishList, setWishList] = useState(invCards.wishlist || []);
 
   useEffect(() => {
     setInventoryList(invCards.inventoryList);
-  }, [invCards.inventoryList]);
+    setWishList(invCards.wishlist);
+  }, [invCards.inventoryList, invCards.wishlist]);
 
   const handleModal = () => {
     setModal(!modal);
@@ -133,7 +135,10 @@ const Inventory = (invCards) => {
                   )}
                 </div>
                 <div className="owned">
-                  <span>Count: {card.count}<br/></span>
+                  <span>
+                    Count: {card.count}
+                    <br />
+                  </span>
                   <span className="ownedSetCode">{`(${card.code})`}</span>
                 </div>
               </div>
@@ -144,132 +149,40 @@ const Inventory = (invCards) => {
         <div className="wishList">
           <h3>Wishlist</h3>
           <div className="items">
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
+            {wishList.map((card, index) => (
+              <div className="item" key={index}>
+                <img src={card.imageURL} alt="Card Image" />
+                <div className="itemInfo">
+                  <span>{card.name}</span>
+                  {card.atk ? (
+                    <>
+                      <p>
+                        {card.attribute ? `${card.attribute}/` : ""}
+                        {card.race}{" "}
+                        {card.level
+                          ? card.frameType !== "xyz"
+                            ? `Level ${card.level}`
+                            : `Rank ${card.level}`
+                          : ""}
+                      </p>
+                      <p>
+                        {card.atk && card.def !== null && card.def !== undefined
+                          ? `${card.atk}/${card.def}`
+                          : `${card.atk}/Link-${card.linkval}`}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p>{card.type}</p>
+                    </>
+                  )}
+                </div>
+                <div className="owned">
+                  <span>Want: {card.count} <br/></span>
+                  <span className="ownedSetCode">{`(${card.code})`}</span>
+                </div>
               </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

@@ -302,6 +302,15 @@
                     .owned {
                         position: absolute;
                         left: 80%;
+
+                        span {
+                            font-size: 14px;
+                        }
+
+                        .ownedSetCode {
+                            font-size: 12px;
+                            color: rgba(255, 255, 255, 0.548);
+                        }
                     }
                 }
             }

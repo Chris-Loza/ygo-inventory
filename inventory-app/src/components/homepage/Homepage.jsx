@@ -6,6 +6,7 @@ import { cardList } from "../../lib/cardList";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
+  const [wishListToggle, setWishListToggle] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [cardCount, setCardCount] = useState(0);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -30,6 +31,10 @@ const Homepage = () => {
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
+  };
+
+  const handleWishListSwitch = () => {
+    setWishListToggle(!wishListToggle);
   };
 
   const basicForm = (e) => {
@@ -76,36 +81,67 @@ const Homepage = () => {
       count: Number(cardCount),
     };
 
-    const existingCardIndex = invCards.findIndex(
+    const existingInvCardIndex = invCards.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    if (existingCardIndex !== -1) {
-      const updatedInvCards = [...invCards];
-      updatedInvCards[existingCardIndex].count += Number(cardCount);
-      setInvCards(updatedInvCards);
+    const existingWishCardIndex = wishCards.findIndex(
+      (card) => card.name === selectedCard.name && card.set === setName
+    );
+
+    if (!wishListToggle) {
+      if (existingInvCardIndex !== -1) {
+        const updatedInvCards = [...invCards];
+        updatedInvCards[existingInvCardIndex].count += Number(cardCount);
+        setInvCards(updatedInvCards);
+      } else {
+        setInvCards((prev) => [...prev, newCard]);
+      }
     } else {
-      setInvCards((prev) => [...prev, newCard]);
+      if (existingWishCardIndex !== -1) {
+        const updatedWishCards = [...wishCards];
+        updatedWishCards[existingWishCardIndex].count += Number(cardCount);
+        setWishCards(updatedWishCards);
+      } else {
+        setWishCards((prev) => [...prev, newCard]);
+      }
     }
   };
 
   const handleCardRemove = (selectedCard, cardCount, setName, index) => {
-    const existingCardIndex = invCards.findIndex(
+    const existingInvCardIndex = invCards.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
-    )
+    );
 
-    if (existingCardIndex !== -1) {
-      const updatedInvCards = [...invCards];
-      updatedInvCards[existingCardIndex].count -= Number(cardCount);
+    const existingWishCardIndex = wishCards.findIndex(
+      (card) => card.name === selectedCard.name && card.set === setName
+    );
 
-      if (updatedInvCards[existingCardIndex].count < 1) {
-        updatedInvCards.splice(existingCardIndex, 1);
+    if(!wishListToggle) {
+      if (existingInvCardIndex !== -1) {
+        const updatedInvCards = [...invCards];
+        updatedInvCards[existingInvCardIndex].count -= Number(cardCount);
+  
+        if (updatedInvCards[existingInvCardIndex].count < 1) {
+          updatedInvCards.splice(existingInvCardIndex, 1);
+        }
+  
+        setInvCards(updatedInvCards);
       }
-
-      setInvCards(updatedInvCards);
+    } else {
+      if (existingWishCardIndex !== -1) {
+        const updatedWishCards = [...wishCards];
+        updatedWishCards[existingWishCardIndex].count -= Number(cardCount);
+  
+        if (updatedWishCards[existingWishCardIndex].count < 1) {
+          updatedWishCards.splice(existingWishCardIndex, 1);
+        }
+  
+        setWishCards(updatedWishCards);
+      }
     }
   };
-
+  
   return (
     <div className="homepage">
       <div className="toggleSwitch">
@@ -113,7 +149,7 @@ const Homepage = () => {
       </div>
       {inventoryMode ? (
         <div className="inventoryMode">
-          <Inventory inventoryList={invCards} />
+          <Inventory inventoryList={invCards} wishlist={wishCards} />
         </div>
       ) : (
         <div className="cardDetails">
@@ -220,7 +256,7 @@ const Homepage = () => {
 
                 if (newSearchInput === "") {
                   setFilteredCards([]);
-                } else if (newSearchInput.length > 1) {
+                } else if (newSearchInput.length > 2) {
                   setFilteredCards(
                     cardList.data.filter((c) =>
                       c.name
@@ -274,7 +310,16 @@ const Homepage = () => {
             </div>
           </div>
           <div className="separator"></div>
-          <h3>{selectedCard.name}</h3>
+          <div className="infoSwitch">
+            <h3>{selectedCard.name}</h3>
+            <div className="wishListSwitch">
+              <input
+                type="checkbox"
+                name="inventory"
+                onClick={handleWishListSwitch}
+              />
+            </div>
+          </div>
           <div className="inventory">
             <div className="sets">
               {selectedCard.set.map((setName, index) => (
