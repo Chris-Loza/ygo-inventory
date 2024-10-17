@@ -132,22 +132,12 @@ const Inventory = (invCards) => {
                     </>
                   )}
                 </div>
+                <div className="owned">
+                  <span>Count: {card.count}<br/></span>
+                  <span className="ownedSetCode">{`(${card.code})`}</span>
+                </div>
               </div>
             ))}
-            <div className="item">
-              <img
-                src="../../../../images/MathmechCircular.png"
-                alt="Card Image"
-              />
-              <div className="itemInfo">
-                <span>Mathmech Circular</span>
-                <p>Light/Cyberse Level 4</p>
-                <p>1500/1500</p>
-              </div>
-              <div className="owned">
-                <span>Amount: 3</span>
-              </div>
-            </div>
           </div>
         </div>
         <div className="listsSeparator"></div>

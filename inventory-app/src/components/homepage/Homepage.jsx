@@ -62,7 +62,7 @@ const Homepage = () => {
       name: selectedCard.name,
       set: setName,
       rarity: selectedCard.rarity[index],
-      code: selectedCard.set[index],
+      code: selectedCard.code[index],
       imageURL: selectedCard.imageURL,
       description: selectedCard.description,
       attribute: selectedCard.attribute,
