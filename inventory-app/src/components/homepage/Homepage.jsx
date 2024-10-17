@@ -7,7 +7,7 @@ import { cardList } from "../../lib/cardList";
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [cardCount, setCardCount] = useState();
+  const [cardCount, setCardCount] = useState(0);
   const [filteredCards, setFilteredCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({
     name: "",
@@ -58,52 +58,51 @@ const Homepage = () => {
   };
 
   const handleCardAdd = (selectedCard, cardCount, setName, index) => {
-    console.log(selectedCard);
-    const cardExists =
-      invCards.some((card) => card.name === selectedCard.name) &&
-      invCards.some((card) => card.set === setName);
-    const cardIndex = invCards.findIndex((card) => card.set === setName);
+    const newCard = {
+      name: selectedCard.name,
+      set: setName,
+      rarity: selectedCard.rarity[index],
+      code: selectedCard.set[index],
+      imageURL: selectedCard.imageURL,
+      description: selectedCard.description,
+      attribute: selectedCard.attribute,
+      race: selectedCard.race,
+      type: selectedCard.type,
+      level: selectedCard.level,
+      atk: selectedCard.atk,
+      def: selectedCard.def,
+      linkval: selectedCard.linkval,
+      frameType: selectedCard.frameType,
+      count: Number(cardCount),
+    };
 
-    if (!cardExists) {
-      invCards.push({
-        name: selectedCard.name,
-        set: setName,
-        rarity: selectedCard.rarity[index],
-        code: selectedCard.set[index],
-        imageURL: selectedCard.imageURL,
-        description: selectedCard.description,
-        attribute: selectedCard.attribute,
-        race: selectedCard.race,
-        type: selectedCard.type,
-        level: selectedCard.level,
-        atk: selectedCard.atk,
-        def: selectedCard.def,
-        linkval: selectedCard.linkval,
-        frameType: selectedCard.frameType,
-        count: Number(cardCount),
-      });
+    const existingCardIndex = invCards.findIndex(
+      (card) => card.name === selectedCard.name && card.set === setName
+    );
+
+    if (existingCardIndex !== -1) {
+      const updatedInvCards = [...invCards];
+      updatedInvCards[existingCardIndex].count += Number(cardCount);
+      setInvCards(updatedInvCards);
     } else {
-      invCards[cardIndex].count =
-        Number(cardCount) + Number(invCards[cardIndex].count);
+      setInvCards((prev) => [...prev, newCard]);
     }
-
-    console.log(invCards);
   };
 
   const handleCardRemove = (selectedCard, cardCount, setName, index) => {
-    const cardExists =
-      invCards.some((card) => card.name === selectedCard.name) &&
-      invCards.some((card) => card.set === setName);
-    const cardIndex = invCards.findIndex((card) => card.set === setName);
+    const existingCardIndex = invCards.findIndex(
+      (card) => card.name === selectedCard.name && card.set === setName
+    )
 
-    if (!cardExists) {
-      return;
-    } else {
-      invCards[cardIndex].count =
-        Number(invCards[cardIndex].count) - Number(cardCount);
-      if (invCards[cardIndex].count < 1) {
-        invCards.splice(cardIndex, 1);
+    if (existingCardIndex !== -1) {
+      const updatedInvCards = [...invCards];
+      updatedInvCards[existingCardIndex].count -= Number(cardCount);
+
+      if (updatedInvCards[existingCardIndex].count < 1) {
+        updatedInvCards.splice(existingCardIndex, 1);
       }
+
+      setInvCards(updatedInvCards);
     }
   };
 
