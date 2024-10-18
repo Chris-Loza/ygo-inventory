@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./homepage.css";
 import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
@@ -8,7 +8,7 @@ const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
   const [wishListToggle, setWishListToggle] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [cardCount, setCardCount] = useState(0);
+  const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({
     name: "",
@@ -59,6 +59,19 @@ const Homepage = () => {
       frameType: card.frameType,
     };
     setSelectedCard(newCard);
+    setCardCounts(Array(card.card_sets.length).fill(0));
+  };
+
+  useEffect(() => {
+    if (selectedCard.set.length > 0) {
+      setCardCounts(Array(selectedCard.set.length).fill(0));
+    }
+  }, [selectedCard.set]);
+
+  const handleInputChange = (e, index) => {
+    const newCounts = [...cardCounts];
+    newCounts[index] = e.target.value;
+    setCardCounts(newCounts);
   };
 
   const handleCardAdd = (selectedCard, cardCount, setName, index) => {
@@ -116,26 +129,26 @@ const Homepage = () => {
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    if(!wishListToggle) {
+    if (!wishListToggle) {
       if (existingInvCardIndex !== -1) {
         const updatedInvCards = [...invCards];
         updatedInvCards[existingInvCardIndex].count -= Number(cardCount);
-  
+
         if (updatedInvCards[existingInvCardIndex].count < 1) {
           updatedInvCards.splice(existingInvCardIndex, 1);
         }
-  
+
         setInvCards(updatedInvCards);
       }
     } else {
       if (existingWishCardIndex !== -1) {
         const updatedWishCards = [...wishCards];
         updatedWishCards[existingWishCardIndex].count -= Number(cardCount);
-  
+
         if (updatedWishCards[existingWishCardIndex].count < 1) {
           updatedWishCards.splice(existingWishCardIndex, 1);
         }
-  
+
         setWishCards(updatedWishCards);
       }
     }
@@ -337,15 +350,18 @@ const Homepage = () => {
                       type="text"
                       name="cardCount"
                       placeholder="0"
-                      onChange={(e) => {
-                        const newCount = e.target.value;
-                        setCardCount(newCount);
-                      }}
+                      value={cardCounts[index]}
+                      onChange={(e) => handleInputChange(e, index)}
                     />
                     <button
                       type="submit"
                       onClick={() =>
-                        handleCardAdd(selectedCard, cardCount, setName, index)
+                        handleCardAdd(
+                          selectedCard,
+                          cardCounts[index],
+                          setName,
+                          index
+                        )
                       }
                     >
                       +
@@ -356,7 +372,7 @@ const Homepage = () => {
                       onClick={() =>
                         handleCardRemove(
                           selectedCard,
-                          cardCount,
+                          cardCounts[index],
                           setName,
                           index
                         )

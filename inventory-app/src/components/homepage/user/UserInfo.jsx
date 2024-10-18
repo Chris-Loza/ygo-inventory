@@ -28,8 +28,8 @@ const UserInfo = () => {
   return (
     <div className="userInfo">
       <div className="user">
-        <img src={currentUser.avatar || "../../../images/UserIconNoFill.svg"} alt="User Icon" />
-        <h3>{currentUser.username}</h3>
+        <img src={currentUser?.avatar || "../../../images/UserIconNoFill.svg"} alt="User Icon" />
+        <h3>{currentUser?.username}</h3>
       </div>
       <button onClick={() => auth.signOut()}>Sign Out</button>
     </div>
