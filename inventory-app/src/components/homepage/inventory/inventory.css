@@ -75,8 +75,8 @@
                     transform: translate(-50%, -25%);
                     background-color: rgba(30, 44, 70, 0.925);
                     border-radius: 12px;
-                    width: 30%;
-                    height: 70%;
+                    width: 50%;
+                    height: 85%;
                     display: flex;
                     flex-direction: column;
 
@@ -127,6 +127,25 @@
                                 opacity: 0.6;
                             }
                         }
+
+                        .manualCardInfo {
+                            display: flex;
+                            border: 1px solid white;
+                            width: 60%;
+                            justify-content: space-between;
+                            
+                            .div1 {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                            }
+                            
+                            .div2 {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                            }
+                        }
                     }
 
                     .buttons {
@@ -134,9 +153,10 @@
                         display: flex;
                         align-items: start;
                         justify-content: center;
-
+                        
                         button {
-                            height: 30%;
+                            text-align: center;
+                            height: 55%;
                         }
                     }
                 }

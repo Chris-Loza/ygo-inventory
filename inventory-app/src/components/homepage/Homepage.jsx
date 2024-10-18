@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./homepage.css";
 import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
@@ -28,6 +28,10 @@ const Homepage = () => {
 
   const [invCards, setInvCards] = useState([]);
   const [wishCards, setWishCards] = useState([]);
+
+  const handleUpdate = (newInvCards) => {
+    setInvCards(newInvCards);
+  }
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
@@ -154,6 +158,87 @@ const Homepage = () => {
     }
   };
 
+  const [modal, setModal] = useState(false);
+  const modalRef = useRef();
+  const [cardImage, setCardImage] = useState({
+    file: null,
+    url: "",
+  });
+  const [manualEntryCard, setManualEntryCard] = useState({
+    name: "",
+    set: "",
+    rarity: "",
+    code: "",
+    imageURL: "",
+    description: "",
+    attribute: "",
+    race: "",
+    type: "",
+    level: "",
+    atk: "",
+    def: "",
+    linkval: "",
+  });
+
+  const handleModal = () => {
+    setModal(!modal);
+  };
+
+  const closeModal = (e) => {
+    if (e.target === modalRef.current) {
+      setModal(false);
+    }
+  };
+
+  const handleCardImage = (e) => {
+    if (e.target.files[0]) {
+      setCardImage({
+        file: e.target.files[0],
+        url: URL.createObjectURL(e.target.files[0]),
+      });
+    }
+  };
+
+  const handleCardEntry = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const {
+      cardName,
+      setName,
+      cardRarity,
+      setCode,
+      cardDesc,
+      attribute,
+      race,
+      cardType,
+      monsterLevel,
+      monsterAtk,
+      monsterDef,
+      linkVal,
+    } = Object.fromEntries(formData);
+
+    const newCard = {
+      name: cardName,
+      set: setName,
+      rarity: cardRarity,
+      code: setCode,
+      imageURL: cardImage.url,
+      description: cardDesc,
+      attribute: attribute,
+      race: race,
+      type: cardType,
+      level: monsterLevel,
+      atk: monsterAtk,
+      def: monsterDef,
+      linkval: linkVal,
+    }
+
+    console.log(newCard);
+    setManualEntryCard(newCard);
+    console.log(manualEntryCard);
+  };
+
   return (
     <div className="homepage">
       <div className="toggleSwitch">
@@ -161,7 +246,99 @@ const Homepage = () => {
       </div>
       {inventoryMode ? (
         <div className="inventoryMode">
-          <Inventory inventoryList={invCards} wishlist={wishCards} />
+          <Inventory inventoryList={invCards} wishlist={wishCards} onUpdate={handleUpdate} />
+          <button className="modalButton" onClick={handleModal}>Card Entry</button>
+          {modal && (
+            <div className="modalContainer" onClick={closeModal} ref={modalRef}>
+              <div className="modal">
+                <img
+                  onClick={handleModal}
+                  className="closeIcon"
+                  src="../../../../images/CloseIcon.svg"
+                  alt="close button"
+                />
+                <form onSubmit={handleCardEntry}>
+                  <label htmlFor="file">
+                    <img
+                      src={
+                        cardImage.url || "/images/AddPhotoAlternateNoFill.svg"
+                      }
+                      alt="card image"
+                    />
+                    Upload an Image
+                  </label>
+                  <input
+                    type="file"
+                    id="file"
+                    style={{ display: "none" }}
+                    onChange={handleCardImage}
+                    name="cardImage"
+                  />
+                  <div className="manualCardInfo">
+                    <div className="div1">
+                      <input
+                        type="text"
+                        placeholder="Card Name"
+                        name="cardName"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Set Name"
+                        name="setName"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Rarity"
+                        name="cardRarity"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Set Code"
+                        name="setCode"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Card Effect (Optional)"
+                        name="cardDesc"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Attribute"
+                        name="attribute"
+                      />
+                    </div>
+                    <div className="div2">
+                      <input
+                        type="text"
+                        placeholder="Monster Type"
+                        name="race"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Card Type"
+                        name="cardType"
+                      />
+                      <input
+                        type="text"
+                        placeholder="Monster Level"
+                        name="monsterLevel"
+                      />
+                      <input type="text" placeholder="Atk" name="monsterAtk" />
+                      <input type="text" placeholder="Def" name="monsterDef" />
+                      <input
+                        type="text"
+                        placeholder="Link Rating"
+                        name="linkVal"
+                      />
+                    </div>
+                  </div>
+                  <div className="buttons">
+                    <button>Enter</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       ) : (
         <div className="cardDetails">
