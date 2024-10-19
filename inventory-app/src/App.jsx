@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import Notifications from "./components/notifications/Notifications";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./lib/firebase.js";
+import { GlobalStateProvider } from "./lib/globalState.jsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,10 +27,12 @@ function App() {
 
   return (
     <>
-      <div className="container">
-        {isLoggedIn ? <Homepage /> : <Login />}
-        <Notifications />
-      </div>
+      <GlobalStateProvider>
+        <div className="container">
+          {isLoggedIn ? <Homepage /> : <Login />}
+          <Notifications />
+        </div>
+      </GlobalStateProvider>
     </>
   );
 }

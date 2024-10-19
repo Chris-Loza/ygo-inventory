@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./inventory.css";
+import { useGlobalState } from "../../../lib/globalState";
 
 const Inventory = (invCards) => {
+  const { globalSelectedCard, setGlobalSelectedCard } = useGlobalState();
+  console.log(globalSelectedCard);
   const [inventoryList, setInventoryList] = useState(
     invCards.inventoryList || []
   );
@@ -13,6 +16,8 @@ const Inventory = (invCards) => {
   useEffect(() => {
     setInventoryList(invCards.inventoryList);
     setWishList(invCards.wishlist);
+    console.log(invCards.inventoryList);
+    console.log(invCards.wishlist);
   }, [invCards.inventoryList, invCards.wishlist]);
 
   return (
@@ -30,6 +35,7 @@ const Inventory = (invCards) => {
               if (newSearchInput === "") {
                 setFilteredInvCards([]);
                 setFilteredWishCards([]);
+                console.log(filteredInvCards, filteredWishCards);
               } else if (newSearchInput.length > 2) {
                 setFilteredInvCards(
                   invCards.inventoryList.filter((c) =>

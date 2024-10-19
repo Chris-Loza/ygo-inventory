@@ -7,6 +7,7 @@ import { cardList } from "../../lib/cardList";
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
   const [wishListToggle, setWishListToggle] = useState(false);
+  const [prevWishListToggle, setPrevWishListToggle] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -29,15 +30,15 @@ const Homepage = () => {
   const [invCards, setInvCards] = useState([]);
   const [wishCards, setWishCards] = useState([]);
 
-  const handleUpdate = (newInvCards) => {
-    setInvCards(newInvCards);
-  }
-
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
   };
 
   const handleWishListSwitch = () => {
+    setWishListToggle(!wishListToggle);
+  };
+
+  const handleModalWishListSwitch = () => {
     setWishListToggle(!wishListToggle);
   };
 
@@ -178,16 +179,30 @@ const Homepage = () => {
     atk: "",
     def: "",
     linkval: "",
+    count: 0,
   });
 
   const handleModal = () => {
-    setModal(!modal);
+    setPrevWishListToggle(wishListToggle);
+    setModal(true);
+    if (wishListToggle) {
+      setWishListToggle(false);
+    }
   };
+
+  // useEffect(() => {
+  //   // console.log("wishListToggle ", wishListToggle);
+  //   // console.log("prevWishListToggle ", prevWishListToggle);
+  // }, [wishListToggle, prevWishListToggle])
 
   const closeModal = (e) => {
     if (e.target === modalRef.current) {
       setModal(false);
+      console.log(wishListToggle);
+    } else {
+      setModal(false);
     }
+    setWishListToggle(prevWishListToggle);
   };
 
   const handleCardImage = (e) => {
@@ -216,6 +231,7 @@ const Homepage = () => {
       monsterAtk,
       monsterDef,
       linkVal,
+      cardCount,
     } = Object.fromEntries(formData);
 
     const newCard = {
@@ -232,12 +248,48 @@ const Homepage = () => {
       atk: monsterAtk,
       def: monsterDef,
       linkval: linkVal,
-    }
+      count: cardCount,
+    };
 
     console.log(newCard);
     setManualEntryCard(newCard);
-    console.log(manualEntryCard);
   };
+  useEffect(() => {
+    if (manualEntryCard.name !== "") {
+      const existingInvCardIndex = invCards.findIndex(
+        (card) =>
+          card.name === manualEntryCard.name && card.set === manualEntryCard.set
+      );
+
+      const existingWishCardIndex = wishCards.findIndex(
+        (card) =>
+          card.name === manualEntryCard.name && card.set === manualEntryCard.set
+      );
+
+      if (!wishListToggle) {
+        if (existingInvCardIndex !== -1) {
+          const updatedInvCards = [...invCards];
+          updatedInvCards[existingInvCardIndex].count += Number(
+            manualEntryCard.count
+          );
+          setInvCards(updatedInvCards);
+        } else {
+          setInvCards((prev) => [...prev, manualEntryCard]);
+        }
+      } else {
+        if (existingWishCardIndex !== -1) {
+          const updatedWishCards = [...wishCards];
+          updatedWishCards[existingWishCardIndex].count += Number(
+            manualEntryCard.count
+          );
+          setWishCards(updatedWishCards);
+        } else {
+          setWishCards((prev) => [...prev, manualEntryCard]);
+        }
+      }
+    }
+    console.log(manualEntryCard);
+  }, [manualEntryCard]);
 
   return (
     <div className="homepage">
@@ -246,13 +298,22 @@ const Homepage = () => {
       </div>
       {inventoryMode ? (
         <div className="inventoryMode">
-          <Inventory inventoryList={invCards} wishlist={wishCards} onUpdate={handleUpdate} />
-          <button className="modalButton" onClick={handleModal}>Card Entry</button>
+          <Inventory inventoryList={invCards} wishlist={wishCards} />
+          <button className="modalButton" onClick={handleModal}>
+            Card Entry
+          </button>
           {modal && (
             <div className="modalContainer" onClick={closeModal} ref={modalRef}>
-              <div className="modal">
+              <div className="modal" onClick={(e) => e.stopPropagation()}>
+                <div className="modalWishListSwitch">
+                  <input
+                    type="checkbox"
+                    name="modalWishListToggle"
+                    onClick={handleModalWishListSwitch}
+                  />
+                </div>
                 <img
-                  onClick={handleModal}
+                  onClick={closeModal}
                   className="closeIcon"
                   src="../../../../images/CloseIcon.svg"
                   alt="close button"
@@ -296,6 +357,13 @@ const Homepage = () => {
                         placeholder="Set Code"
                         name="setCode"
                       />
+                    </div>
+                    <div className="div2">
+                      <input
+                        type="text"
+                        placeholder="Card Type"
+                        name="cardType"
+                      />
                       <input
                         type="text"
                         placeholder="Card Effect (Optional)"
@@ -306,18 +374,14 @@ const Homepage = () => {
                         placeholder="Attribute"
                         name="attribute"
                       />
-                    </div>
-                    <div className="div2">
                       <input
                         type="text"
                         placeholder="Monster Type"
                         name="race"
                       />
-                      <input
-                        type="text"
-                        placeholder="Card Type"
-                        name="cardType"
-                      />
+                      <input type="text" placeholder="Count" name="cardCount" />
+                    </div>
+                    <div className="div3">
                       <input
                         type="text"
                         placeholder="Monster Level"
