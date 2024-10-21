@@ -4,7 +4,6 @@ import { useGlobalState } from "../../../lib/globalState";
 
 const Inventory = (invCards) => {
   const { globalSelectedCard, setGlobalSelectedCard } = useGlobalState();
-  console.log(globalSelectedCard);
   const [inventoryList, setInventoryList] = useState(
     invCards.inventoryList || []
   );
@@ -19,6 +18,10 @@ const Inventory = (invCards) => {
     console.log(invCards.inventoryList);
     console.log(invCards.wishlist);
   }, [invCards.inventoryList, invCards.wishlist]);
+
+  useEffect(() => {
+    console.log(globalSelectedCard);
+  }, [globalSelectedCard]);
 
   return (
     <div className="inventoryModeComp">
@@ -59,7 +62,14 @@ const Inventory = (invCards) => {
           <div className="items">
             {filteredInvCards.length > 0
               ? filteredInvCards.map((card, index) => (
-                  <div className="item" key={index}>
+                  <div
+                    className="item"
+                    key={index}
+                    onClick={() => {
+                      setGlobalSelectedCard(card);
+                      console.log(globalSelectedCard);
+                    }}
+                  >
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -98,7 +108,14 @@ const Inventory = (invCards) => {
                   </div>
                 ))
               : inventoryList.map((card, index) => (
-                  <div className="item" key={index}>
+                  <div
+                    className="item"
+                    key={index}
+                    onClick={() => {
+                      setGlobalSelectedCard(card);
+                      console.log(globalSelectedCard);
+                    }}
+                  >
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -144,7 +161,14 @@ const Inventory = (invCards) => {
           <div className="items">
             {filteredWishCards.length > 0
               ? filteredWishCards.map((card, index) => (
-                  <div className="item" key={index}>
+                  <div
+                    className="item"
+                    key={index}
+                    onClick={() => {
+                      setGlobalSelectedCard(card);
+                      console.log(globalSelectedCard);
+                    }}
+                  >
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -182,7 +206,14 @@ const Inventory = (invCards) => {
                   </div>
                 ))
               : wishList.map((card, index) => (
-                  <div className="item" key={index}>
+                  <div
+                    className="item"
+                    key={index}
+                    onClick={() => {
+                      setGlobalSelectedCard(card);
+                      console.log(globalSelectedCard);
+                    }}
+                  >
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>

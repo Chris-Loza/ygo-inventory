@@ -3,6 +3,7 @@ import "./homepage.css";
 import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
 import { cardList } from "../../lib/cardList";
+import { useGlobalState } from "../../lib/globalState";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
@@ -11,6 +12,7 @@ const Homepage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
+  const { globalSelectedCard, setGlobalSelectedCard} = useGlobalState();
   const [selectedCard, setSelectedCard] = useState({
     name: "",
     set: [],

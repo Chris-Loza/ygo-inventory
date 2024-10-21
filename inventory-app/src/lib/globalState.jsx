@@ -10,6 +10,7 @@ export const GlobalStateProvider = ({ children }) => {
         imageURL: "",
         description: "",
         attribute: "",
+        race: "",
         type: "",
         level: "",
         atk: "",
