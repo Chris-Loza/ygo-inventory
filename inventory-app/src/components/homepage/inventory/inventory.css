@@ -278,6 +278,11 @@
                                 }
                             }
                         }
+
+                        .countButtons {
+                            display: flex;
+                            gap: 0.5rem;
+                        }
                     }
 
                     .owned {
@@ -360,6 +365,54 @@
                             text-align: left;
                             font-weight: lighter;
                             color: rgba(255, 255, 255, 0.548);
+                        }
+                    }
+
+                    .modifyCount {
+                        display: flex;
+                        width: 30%;
+                        gap: 0.5rem;
+                        justify-content: flex-end;
+                        position: absolute;
+                        left: 45%;
+
+                        input {
+                            padding: 8px;
+                            border: none;
+                            outline: none;
+                            background-color: rgba(17, 25, 40, 1);
+                            color: white;
+                            border-radius: 5px;
+                            width: 20%;
+                            &:focus {
+                                border: 1px solid rgba(60, 110, 208, 1);
+                            }
+                        }
+
+                        button {
+                            padding: 8px;
+                            border: none;
+                            background-color: rgba(60, 110, 208, 0.8);
+                            color: white;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-weight: 500;
+                            &:hover {
+                                background-color: rgba(60, 110, 208, 1);
+                            }
+
+                            &.countSubtract {
+                                background-color: rgba(255, 88, 70, 0.8);
+
+                                &:hover {
+                                    background-color: rgba(255, 88, 70, 1);
+                                }
+                            }
+                        }
+
+                        .countButtons {
+                            display: flex;
+                            gap: 0.5rem;
                         }
                     }
 

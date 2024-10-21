@@ -153,8 +153,10 @@ const Inventory = (invCards) => {
                     </div>
                     <div className="modifyCount">
                       <input type="text" placeholder="0" />
-                      <button className="countAdd">+</button>
-                      <button className="countSubtract">-</button>
+                      <div className="countButtons">
+                        <button className="countAdd">+</button>
+                        <button className="countSubtract">-</button>
+                      </div>
                     </div>
                     <div className="owned">
                       <span>
@@ -209,6 +211,13 @@ const Inventory = (invCards) => {
                         </>
                       )}
                     </div>
+                    <div className="modifyCount">
+                      <input type="text" placeholder="0" />
+                      <div className="countButtons">
+                        <button className="countAdd">+</button>
+                        <button className="countSubtract">-</button>
+                      </div>
+                    </div>
                     <div className="owned">
                       <span>
                         Want: {card.count} <br />
@@ -253,6 +262,13 @@ const Inventory = (invCards) => {
                           <p>{card.type}</p>
                         </>
                       )}
+                    </div>
+                    <div className="modifyCount">
+                      <input type="text" placeholder="0" />
+                      <div className="countButtons">
+                        <button className="countAdd">+</button>
+                        <button className="countSubtract">-</button>
+                      </div>
                     </div>
                     <div className="owned">
                       <span>
