@@ -192,10 +192,6 @@ const Homepage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // console.log("wishListToggle ", wishListToggle);
-  //   // console.log("prevWishListToggle ", prevWishListToggle);
-  // }, [wishListToggle, prevWishListToggle])
 
   const closeModal = (e) => {
     if (e.target === modalRef.current) {

@@ -98,6 +98,13 @@ const Inventory = (invCards) => {
                         </>
                       )}
                     </div>
+                    <div className="modifyCount">
+                      <input type="text" placeholder="0" />
+                      <div className="countButtons">
+                        <button className="countAdd">+</button>
+                        <button className="countSubtract">-</button>
+                      </div>
+                    </div>
                     <div className="owned">
                       <span>
                         Count: {card.count}
@@ -143,6 +150,11 @@ const Inventory = (invCards) => {
                           <p>{card.type}</p>
                         </>
                       )}
+                    </div>
+                    <div className="modifyCount">
+                      <input type="text" placeholder="0" />
+                      <button className="countAdd">+</button>
+                      <button className="countSubtract">-</button>
                     </div>
                     <div className="owned">
                       <span>
