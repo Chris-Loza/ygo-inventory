@@ -244,7 +244,7 @@ const Homepage = () => {
       set: setName,
       rarity: cardRarity,
       code: setCode,
-      imageURL: cardImage.url,
+      imageURL: cardImage.url !== "" ? cardImage.url : "../../../../images/backOfYGOCard.jpg",
       description: cardDesc,
       attribute: attribute,
       race: race,
@@ -253,7 +253,7 @@ const Homepage = () => {
       atk: monsterAtk,
       def: monsterDef,
       linkval: linkVal,
-      count: cardCount,
+      count: cardCount !== "" ? cardCount : 0,
     };
 
     console.log(newCard);

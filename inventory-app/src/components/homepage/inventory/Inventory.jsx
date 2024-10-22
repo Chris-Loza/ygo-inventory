@@ -256,7 +256,7 @@ const Inventory = () => {
                         Count: {card.count}
                         <br />
                       </span>
-                      <span className="ownedSetCode">{`(${card.code})`}</span>
+                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
                     </div>
                   </div>
                 ))
@@ -338,7 +338,7 @@ const Inventory = () => {
                         Count: {card.count}
                         <br />
                       </span>
-                      <span className="ownedSetCode">{`(${card.code})`}</span>
+                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
                     </div>
                   </div>
                 ))}
@@ -425,7 +425,7 @@ const Inventory = () => {
                       <span>
                         Want: {card.count} <br />
                       </span>
-                      <span className="ownedSetCode">{`(${card.code})`}</span>
+                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
                     </div>
                   </div>
                 ))
@@ -505,7 +505,7 @@ const Inventory = () => {
                       <span>
                         Want: {card.count} <br />
                       </span>
-                      <span className="ownedSetCode">{`(${card.code})`}</span>
+                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
                     </div>
                   </div>
                 ))}
