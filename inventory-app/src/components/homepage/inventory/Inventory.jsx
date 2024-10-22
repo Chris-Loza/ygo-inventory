@@ -2,26 +2,143 @@ import React, { useEffect, useState } from "react";
 import "./inventory.css";
 import { useGlobalState } from "../../../lib/globalState";
 
-const Inventory = (invCards) => {
-  const { globalSelectedCard, setGlobalSelectedCard } = useGlobalState();
-  const [inventoryList, setInventoryList] = useState(
-    invCards.inventoryList || []
-  );
-  const [wishList, setWishList] = useState(invCards.wishlist || []);
+const Inventory = () => {
+  const {
+    globalInventoryList,
+    setGlobalInventoryList,
+    globalWishlist,
+    setGlobalWishlist,
+  } = useGlobalState();
   const [filteredInvCards, setFilteredInvCards] = useState([]);
   const [filteredWishCards, setFilteredWishCards] = useState([]);
   const [listsSearchInput, setListsSearchInput] = useState("");
+  const [invListCounts, setInvListCounts] = useState(
+    globalInventoryList.map(() => "")
+  );
 
-  useEffect(() => {
-    setInventoryList(invCards.inventoryList);
-    setWishList(invCards.wishlist);
-    console.log(invCards.inventoryList);
-    console.log(invCards.wishlist);
-  }, [invCards.inventoryList, invCards.wishlist]);
+  const [wishistCounts, setWishlistCounts] = useState(
+    globalWishlist.map(() => "")
+  );
 
-  useEffect(() => {
-    console.log(globalSelectedCard);
-  }, [globalSelectedCard]);
+  const handleInvListInputChange = (e, index) => {
+    const newCounts = [...invListCounts];
+    newCounts[index] = e.target.value;
+    setInvListCounts(newCounts);
+  };
+
+  const handleInvListCardAdd = (card, inputCount) => {
+    const globalIndex = globalInventoryList.findIndex((globalCard) => {
+      return globalCard.name === card.name && globalCard.set === card.set;
+    });
+
+    if (globalIndex !== -1) {
+      const updatedList = [...globalInventoryList];
+      updatedList[globalIndex] = {
+        ...globalInventoryList[globalIndex],
+        count:
+          Number(globalInventoryList[globalIndex].count) + Number(inputCount),
+      };
+
+      setGlobalInventoryList(updatedList);
+
+      if (listsSearchInput.length > 2) {
+        setFilteredInvCards(
+          updatedList.filter((c) =>
+            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+          )
+        );
+      }
+    }
+  };
+
+  const handleInvListCardSubtract = (card, inputCount) => {
+    const globalIndex = globalInventoryList.findIndex(
+      (globalCard) =>
+        globalCard.name === card.name && globalCard.set === card.set
+    );
+
+    if (globalIndex !== -1) {
+      const updatedList = [...globalInventoryList];
+      updatedList[globalIndex] = {
+        ...globalInventoryList[globalIndex],
+        count:
+          Number(globalInventoryList[globalIndex].count) - Number(inputCount),
+      };
+
+      if (updatedList[globalIndex].count < 1) {
+        updatedList.splice(globalIndex, 1);
+      }
+
+      setGlobalInventoryList(updatedList);
+
+      if (listsSearchInput.length > 2) {
+        setFilteredInvCards(
+          updatedList.filter((c) =>
+            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+          )
+        );
+      }
+    }
+  };
+
+  const handleWishlistInputChange = (e, index) => {
+    const newCounts = [...wishistCounts];
+    newCounts[index] = e.target.value;
+    setWishlistCounts(newCounts);
+  };
+
+  const handleWishlistCardAdd = (card, inputCount) => {
+    const globalIndex = globalWishlist.findIndex((globalCard) => {
+      return globalCard.name === card.name && globalCard.set === card.set;
+    });
+
+    if (globalIndex !== -1) {
+      const updatedList = [...globalWishlist];
+      updatedList[globalIndex] = {
+        ...globalWishlist[globalIndex],
+        count: Number(globalWishlist[globalIndex].count) + Number(inputCount),
+      };
+
+      setGlobalWishlist(updatedList);
+
+      if (listsSearchInput.length > 2) {
+        setFilteredWishCards(
+          updatedList.filter((c) =>
+            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+          )
+        );
+      }
+    }
+  };
+
+  const handleWishlistCardSubtract = (card, inputCount) => {
+    const globalIndex = globalWishlist.findIndex(
+      (globalCard) =>
+        globalCard.name === card.name && globalCard.set === card.set
+    );
+
+    if (globalIndex !== -1) {
+      const updatedList = [...globalWishlist];
+      updatedList[globalIndex] = {
+        ...globalWishlist[globalIndex],
+        count: Number(globalWishlist[globalIndex].count) - Number(inputCount),
+      };
+
+      if (updatedList[globalIndex].count < 1) {
+        updatedList.splice(globalIndex, 1);
+      }
+
+      setGlobalWishlist(updatedList);
+
+      if (listsSearchInput.length > 2) {
+        setFilteredWishCards(
+          updatedList.filter((c) =>
+            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+          )
+        );
+      }
+    }
+  };
 
   return (
     <div className="inventoryModeComp">
@@ -41,12 +158,12 @@ const Inventory = (invCards) => {
                 console.log(filteredInvCards, filteredWishCards);
               } else if (newSearchInput.length > 2) {
                 setFilteredInvCards(
-                  invCards.inventoryList.filter((c) =>
+                  globalInventoryList.filter((c) =>
                     c.name.toLowerCase().includes(newSearchInput.toLowerCase())
                   )
                 );
                 setFilteredWishCards(
-                  invCards.wishlist.filter((c) =>
+                  globalWishlist.filter((c) =>
                     c.name.toLowerCase().includes(newSearchInput.toLowerCase())
                   )
                 );
@@ -62,14 +179,7 @@ const Inventory = (invCards) => {
           <div className="items">
             {filteredInvCards.length > 0
               ? filteredInvCards.map((card, index) => (
-                  <div
-                    className="item"
-                    key={index}
-                    onClick={() => {
-                      setGlobalSelectedCard(card);
-                      console.log(globalSelectedCard);
-                    }}
-                  >
+                  <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -99,11 +209,47 @@ const Inventory = (invCards) => {
                       )}
                     </div>
                     <div className="modifyCount">
-                      <input type="text" placeholder="0" />
-                      <div className="countButtons">
-                        <button className="countAdd">+</button>
-                        <button className="countSubtract">-</button>
-                      </div>
+                      <form onSubmit={(e) => e.preventDefault()}>
+                        <input
+                          type="text"
+                          name="invCardCount"
+                          placeholder="0"
+                          value={
+                            invListCounts[index] !== undefined
+                              ? invListCounts[index]
+                              : ""
+                          }
+                          onChange={(e) => {
+                            if (!isNaN(e.target.value)) {
+                              handleInvListInputChange(e, index);
+                            }
+                          }}
+                        />
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleInvListCardAdd(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                        <button
+                          className="countSubtract"
+                          onClick={() =>
+                            handleInvListCardSubtract(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                      </form>
                     </div>
                     <div className="owned">
                       <span>
@@ -114,15 +260,8 @@ const Inventory = (invCards) => {
                     </div>
                   </div>
                 ))
-              : inventoryList.map((card, index) => (
-                  <div
-                    className="item"
-                    key={index}
-                    onClick={() => {
-                      setGlobalSelectedCard(card);
-                      console.log(globalSelectedCard);
-                    }}
-                  >
+              : globalInventoryList.map((card, index) => (
+                  <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -152,11 +291,47 @@ const Inventory = (invCards) => {
                       )}
                     </div>
                     <div className="modifyCount">
-                      <input type="text" placeholder="0" />
-                      <div className="countButtons">
-                        <button className="countAdd">+</button>
-                        <button className="countSubtract">-</button>
-                      </div>
+                      <form onSubmit={(e) => e.preventDefault()}>
+                        <input
+                          type="text"
+                          name="invCardCount"
+                          placeholder="0"
+                          value={
+                            invListCounts[index] !== undefined
+                              ? invListCounts[index]
+                              : ""
+                          }
+                          onChange={(e) => {
+                            if (!isNaN(e.target.value)) {
+                              handleInvListInputChange(e, index);
+                            }
+                          }}
+                        />
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleInvListCardAdd(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                        <button
+                          className="countSubtract"
+                          onClick={() =>
+                            handleInvListCardSubtract(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                      </form>
                     </div>
                     <div className="owned">
                       <span>
@@ -175,14 +350,7 @@ const Inventory = (invCards) => {
           <div className="items">
             {filteredWishCards.length > 0
               ? filteredWishCards.map((card, index) => (
-                  <div
-                    className="item"
-                    key={index}
-                    onClick={() => {
-                      setGlobalSelectedCard(card);
-                      console.log(globalSelectedCard);
-                    }}
-                  >
+                  <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -212,11 +380,46 @@ const Inventory = (invCards) => {
                       )}
                     </div>
                     <div className="modifyCount">
-                      <input type="text" placeholder="0" />
-                      <div className="countButtons">
-                        <button className="countAdd">+</button>
-                        <button className="countSubtract">-</button>
-                      </div>
+                      <form onSubmit={(e) => e.preventDefault()}>
+                        <input
+                          type="text"
+                          placeholder="0"
+                          value={
+                            wishistCounts[index] !== undefined
+                              ? wishistCounts[index]
+                              : ""
+                          }
+                          onChange={(e) => {
+                            if (!isNaN(e.target.value)) {
+                              handleWishlistInputChange(e, index);
+                            }
+                          }}
+                        />
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleWishlistCardAdd(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                        <button
+                          className="countSubtract"
+                          onClick={() =>
+                            handleWishlistCardSubtract(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                      </form>
                     </div>
                     <div className="owned">
                       <span>
@@ -226,15 +429,8 @@ const Inventory = (invCards) => {
                     </div>
                   </div>
                 ))
-              : wishList.map((card, index) => (
-                  <div
-                    className="item"
-                    key={index}
-                    onClick={() => {
-                      setGlobalSelectedCard(card);
-                      console.log(globalSelectedCard);
-                    }}
-                  >
+              : globalWishlist.map((card, index) => (
+                  <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
                       <span>{card.name}</span>
@@ -264,11 +460,46 @@ const Inventory = (invCards) => {
                       )}
                     </div>
                     <div className="modifyCount">
-                      <input type="text" placeholder="0" />
-                      <div className="countButtons">
-                        <button className="countAdd">+</button>
-                        <button className="countSubtract">-</button>
-                      </div>
+                      <form onSubmit={(e) => e.preventDefault()}>
+                        <input
+                          type="text"
+                          placeholder="0"
+                          value={
+                            wishistCounts[index] !== undefined
+                              ? wishistCounts[index]
+                              : ""
+                          }
+                          onChange={(e) => {
+                            if (!isNaN(e.target.value)) {
+                              handleWishlistInputChange(e, index);
+                            }
+                          }}
+                        />
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleWishlistCardAdd(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
+                        </button>
+                        <button
+                          className="countSubtract"
+                          onClick={() =>
+                            handleWishlistCardSubtract(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          -
+                        </button>
+                      </form>
                     </div>
                     <div className="owned">
                       <span>

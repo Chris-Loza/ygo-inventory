@@ -12,7 +12,12 @@ const Homepage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
-  const { globalSelectedCard, setGlobalSelectedCard} = useGlobalState();
+  const {
+    globalInventoryList,
+    setGlobalInventoryList,
+    globalWishlist,
+    setGlobalWishlist,
+  } = useGlobalState();
   const [selectedCard, setSelectedCard] = useState({
     name: "",
     set: [],
@@ -28,9 +33,6 @@ const Homepage = () => {
     linkval: "",
     frameType: "",
   });
-
-  const [invCards, setInvCards] = useState([]);
-  const [wishCards, setWishCards] = useState([]);
 
   const handleSwitch = () => {
     setInventoryMode(!inventoryMode);
@@ -66,12 +68,12 @@ const Homepage = () => {
       frameType: card.frameType,
     };
     setSelectedCard(newCard);
-    setCardCounts(Array(card.card_sets.length).fill(0));
+    setCardCounts(Array(card.card_sets.length).fill(""));
   };
 
   useEffect(() => {
     if (selectedCard.set.length > 0) {
-      setCardCounts(Array(selectedCard.set.length).fill(0));
+      setCardCounts(Array(selectedCard.set.length).fill(""));
     }
   }, [selectedCard.set]);
 
@@ -100,63 +102,69 @@ const Homepage = () => {
       count: Number(cardCount),
     };
 
-    const existingInvCardIndex = invCards.findIndex(
+    const existingInvCardIndex = globalInventoryList.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    const existingWishCardIndex = wishCards.findIndex(
+    const existingWishCardIndex = globalWishlist.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
     if (!wishListToggle) {
       if (existingInvCardIndex !== -1) {
-        const updatedInvCards = [...invCards];
+        const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count += Number(cardCount);
-        setInvCards(updatedInvCards);
+        // setInvCards(updatedInvCards);
+        setGlobalInventoryList(updatedInvCards);
       } else {
-        setInvCards((prev) => [...prev, newCard]);
+        // setInvCards((prev) => [...prev, newCard]);
+        setGlobalInventoryList((prev) => [...prev, newCard]);
       }
     } else {
       if (existingWishCardIndex !== -1) {
-        const updatedWishCards = [...wishCards];
+        const updatedWishCards = [...globalWishlist];
         updatedWishCards[existingWishCardIndex].count += Number(cardCount);
-        setWishCards(updatedWishCards);
+        // setWishCards(updatedWishCards);
+        setGlobalWishlist(updatedWishCards);
       } else {
-        setWishCards((prev) => [...prev, newCard]);
+        // setWishCards((prev) => [...prev, newCard]);
+        setGlobalWishlist((prev) => [...prev, newCard]);
       }
     }
   };
 
   const handleCardRemove = (selectedCard, cardCount, setName, index) => {
-    const existingInvCardIndex = invCards.findIndex(
+    const existingInvCardIndex = globalInventoryList.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    const existingWishCardIndex = wishCards.findIndex(
+    const existingWishCardIndex = globalWishlist.findIndex(
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
     if (!wishListToggle) {
       if (existingInvCardIndex !== -1) {
-        const updatedInvCards = [...invCards];
+        const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count -= Number(cardCount);
 
         if (updatedInvCards[existingInvCardIndex].count < 1) {
           updatedInvCards.splice(existingInvCardIndex, 1);
         }
 
-        setInvCards(updatedInvCards);
+        // setInvCards(updatedInvCards);
+        setGlobalInventoryList(updatedInvCards);
       }
     } else {
       if (existingWishCardIndex !== -1) {
-        const updatedWishCards = [...wishCards];
+        const updatedWishCards = [...globalWishlist];
         updatedWishCards[existingWishCardIndex].count -= Number(cardCount);
 
         if (updatedWishCards[existingWishCardIndex].count < 1) {
           updatedWishCards.splice(existingWishCardIndex, 1);
         }
 
-        setWishCards(updatedWishCards);
+        // setWishCards(updatedWishCards);
+        setGlobalWishlist(updatedWishCards);
       }
     }
   };
@@ -191,7 +199,6 @@ const Homepage = () => {
       setWishListToggle(false);
     }
   };
-
 
   const closeModal = (e) => {
     if (e.target === modalRef.current) {
@@ -252,42 +259,48 @@ const Homepage = () => {
     console.log(newCard);
     setManualEntryCard(newCard);
   };
+
   useEffect(() => {
     if (manualEntryCard.name !== "") {
-      const existingInvCardIndex = invCards.findIndex(
+      const existingInvCardIndex = globalInventoryList.findIndex(
         (card) =>
           card.name === manualEntryCard.name && card.set === manualEntryCard.set
       );
 
-      const existingWishCardIndex = wishCards.findIndex(
+      const existingWishCardIndex = globalWishlist.findIndex(
         (card) =>
           card.name === manualEntryCard.name && card.set === manualEntryCard.set
       );
 
       if (!wishListToggle) {
         if (existingInvCardIndex !== -1) {
-          const updatedInvCards = [...invCards];
+          const updatedInvCards = [...globalInventoryList];
           updatedInvCards[existingInvCardIndex].count += Number(
             manualEntryCard.count
           );
-          setInvCards(updatedInvCards);
+          setGlobalInventoryList(updatedInvCards);
         } else {
-          setInvCards((prev) => [...prev, manualEntryCard]);
+          setGlobalInventoryList((prev) => [...prev, manualEntryCard]);
         }
       } else {
         if (existingWishCardIndex !== -1) {
-          const updatedWishCards = [...wishCards];
+          const updatedWishCards = [...globalWishlist];
           updatedWishCards[existingWishCardIndex].count += Number(
             manualEntryCard.count
           );
-          setWishCards(updatedWishCards);
+          setGlobalWishlist(updatedWishCards);
         } else {
-          setWishCards((prev) => [...prev, manualEntryCard]);
+          setGlobalWishlist((prev) => [...prev, manualEntryCard]);
         }
       }
     }
     console.log(manualEntryCard);
   }, [manualEntryCard]);
+
+  // useEffect(() => {
+  //   console.log(globalInventoryList);
+  //   console.log(globalWishlist);
+  // }, [globalWishlist, globalInventoryList]);
 
   return (
     <div className="homepage">
@@ -296,7 +309,7 @@ const Homepage = () => {
       </div>
       {inventoryMode ? (
         <div className="inventoryMode">
-          <Inventory inventoryList={invCards} wishlist={wishCards} />
+          <Inventory />
           <button className="modalButton" onClick={handleModal}>
             Card Entry
           </button>
