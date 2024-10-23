@@ -244,7 +244,10 @@ const Homepage = () => {
       set: setName,
       rarity: cardRarity,
       code: setCode,
-      imageURL: cardImage.url !== "" ? cardImage.url : "../../../../images/backOfYGOCard.jpg",
+      imageURL:
+        cardImage.url !== ""
+          ? cardImage.url
+          : "../../../../images/backOfYGOCard.jpg",
       description: cardDesc,
       attribute: attribute,
       race: race,
@@ -296,11 +299,6 @@ const Homepage = () => {
     }
     console.log(manualEntryCard);
   }, [manualEntryCard]);
-
-  // useEffect(() => {
-  //   console.log(globalInventoryList);
-  //   console.log(globalWishlist);
-  // }, [globalWishlist, globalInventoryList]);
 
   return (
     <div className="homepage">
@@ -590,12 +588,10 @@ const Homepage = () => {
                 <div className="resultSet" key={index}>
                   <div className="setInfo">
                     <p>{setName}</p>
-                    <div className="set">
-                      <span>
-                        {selectedCard.rarity[index]} ({selectedCard.code[index]}
-                        )
-                      </span>
-                    </div>
+                    <p className="set">
+                      {selectedCard.rarity[index]} ({selectedCard.code[index]})
+                    </p>
+                    {/* <div className="set"></div> */}
                   </div>
                   <form onSubmit={basicForm}>
                     <input

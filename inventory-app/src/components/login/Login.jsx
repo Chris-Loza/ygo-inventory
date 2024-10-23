@@ -9,7 +9,7 @@ import upload from "../../lib/upload";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ onRegister }) => {
   const [loading, setLoading] = useState(false);
   const [avatar, setAvatar] = useState({
     file: null,
@@ -44,11 +44,9 @@ const Login = () => {
         wishList: [],
       });
 
-      await setDoc(doc(db, "userCards", res.user.uid), {
-        cards: [],
-      });
+      onRegister();
 
-      toast.success("Account Created! Please Login.");
+      toast.success("Account Created!");
     } catch (error) {
       console.log(error);
       toast.error(error.message);

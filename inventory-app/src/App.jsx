@@ -4,36 +4,48 @@ import Homepage from "./components/homepage/Homepage";
 import Login from "./components/login/Login";
 import Notifications from "./components/notifications/Notifications";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./lib/firebase.js";
+import { auth, db } from "./lib/firebase.js";
 import { GlobalStateProvider } from "./lib/globalState.jsx";
+import { doc, getDoc } from "firebase/firestore";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoadingUserData, setIsLoadingUserData] = useState(true);
+
+  const handleSuccessfulRegistration = () => {
+    setIsLoggedIn(true);
+  };
 
   useEffect(() => {
-    const unSub = onAuthStateChanged(auth, (user) => {
-      // console.log(auth.currentUser);
+    const unSub = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setIsLoggedIn(true);
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
       } else {
         setIsLoggedIn(false);
       }
+
+      setIsLoadingUserData(false);
     });
 
     return () => {
       unSub();
     };
-  }, [isLoggedIn]);
+  }, []);
 
   return (
-    <>
-      <GlobalStateProvider>
-        <div className="container">
-          {isLoggedIn ? <Homepage /> : <Login />}
-          <Notifications />
-        </div>
-      </GlobalStateProvider>
-    </>
+    <GlobalStateProvider>
+      <div className="container">
+        {isLoadingUserData ? <Login onRegister={handleSuccessfulRegistration} /> : isLoggedIn ? <Homepage /> : <Login onRegister={handleSuccessfulRegistration} />}
+        <Notifications />
+      </div>
+    </GlobalStateProvider>
   );
 }
 
