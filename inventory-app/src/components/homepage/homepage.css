@@ -108,8 +108,8 @@
 
                 .closeIcon {
                     position: absolute;
-                    left: 90%;
-                    top: 2%;
+                    left: 92%;
+                    top: 2.3%;
                     cursor: pointer;
                 }
 
@@ -245,6 +245,7 @@
                     button {
                         margin-top: 20px;
                         text-align: center;
+                        width: 12rem;
                         height: 35%;
                         padding: 8px;
                         border: none;
@@ -253,6 +254,7 @@
                         border-radius: 5px;
                         cursor: pointer;
                         font-weight: 500;
+
                         &:hover {
                             background-color: rgba(60, 110, 208, 1);
                         }
@@ -603,6 +605,27 @@
             .modalButton {
                 left: 62.2%;
             }
+
+            .modalContainer {
+                .modal {
+                    width: 70%;
+
+                    .modalWishListSwitch {
+                        left: 77%;
+                    }
+
+                    .closeIcon {
+                        left: 92.5%;
+                    }
+                    form {
+                        .manualCardInfo {
+                            div {
+                                width: 14rem;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         .details {
@@ -610,6 +633,12 @@
                 .infoSwitch {
                     h3 {
                         font-size: 16px;
+                    }
+                }
+
+                .inventory {
+                    .sets {
+                        overflow-x: hidden;
                     }
                 }
             }
@@ -622,6 +651,32 @@
         .inventoryMode {
             .modalButton {
                 left: 59.3%;
+            }
+
+            .modalContainer {
+                .modal {
+                    width: 70%;
+
+                    .modalWishListSwitch {
+                        left: 70%;
+                    }
+
+                    form {
+                        .manualCardInfo {
+                            div {
+                                width: 10rem;
+                            }
+                        }
+                    }
+
+                    .buttons {
+                        button {
+                            margin-top: 0;
+                            width: 8rem;
+                            height: 2rem;
+                        }
+                    }
+                }
             }
         }
 
@@ -721,6 +776,175 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .homepage {
+        flex-direction: column;
+
+        .toggleSwitch {
+            left: 45%;
+        }
+
+        .inventoryMode {
+            flex: 2;
+            max-height: 478.39px;
+
+            .modalButton {
+                left: 81.5%;
+                top: 11%;
+            }
+
+            .modalContainer {
+                .modal {
+                    width: 80%;
+
+                    .modalWishListSwitch {
+                        left: 70%;
+                    }
+
+                    form {
+                        .manualCardInfo {
+                            div {
+                                width: 8rem;
+                            }
+                        }
+                    }
+
+                    .buttons {
+                        button {
+                            margin-top: 0;
+                            width: 8rem;
+                            height: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .cardDetails {
+            flex: 2;
+
+            .cardImage {
+                .pictureContainer {
+                    height: 70%;
+
+                    img {
+                        width: 70%;
+                    }
+                }
+            }
+
+            .cardDetailsExpanded {
+                .description {
+                    margin-top: 0;
+
+                    h3 {
+                        font-size: 16px;
+                    }
+                    .header {
+                        margin-top: 2rem;
+
+                    }
+                }
+            }
+        }
+        
+        .mainSeparator {
+            width: 90%;
+            height: 2px;
+        }
+
+        .details {
+            width: 95%;
+            margin: 0 auto;
+
+            .utilities {
+                flex-direction: row;
+                .cardSearch {
+                    flex: 2;
+
+                    input {
+                        margin-right: 27rem;
+                        width: 60%;
+                        height: 1.8rem;
+                    }
+
+                    .searchResults {
+                        flex-direction: column;
+                        max-height: 60%;
+                        gap: 10px;
+                    }
+                }
+
+                .separator {
+                    height: 66%;
+                    width: 2px;
+                }
+
+                .infoSwitch {
+                    position: absolute;
+                    left: 53.5%;
+                    top: 69%;
+                    gap: 3.3rem;
+
+                    .wishListSwitch {
+                        z-index: 99;
+                        
+
+                        input {
+                            width: 100px;
+                        }
+
+                        input::before {
+                            left: 15%;
+                        }
+
+                        input:checked::before {
+                            left: 85%;
+                        }
+
+                        input::after {
+                            content: "Inventory";
+                        }
+
+                        input:checked::after {
+                            content: "Wishlist";
+                        }
+                    }
+                }
+
+                .inventory {
+                    padding-top: 3.1rem;
+                    overflow-y: hidden;
+
+                    .sets {
+                        height: 65%;
+                        gap: 10px;
+
+                        .resultSet {
+                            min-height: 55px;
+                        }
+                    }
+                }
+            }
+
+            .userDetails {
+                left: 0%;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .homepage {
+        .details {
+            .userDetails {
+                top: 91.8%
             }
         }
     }

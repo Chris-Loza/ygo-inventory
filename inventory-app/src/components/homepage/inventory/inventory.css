@@ -19,7 +19,7 @@
         .formSearch {
             display: flex;
             flex: 8;
-            
+
             input {
                 margin-top: 20px;
                 margin-left: 26px;
@@ -222,9 +222,10 @@
                         padding: 5px;
                         gap: 2px;
 
-                        span {
+                        .cardName {
                             font-size: 16px;
                             max-width: 14rem;
+                            color: white;
                         }
 
                         p {
@@ -353,8 +354,9 @@
                         padding: 5px;
                         gap: 2px;
 
-                        span {
+                        .cardName {
                             font-size: 16px;
+                            color: white;
                         }
 
                         p {
@@ -428,6 +430,194 @@
                             color: rgba(255, 255, 255, 0.548);
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1440px) {
+    .inventoryModeComp {
+        .inventorySearch {
+            .formSearch {
+                input {
+                    margin-left: 1.2rem;
+                }
+            }
+        }
+
+        .lists {
+            .inventoryList {
+                .items {
+                    .item {
+                        .itemInfo {
+                            .cardName {
+                                white-space: wrap;
+                                max-width: 9.5rem;
+                            }
+                        }
+
+                        .modifyCount {
+                            left: 50%;
+                            form {
+                                gap: 0.25rem;
+                                input {
+                                    width: 30%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wishList {
+                .items {
+                    .item {
+                        .itemInfo {
+                            .cardName {
+                                white-space: wrap;
+                                max-width: 9.5rem;
+                            }
+                        }
+
+                        .modifyCount {
+                            left: 50%;
+                            form {
+                                gap: 0.25rem;
+                                input {
+                                    width: 30%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .inventoryModeComp {
+        .inventorySearch {
+            .formSearch {
+                input {
+                    margin-left: 0.85rem;
+                    width: 35%;
+                }
+            }
+        }
+
+        .lists {
+            .inventoryList {
+                .items {
+                    .item {
+                        .itemInfo {
+                            .cardName {
+                                white-space: wrap;
+                                font-size: 14px;
+                                max-width: 7.5rem;
+                            }
+
+                            p {
+                                font-size: 8px;
+                            }
+                        }
+
+                        .modifyCount {
+                            form {
+                                position: absolute;
+                                left: 50%;
+
+                                input {
+                                    position: absolute;
+                                    top: -97%;
+                                    width: 2.1rem;
+                                    padding: 2px;
+                                }
+
+                                button {
+                                    padding: 4px;
+                                }
+                            }
+                        }
+
+                        .owned {
+                            span {
+                                font-size: 10px;
+                            }
+
+                            .ownedSetCode {
+                                font-size: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .wishList {
+                .items {
+                    .item {
+                        .itemInfo {
+                            .cardName {
+                                white-space: wrap;
+                                font-size: 14px;
+                                max-width: 7.5rem;
+                            }
+
+                            p {
+                                font-size: 8px;
+                            }
+                        }
+
+                        .modifyCount {
+                            form {
+                                position: absolute;
+                                left: 50%;
+
+                                input {
+                                    position: absolute;
+                                    top: -97%;
+                                    width: 2.1rem;
+                                    padding: 2px;
+                                }
+
+                                button {
+                                    padding: 4px;
+                                }
+                            }
+                        }
+
+                        .owned {
+                            span {
+                                font-size: 10px;
+                            }
+
+                            .ownedSetCode {
+                                font-size: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .inventoryModeComp {
+        margin-top: 3rem;
+        width: 95%;
+
+        .lists {
+            .inventoryList {
+                h3 {
+                    left: 32%;
+                }
+            }
+
+            .wishList {
+                h3 {
+                    left: 38%;
                 }
             }
         }

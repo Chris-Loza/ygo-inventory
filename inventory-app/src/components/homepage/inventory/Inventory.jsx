@@ -182,7 +182,7 @@ const Inventory = () => {
                   <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
-                      <span>{card.name}</span>
+                      <p className="cardName">{card.name}</p>
                       {card.atk ? (
                         <>
                           <p>
@@ -264,7 +264,7 @@ const Inventory = () => {
                   <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
-                      <span>{card.name}</span>
+                      <p className="cardName">{card.name}</p>
                       {card.atk ? (
                         <>
                           <p>
@@ -353,7 +353,7 @@ const Inventory = () => {
                   <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
-                      <span>{card.name}</span>
+                      <p className="cardName">{card.name}</p>
                       {card.atk ? (
                         <>
                           <p>
@@ -433,7 +433,7 @@ const Inventory = () => {
                   <div className="item" key={index}>
                     <img src={card.imageURL} alt="Card Image" />
                     <div className="itemInfo">
-                      <span>{card.name}</span>
+                      <p className="cardName">{card.name}</p>
                       {card.atk ? (
                         <>
                           <p>

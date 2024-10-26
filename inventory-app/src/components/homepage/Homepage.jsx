@@ -572,16 +572,20 @@ const Homepage = () => {
             </div>
           </div>
           <div className="separator"></div>
-          <div className="infoSwitch">
-            <h3>{selectedCard.name}</h3>
-            <div className="wishListSwitch">
-              <input
-                type="checkbox"
-                name="inventory"
-                onClick={handleWishListSwitch}
-              />
+          {selectedCard.name ? (
+            <div className="infoSwitch">
+              <h3>{selectedCard.name}</h3>
+              <div className="wishListSwitch">
+                <input
+                  type="checkbox"
+                  name="inventory"
+                  onClick={handleWishListSwitch}
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
           <div className="inventory">
             <div className="sets">
               {selectedCard.set.map((setName, index) => (
