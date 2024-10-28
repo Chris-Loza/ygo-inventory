@@ -597,42 +597,44 @@ const Homepage = () => {
                     </p>
                     {/* <div className="set"></div> */}
                   </div>
-                  <form onSubmit={basicForm}>
-                    <input
-                      type="text"
-                      name="cardCount"
-                      placeholder="0"
-                      value={cardCounts[index]}
-                      onChange={(e) => handleInputChange(e, index)}
-                    />
-                    <button
-                      type="submit"
-                      onClick={() =>
-                        handleCardAdd(
-                          selectedCard,
-                          cardCounts[index],
-                          setName,
-                          index
-                        )
-                      }
-                    >
-                      +
-                    </button>
-                    <button
-                      type="submit"
-                      className="removeButton"
-                      onClick={() =>
-                        handleCardRemove(
-                          selectedCard,
-                          cardCounts[index],
-                          setName,
-                          index
-                        )
-                      }
-                    >
-                      -
-                    </button>
-                  </form>
+                  <div className="setModifying">
+                    <form onSubmit={basicForm}>
+                      <input
+                        type="text"
+                        name="cardCount"
+                        placeholder="0"
+                        value={cardCounts[index]}
+                        onChange={(e) => handleInputChange(e, index)}
+                      />
+                      <button
+                        type="submit"
+                        onClick={() =>
+                          handleCardAdd(
+                            selectedCard,
+                            cardCounts[index],
+                            setName,
+                            index
+                          )
+                        }
+                      >
+                        +
+                      </button>
+                      <button
+                        type="submit"
+                        className="removeButton"
+                        onClick={() =>
+                          handleCardRemove(
+                            selectedCard,
+                            cardCounts[index],
+                            setName,
+                            index
+                          )
+                        }
+                      >
+                        -
+                      </button>
+                    </form>
+                  </div>
                 </div>
               ))}
             </div>

@@ -178,6 +178,14 @@
         width: 95%;
         overflow: hidden;
 
+        .invTab {
+            display: none;
+        }
+
+        .wishTab {
+            display: none;
+        }
+
         .inventoryList {
             flex: 1;
             display: flex;
@@ -618,6 +626,101 @@
             .wishList {
                 h3 {
                     left: 38%;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    .inventoryModeComp {
+        .inventorySearch {
+            .formSearch {
+                input {
+                    width: 50%;
+                    margin-left: 0.5rem;
+                }
+            }
+        }
+
+        .lists {
+            border: 1px solid rgba(255, 255, 255, 0.125);
+            border-top: none;
+            border-radius: 5px;
+
+            .listsSeparator {
+                display: none;
+            }
+
+            .tabHeaders {
+                height: 2rem;
+                display: flex;
+                justify-content: space-between;
+                width: 90%;
+                position: absolute;
+                z-index: 10;
+            }
+
+            .tabs {
+                display: none;
+            }
+
+            .active {
+                display: block;
+
+                .items {
+                    max-height: 290px;
+                }
+            }
+
+            .invTab {
+                display: block;
+                width: 50%;
+                height: 2rem;
+                text-align: left;
+                padding-left: 8px;
+                line-height: 2rem;
+                border-radius: 5px 5px 0px 0px;
+                border: 1px solid rgba(255, 255, 255, 0.125);
+                border-left: none;
+                border-bottom: none;
+                cursor: pointer;
+                font-weight: bold;
+                
+                &.nonActive {
+                    font-weight: normal;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.125);
+                }
+            }
+            
+            .wishTab {
+                height: 2rem;
+                padding-left: 8px;
+                text-align: left;
+                line-height: 2rem;
+                border: 1px solid rgba(255, 255, 255, 0.125);
+                display: block;
+                width: 50%;
+                border-radius: 5px 5px 0px 0px;
+                cursor: pointer;
+                font-weight: normal;
+                
+                &.currentTab {
+                    font-weight: bold;
+                    border-bottom: none;
+                    border-right: none;
+                }
+            }
+
+            .inventoryList {
+                .respHide {
+                    display: none;
+                }
+            }
+
+            .wishList {
+                .respHide {
+                    display: none;
                 }
             }
         }

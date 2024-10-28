@@ -140,6 +140,10 @@ const Inventory = () => {
     }
   };
 
+  const [tabNumber, setTabNumber] = useState(1);
+  const handleTabNumber = (num) => {
+    setTabNumber(num);
+  };
   return (
     <div className="inventoryModeComp">
       <div className="inventorySearch">
@@ -174,8 +178,21 @@ const Inventory = () => {
       </div>
       <div className="searchListsSeparator"></div>
       <div className="lists">
-        <div className="inventoryList">
-          <h3>Inventory</h3>
+        {/* Before Tabs */}
+        <div className="tabHeaders">
+          <div className={tabNumber === 1 ? "invTab" : "invTab nonActive"} onClick={() => handleTabNumber(1)}>
+            Inventory
+          </div>
+          <div className={tabNumber === 2 ? "wishTab currentTab" : "wishTab"} onClick={() => handleTabNumber(2)}>
+            Wishlist
+          </div>
+        </div>
+        <div
+          className={
+            tabNumber === 1 ? "inventoryList tabs active" : "inventoryList tabs"
+          }
+        >
+          <h3 className="respHide">Inventory</h3>
           <div className="items">
             {filteredInvCards.length > 0
               ? filteredInvCards.map((card, index) => (
@@ -256,7 +273,9 @@ const Inventory = () => {
                         Count: {card.count}
                         <br />
                       </span>
-                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
+                      <span className="ownedSetCode">
+                        {card.code !== "" ? `(${card.code})` : ""}
+                      </span>
                     </div>
                   </div>
                 ))
@@ -338,15 +357,19 @@ const Inventory = () => {
                         Count: {card.count}
                         <br />
                       </span>
-                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
+                      <span className="ownedSetCode">
+                        {card.code !== "" ? `(${card.code})` : ""}
+                      </span>
                     </div>
                   </div>
                 ))}
           </div>
         </div>
         <div className="listsSeparator"></div>
-        <div className="wishList">
-          <h3>Wishlist</h3>
+        <div
+          className={tabNumber === 2 ? "wishList tabs active" : "wishList tabs"}
+        >
+          <h3 className="respHide">Wishlist</h3>
           <div className="items">
             {filteredWishCards.length > 0
               ? filteredWishCards.map((card, index) => (
@@ -425,7 +448,9 @@ const Inventory = () => {
                       <span>
                         Want: {card.count} <br />
                       </span>
-                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
+                      <span className="ownedSetCode">
+                        {card.code !== "" ? `(${card.code})` : ""}
+                      </span>
                     </div>
                   </div>
                 ))
@@ -505,7 +530,9 @@ const Inventory = () => {
                       <span>
                         Want: {card.count} <br />
                       </span>
-                      <span className="ownedSetCode">{card.code !== "" ? `(${card.code})` : ""}</span>
+                      <span className="ownedSetCode">
+                        {card.code !== "" ? `(${card.code})` : ""}
+                      </span>
                     </div>
                   </div>
                 ))}

@@ -535,49 +535,55 @@
                             }
                         }
 
-                        form {
+                        .setModifying {
                             display: flex;
-                            align-items: center;
                             justify-content: flex-end;
-                            padding-right: none;
-                            width: 55%;
-                            gap: 8px;
-                            z-index: 1;
+                            padding-right: 5px;
 
-                            input {
-                                padding: 9px;
-                                border: none;
-                                outline: none;
-                                background-color: rgba(17, 25, 40, 1);
-                                color: white;
-                                border-radius: 5px;
-                                width: 30%;
-
-                                &:focus {
-                                    border: 1px solid rgba(60, 110, 208, 1);
+                            form {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-end;
+                                padding-right: none;
+                                width: 55%;
+                                gap: 8px;
+                                z-index: 1;
+    
+                                input {
+                                    padding: 9px;
+                                    border: none;
+                                    outline: none;
+                                    background-color: rgba(17, 25, 40, 1);
+                                    color: white;
+                                    border-radius: 5px;
+                                    width: 30%;
+    
+                                    &:focus {
+                                        border: 1px solid rgba(60, 110, 208, 1);
+                                    }
                                 }
-                            }
-
-                            button {
-                                width: 20%;
-                                padding: 8px;
-                                border: none;
-                                background-color: rgba(60, 110, 208, 0.8);
-                                color: white;
-                                border-radius: 5px;
-                                cursor: pointer;
-                                font-weight: 500;
-                                text-align: center;
-
-                                &:hover {
-                                    background-color: rgba(60, 110, 208, 1);
-                                }
-
-                                &.removeButton {
-                                    background-color: rgba(255, 88, 70, 0.8);
-
+    
+                                button {
+                                    width: 20%;
+                                    padding: 8px;
+                                    border: none;
+                                    background-color: rgba(60, 110, 208, 0.8);
+                                    color: white;
+                                    border-radius: 5px;
+                                    cursor: pointer;
+                                    font-weight: 500;
+                                    text-align: center;
+    
                                     &:hover {
-                                        background-color: rgba(255, 88, 70, 1);
+                                        background-color: rgba(60, 110, 208, 1);
+                                    }
+    
+                                    &.removeButton {
+                                        background-color: rgba(255, 88, 70, 0.8);
+    
+                                        &:hover {
+                                            background-color: rgba(255, 88, 70, 1);
+                                        }
                                     }
                                 }
                             }
@@ -639,8 +645,27 @@
                 .inventory {
                     .sets {
                         overflow-x: hidden;
+
+                        .resultSet {
+                            width: 95%;
+                            .setModifying {
+                                form {
+                                    input {
+                                        width: 30px;
+                                    }
+
+                                    button {
+                                        width: 20px;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+            }
+
+            .userDetails {
+                top: 92.6%;
             }
         }
     }
@@ -744,6 +769,18 @@
                                     padding: 0;
                                 }
                             }
+
+                            .setModifying {
+                                form {
+                                    input {
+                                        width: 30px;
+                                    }
+
+                                    button {
+                                        width: 20px;
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -799,6 +836,7 @@
             }
 
             .modalContainer {
+                z-index: 100;
                 .modal {
                     width: 80%;
 
@@ -893,7 +931,6 @@
 
                     .wishListSwitch {
                         z-index: 99;
-                        
 
                         input {
                             width: 100px;
@@ -940,11 +977,294 @@
     }
 }
 
+@media only screen and (max-width: 425px) {
+    .homepage {
+        .toggleSwitch {
+            left: 40%;
+        }
+
+        .inventoryMode {
+            .modalButton {
+                left: 70.5%;
+            }
+
+            .modalContainer {
+                .modal {
+                    .modalWishListSwitch {
+                        left: 85%;
+                        top: 8%;
+
+                        input {
+                            left: -45%;
+                            width: 70px;
+                            font-size: 10px;
+                        }
+    
+                        input::before {
+                            left: 22%
+                        }
+
+                        input:checked::before {
+                            left: 78%;
+                        }
+
+                        input::after {
+                            content: "Inv";
+                        }
+                
+                        input:checked::after {
+                            content: "Wish";
+                        }
+                    }
+
+                    .closeIcon {
+                        left: 89.5%;
+                    }
+                    
+                    form {
+                        .manualCardInfo {
+                            gap: 20px;
+                            width: 90%;
+                            overflow-y: scroll;
+                            overflow-x: hidden;
+                            flex-direction: column;
+                            height: 22rem;
+
+                            div {
+                                margin: 0 auto;
+                                width: 14rem;
+
+                                input {
+                                    height: 2rem;
+                                }
+                            }
+                        }
+
+                        .buttons {
+                            align-items: flex-end;
+
+                            button {
+                                margin-bottom: 2rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .cardDetails {
+            flex: 2;
+
+            .cardImage {
+                .pictureContainer {
+                    height: 45%;
+
+                    img {
+                        width: 85%;
+                    }
+                }
+            }
+
+            .cardDetailsExpanded {
+                .description {
+                    margin-top: 1rem;
+
+                    h3 {
+                        font-size: 14px;
+                    }
+
+                    .header {
+                        margin-top: 2rem;
+
+                        p {
+                            font-size: 10px;
+                        }
+                    }
+
+                    .cardDescription {
+                        margin: auto;
+
+                        p {
+                            font-size: 12px;
+                        }
+
+                        b {
+                            font-size: 14px;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .details {
+            .utilities {
+                .cardSearch {
+                    input {
+                        width: 95%;
+                    }
+
+                    .searchResults {
+                        .result {
+                            .cardInfo {
+                                span {
+                                    font-size: 10px;
+                                }
+
+                                p {
+                                    font-size: 8px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .infoSwitch {
+                    position: absolute;
+                    left: 53.5%;
+                    top: 69%;
+                    gap: 0.5rem;
+
+                    h3 {
+                        font-size: 10px;
+                        padding-left: 5px;
+                        width: 70px;
+                    }
+                    .wishListSwitch {
+                        z-index: 99;
+                        
+                        input {
+                            width: 82px;
+                        }
+
+                        input::before {
+                            left: 18%;
+                        }
+
+                        input:checked::before {
+                            left: 82%;
+                        }
+
+                        input::after {
+                            font-size: 10px;
+                            content: "Inventory";
+                        }
+
+                        input:checked::after {
+                            content: "Wishlist";
+                        }
+                    }
+                }
+
+                .inventory {
+                    .sets {
+                        .resultSet {
+                            width: 90%;
+                            .setInfo {
+                                width: 4rem;
+                                p {
+                                    font-size: 10px;
+                                }
+                                .set {
+                                    font-size: 8px;
+                                }
+                            }
+
+                            .setModifying {
+                                padding-right: 0px;
+                                form {
+                                    position: absolute;
+                                    gap: 4px;
+                                    input {
+                                        position: absolute;
+                                        width: 2.7rem;
+                                        height: 1rem;
+                                        top: -110%;
+                                    }
+
+                                    button {
+                                        padding: 2px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 375px) {
     .homepage {
+        .toggleSwitch {
+            left: 37.5%;
+        }
+
+        .inventoryMode {
+            .modalButton {
+                left: 67.3%;
+                top: 10.1%
+            }
+        }
+
         .details {
+            .utilities {
+                .infoSwitch {
+                    top: 68.9%;
+
+                    .wishListSwitch {
+                        input {
+                            width: 60px;
+                        }
+
+                        input::before {
+                            left: 25%;
+                        }
+
+                        input:checked::before {
+                            left: 78%;
+                        }
+
+                        input::after {
+                            font-size: 10px;
+                            content: "Inv";
+                        }
+
+                        input:checked::after {
+                            content: "Wish";
+                        }
+                    }
+                }
+
+                .inventory {
+                    .sets {
+                        .resultSet {
+                            width: 92%;
+                            .setModifying {
+                                padding-left: 3px;
+                            }
+                        }
+                    }
+                }
+            }
+
             .userDetails {
                 top: 91.8%
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .homepage {
+        .details {
+            .utilities {
+                .cardSearch {
+                    .searchResults {
+                        overflow-x: hidden;
+                    }
+                }
             }
         }
     }
