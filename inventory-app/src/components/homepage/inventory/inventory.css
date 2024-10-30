@@ -21,6 +21,7 @@
             flex: 8;
 
             input {
+                font-size: 0.875rem;
                 margin-top: 20px;
                 margin-left: 26px;
                 border: 1px solid white;

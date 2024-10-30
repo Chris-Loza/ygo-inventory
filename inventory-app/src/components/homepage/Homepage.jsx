@@ -608,19 +608,6 @@ const Homepage = () => {
                       />
                       <button
                         type="submit"
-                        onClick={() =>
-                          handleCardAdd(
-                            selectedCard,
-                            cardCounts[index],
-                            setName,
-                            index
-                          )
-                        }
-                      >
-                        +
-                      </button>
-                      <button
-                        type="submit"
                         className="removeButton"
                         onClick={() =>
                           handleCardRemove(
@@ -632,6 +619,19 @@ const Homepage = () => {
                         }
                       >
                         -
+                      </button>
+                      <button
+                        type="submit"
+                        onClick={() =>
+                          handleCardAdd(
+                            selectedCard,
+                            cardCounts[index],
+                            setName,
+                            index
+                          )
+                        }
+                      >
+                        +
                       </button>
                     </form>
                   </div>
