@@ -38,131 +38,203 @@
                     border: 1px solid rgba(60, 110, 208, 1);
                 }
             }
-        }
 
-
-        .manualEntry {
-            flex: 1;
-            margin-top: 18px;
-            margin-right: 12px;
-
-            button {
-                padding: 8px;
-                border: none;
-                background-color: rgba(60, 110, 208, 0.8);
-                color: white;
-                border-radius: 5px;
-                cursor: pointer;
-                font-weight: 500;
-
-                &:hover {
-                    background-color: rgba(60, 110, 208, 1);
-                }
-            }
-
-            .modalContainer {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.8);
-                z-index: 99;
-
-                .modal {
+            .globalManualEntry {    
+                .modalButton {
                     position: absolute;
-                    top: 25%;
-                    left: 50%;
-                    transform: translate(-50%, -25%);
-                    background-color: rgba(30, 44, 70, 0.925);
-                    border-radius: 12px;
-                    width: 50%;
-                    height: 85%;
-                    display: flex;
-                    flex-direction: column;
-
-                    .closeIcon {
-                        position: absolute;
-                        left: 90%;
-                        top: 2%;
-                        cursor: pointer;
+                    left: 85%;
+                    top: 10.2%;
+                    padding: 0.5rem;
+                    border: none;
+                    background-color: rgba(60, 110, 208, 0.8);
+                    color: white;
+                    border-radius: 0.3125rem;
+                    cursor: pointer;
+                    font-size: 0.875rem;
+                    font-weight: 500;
+                    &:hover {
+                        background-color: rgba(60, 110, 208, 1);
                     }
+                }
 
-                    form {
+                .modalContainer {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.8);
+                    z-index: 99;
+    
+                    .modal {
+                        position: absolute;
+                        top: 25%;
+                        left: 50%;
+                        transform: translate(-50%, -25%);
+                        background-color: rgba(30, 44, 70, 0.925);
+                        border-radius: 12px;
+                        width: 50%;
+                        height: 85%;
                         display: flex;
                         flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 20px;
-                        flex: 4;
 
-                        input {
-                            padding: 20px;
-                            border: none;
-                            outline: none;
-                            background-color: rgba(17, 25, 40, 0.6);
-                            color: white;
-                            border-radius: 5px;
-
-                            &:focus {
-                                border: 1px solid rgba(60, 110, 208, 1);
+                        .modalWishlistSwitch {
+                            position: absolute;
+                            left: 75%;
+                            top: -1%;
+        
+                            input {
+                                appearance: none;
+                                position: relative;
+                                width: 6.25rem;
+                                height: 1.875rem;
+                                margin-right: 0.625rem;
+                                border-radius: 1.5625rem;
+                                background-color: rgba(255, 255, 255, 0.125);
+                                transition: background .3s;
+                                outline: none;
+                                cursor: pointer;
+                                font-size: 0.875rem;
+                            }
+        
+                            input::before {
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                left: 15%;
+                                transform: translate(-50%, -50%);
+                                border-radius: 50%;
+                                height: 1.25rem;
+                                width: 1.25rem;
+                                background-color: white;
+                                transition: left .3s;
+                            }
+        
+                            input:checked {
+                                background-color: rgba(60, 110, 208, 1);
+                            }
+        
+                            input:checked::before {
+                                left: 85%;
+                            }
+        
+                            input::after {
+                                position: absolute;
+                                content: "Inventory";
+                                color: white;
+                                top: 50%;
+                                left: 60%;
+                                transform: translate(-50%, -50%);
+                            }
+                    
+                            input:checked::after {
+                                position: absolute;
+                                content: "Wishlist";
+                                color: white;
+                                top: 50%;
+                                left: 40%;
+                                transform: translate(-50%, -50%);
                             }
                         }
-
-                        label {
-                            width: 100%;
+    
+                        .closeIcon {
+                            position: absolute;
+                            left: 92%;
+                            top: 2.3%;
+                            cursor: pointer;
+                        }
+    
+                        form {
                             display: flex;
                             flex-direction: column;
                             align-items: center;
                             justify-content: center;
-                            cursor: pointer;
-                            text-decoration: underline;
-                            gap: 20px;
+                            gap: 1.25rem;
+                            flex: 4;
+    
+                            input {
+                                padding: 1.25rem;
+                                border: none;
+                                outline: none;
+                                background-color: rgba(17, 25, 40, 0.6);
+                                color: white;
+                                border-radius: 0.3125rem;
+        
+                                &:focus {
+                                    border: 1px solid rgba(60, 110, 208, 1);
+                                }
+                            }
+    
+                            label {
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                text-decoration: underline;
+                                gap: 1.25rem;
+    
+                                img {
+                                    margin-top: 1.25rem;
+                                    width: 6.25rem;
+                                    height: 6.25rem;
+                                    border-radius: 0.625rem;
+                                    object-fit: cover;
+                                    opacity: 0.6;
+                                }
+                            }
+    
+                            .manualCardInfo {
+                                display: flex;
+                                width: 90%;
+                                justify-content: space-between;
 
-                            img {
-                                margin-top: 20px;
-                                width: 100px;
-                                height: 100px;
-                                border-radius: 10px;
-                                object-fit: cover;
-                                opacity: 0.6;
+                                div {
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 1.25rem;
+
+                                    input {
+                                        font-size: 0.875rem;
+                                        width: 100%;
+                                        margin: 0;
+                                    }
+                                }
                             }
                         }
-
-                        .manualCardInfo {
+    
+                        .buttons {
+                            flex: 1;
                             display: flex;
-                            border: 1px solid white;
-                            width: 60%;
-                            justify-content: space-between;
-                            
-                            .div1 {
-                                display: flex;
-                                flex-direction: column;
-                                gap: 20px;
+                            align-items: start;
+                            justify-content: center;
+    
+                            button {
+                                margin-top: 1.25rem;
+                                text-align: center;
+                                width: 14rem;
+                                height: 35%;
+                                padding: 0.5rem;
+                                border: none;
+                                background-color: rgba(60, 110, 208, 0.8);
+                                color: white;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                font-size: 0.875rem;
+                                font-weight: 500;
+        
+                                &:hover {
+                                    background-color: rgba(60, 110, 208, 1);
+                                }
                             }
-                            
-                            .div2 {
-                                display: flex;
-                                flex-direction: column;
-                                gap: 20px;
-                            }
-                        }
-                    }
-
-                    .buttons {
-                        flex: 1;
-                        display: flex;
-                        align-items: start;
-                        justify-content: center;
-
-                        button {
-                            text-align: center;
-                            height: 55%;
                         }
                     }
                 }
             }
         }
+
+
     }
 
     .searchListsSeparator {

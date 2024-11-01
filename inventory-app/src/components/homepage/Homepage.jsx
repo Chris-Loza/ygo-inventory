@@ -7,8 +7,8 @@ import { useGlobalState } from "../../lib/globalState";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
-  const [wishListToggle, setWishListToggle] = useState(false);
-  const [prevWishListToggle, setPrevWishListToggle] = useState(null);
+  // const [wishListToggle, setWishListToggle] = useState(false);
+  // const [prevWishListToggle, setPrevWishListToggle] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -17,6 +17,8 @@ const Homepage = () => {
     setGlobalInventoryList,
     globalWishlist,
     setGlobalWishlist,
+    wishlistToggle,
+    setWishlistToggle,
   } = useGlobalState();
   const [selectedCard, setSelectedCard] = useState({
     name: "",
@@ -39,12 +41,12 @@ const Homepage = () => {
   };
 
   const handleWishListSwitch = () => {
-    setWishListToggle(!wishListToggle);
+    setWishlistToggle(!wishlistToggle);
   };
 
-  const handleModalWishListSwitch = () => {
-    setWishListToggle(!wishListToggle);
-  };
+  // const handleModalWishListSwitch = () => {
+  //   setWishListToggle(!wishListToggle);
+  // };
 
   const basicForm = (e) => {
     e.preventDefault();
@@ -110,7 +112,7 @@ const Homepage = () => {
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    if (!wishListToggle) {
+    if (!wishlistToggle) {
       if (existingInvCardIndex !== -1) {
         const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count += Number(cardCount);
@@ -142,7 +144,7 @@ const Homepage = () => {
       (card) => card.name === selectedCard.name && card.set === setName
     );
 
-    if (!wishListToggle) {
+    if (!wishlistToggle) {
       if (existingInvCardIndex !== -1) {
         const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count -= Number(cardCount);
@@ -169,136 +171,136 @@ const Homepage = () => {
     }
   };
 
-  const [modal, setModal] = useState(false);
-  const modalRef = useRef();
-  const [cardImage, setCardImage] = useState({
-    file: null,
-    url: "",
-  });
-  const [manualEntryCard, setManualEntryCard] = useState({
-    name: "",
-    set: "",
-    rarity: "",
-    code: "",
-    imageURL: "",
-    description: "",
-    attribute: "",
-    race: "",
-    type: "",
-    level: "",
-    atk: "",
-    def: "",
-    linkval: "",
-    count: 0,
-  });
+  // const [modal, setModal] = useState(false);
+  // const modalRef = useRef();
+  // const [cardImage, setCardImage] = useState({
+  //   file: null,
+  //   url: "",
+  // });
+  // const [manualEntryCard, setManualEntryCard] = useState({
+  //   name: "",
+  //   set: "",
+  //   rarity: "",
+  //   code: "",
+  //   imageURL: "",
+  //   description: "",
+  //   attribute: "",
+  //   race: "",
+  //   type: "",
+  //   level: "",
+  //   atk: "",
+  //   def: "",
+  //   linkval: "",
+  //   count: 0,
+  // });
 
-  const handleModal = () => {
-    setPrevWishListToggle(wishListToggle);
-    setModal(true);
-    if (wishListToggle) {
-      setWishListToggle(false);
-    }
-  };
+  // const handleModal = () => {
+  //   setPrevWishListToggle(wishListToggle);
+  //   setModal(true);
+  //   if (wishListToggle) {
+  //     setWishListToggle(false);
+  //   }
+  // };
 
-  const closeModal = (e) => {
-    if (e.target === modalRef.current) {
-      setModal(false);
-      console.log(wishListToggle);
-    } else {
-      setModal(false);
-    }
-    setWishListToggle(prevWishListToggle);
-  };
+  // const closeModal = (e) => {
+  //   if (e.target === modalRef.current) {
+  //     setModal(false);
+  //     console.log(wishListToggle);
+  //   } else {
+  //     setModal(false);
+  //   }
+  //   setWishListToggle(prevWishListToggle);
+  // };
 
-  const handleCardImage = (e) => {
-    if (e.target.files[0]) {
-      setCardImage({
-        file: e.target.files[0],
-        url: URL.createObjectURL(e.target.files[0]),
-      });
-    }
-  };
+  // const handleCardImage = (e) => {
+  //   if (e.target.files[0]) {
+  //     setCardImage({
+  //       file: e.target.files[0],
+  //       url: URL.createObjectURL(e.target.files[0]),
+  //     });
+  //   }
+  // };
 
-  const handleCardEntry = (e) => {
-    e.preventDefault();
+  // const handleCardEntry = (e) => {
+  //   e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const {
-      cardName,
-      setName,
-      cardRarity,
-      setCode,
-      cardDesc,
-      attribute,
-      race,
-      cardType,
-      monsterLevel,
-      monsterAtk,
-      monsterDef,
-      linkVal,
-      cardCount,
-    } = Object.fromEntries(formData);
+  //   const formData = new FormData(e.target);
+  //   const {
+  //     cardName,
+  //     setName,
+  //     cardRarity,
+  //     setCode,
+  //     cardDesc,
+  //     attribute,
+  //     race,
+  //     cardType,
+  //     monsterLevel,
+  //     monsterAtk,
+  //     monsterDef,
+  //     linkVal,
+  //     cardCount,
+  //   } = Object.fromEntries(formData);
 
-    const newCard = {
-      name: cardName,
-      set: setName,
-      rarity: cardRarity,
-      code: setCode,
-      imageURL:
-        cardImage.url !== ""
-          ? cardImage.url
-          : "../../../../images/backOfYGOCard.jpg",
-      description: cardDesc,
-      attribute: attribute,
-      race: race,
-      type: cardType,
-      level: monsterLevel,
-      atk: monsterAtk,
-      def: monsterDef,
-      linkval: linkVal,
-      count: cardCount !== "" ? cardCount : 0,
-    };
+  //   const newCard = {
+  //     name: cardName,
+  //     set: setName,
+  //     rarity: cardRarity,
+  //     code: setCode,
+  //     imageURL:
+  //       cardImage.url !== ""
+  //         ? cardImage.url
+  //         : "../../../../images/backOfYGOCard.jpg",
+  //     description: cardDesc,
+  //     attribute: attribute,
+  //     race: race,
+  //     type: cardType,
+  //     level: monsterLevel,
+  //     atk: monsterAtk,
+  //     def: monsterDef,
+  //     linkval: linkVal,
+  //     count: cardCount !== "" ? cardCount : 0,
+  //   };
 
-    console.log(newCard);
-    setManualEntryCard(newCard);
-  };
+  //   console.log(newCard);
+  //   setManualEntryCard(newCard);
+  // };
 
-  useEffect(() => {
-    if (manualEntryCard.name !== "") {
-      const existingInvCardIndex = globalInventoryList.findIndex(
-        (card) =>
-          card.name === manualEntryCard.name && card.set === manualEntryCard.set
-      );
+  // useEffect(() => {
+  //   if (manualEntryCard.name !== "") {
+  //     const existingInvCardIndex = globalInventoryList.findIndex(
+  //       (card) =>
+  //         card.name === manualEntryCard.name && card.set === manualEntryCard.set
+  //     );
 
-      const existingWishCardIndex = globalWishlist.findIndex(
-        (card) =>
-          card.name === manualEntryCard.name && card.set === manualEntryCard.set
-      );
+  //     const existingWishCardIndex = globalWishlist.findIndex(
+  //       (card) =>
+  //         card.name === manualEntryCard.name && card.set === manualEntryCard.set
+  //     );
 
-      if (!wishListToggle) {
-        if (existingInvCardIndex !== -1) {
-          const updatedInvCards = [...globalInventoryList];
-          updatedInvCards[existingInvCardIndex].count += Number(
-            manualEntryCard.count
-          );
-          setGlobalInventoryList(updatedInvCards);
-        } else {
-          setGlobalInventoryList((prev) => [...prev, manualEntryCard]);
-        }
-      } else {
-        if (existingWishCardIndex !== -1) {
-          const updatedWishCards = [...globalWishlist];
-          updatedWishCards[existingWishCardIndex].count += Number(
-            manualEntryCard.count
-          );
-          setGlobalWishlist(updatedWishCards);
-        } else {
-          setGlobalWishlist((prev) => [...prev, manualEntryCard]);
-        }
-      }
-    }
-    console.log(manualEntryCard);
-  }, [manualEntryCard]);
+  //     if (!wishListToggle) {
+  //       if (existingInvCardIndex !== -1) {
+  //         const updatedInvCards = [...globalInventoryList];
+  //         updatedInvCards[existingInvCardIndex].count += Number(
+  //           manualEntryCard.count
+  //         );
+  //         setGlobalInventoryList(updatedInvCards);
+  //       } else {
+  //         setGlobalInventoryList((prev) => [...prev, manualEntryCard]);
+  //       }
+  //     } else {
+  //       if (existingWishCardIndex !== -1) {
+  //         const updatedWishCards = [...globalWishlist];
+  //         updatedWishCards[existingWishCardIndex].count += Number(
+  //           manualEntryCard.count
+  //         );
+  //         setGlobalWishlist(updatedWishCards);
+  //       } else {
+  //         setGlobalWishlist((prev) => [...prev, manualEntryCard]);
+  //       }
+  //     }
+  //   }
+  //   console.log(manualEntryCard);
+  // }, [manualEntryCard]);
 
   return (
     <div className="homepage">
@@ -308,7 +310,7 @@ const Homepage = () => {
       {inventoryMode ? (
         <div className="inventoryMode">
           <Inventory />
-          <button className="modalButton" onClick={handleModal}>
+          {/* <button className="modalButton" onClick={handleModal}>
             Card Entry
           </button>
           {modal && (
@@ -411,7 +413,7 @@ const Homepage = () => {
                 </form>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       ) : (
         <div className="cardDetails">

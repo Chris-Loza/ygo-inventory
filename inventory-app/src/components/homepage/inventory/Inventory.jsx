@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./inventory.css";
 import { useGlobalState } from "../../../lib/globalState";
 
@@ -8,6 +8,12 @@ const Inventory = () => {
     setGlobalInventoryList,
     globalWishlist,
     setGlobalWishlist,
+    globalManualEntryCard,
+    setGlobalManualEntryCard,
+    wishlistToggle,
+    setWishlistToggle,
+    globalManualEntryCardImage,
+    setGlobalManualEntryCardImage,
   } = useGlobalState();
   const [filteredInvCards, setFilteredInvCards] = useState([]);
   const [filteredWishCards, setFilteredWishCards] = useState([]);
@@ -144,6 +150,125 @@ const Inventory = () => {
   const handleTabNumber = (num) => {
     setTabNumber(num);
   };
+
+  const [prevWishlistToggle, setPrevWishlistToggle] = useState(null);
+  const [modal, setModal] = useState(false);
+  const modalRef = useRef();
+  const handleModal = () => {
+    setPrevWishlistToggle(wishlistToggle);
+    setModal(true);
+    if (wishlistToggle) {
+      setWishlistToggle(false);
+    }
+  };
+
+  const closeModal = (e) => {
+    if (e.target === modalRef.current) {
+      setModal(false);
+      console.log(wishlistToggle);
+    } else {
+      setModal(false);
+    }
+    setWishlistToggle(prevWishlistToggle);
+  };
+
+  const handleCardImage = (e) => {
+    if (e.target.files[0]) {
+      setGlobalManualEntryCardImage({
+        file: e.target.files[0],
+        url: URL.createObjectURL(e.target.files[0]),
+      });
+    }
+  };
+
+  const handleManualCardEntry = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const {
+      cardName,
+      setName,
+      cardRarity,
+      setCode,
+      cardDesc,
+      attribute,
+      race,
+      cardType,
+      monsterLevel,
+      monsterAtk,
+      monsterDef,
+      linkVal,
+      cardCount,
+    } = Object.fromEntries(formData);
+
+    const newCard = {
+      name: cardName,
+      set: setName,
+      rarity: cardRarity,
+      code: setCode,
+      imageURL:
+        globalManualEntryCardImage.url !== ""
+          ? globalManualEntryCardImage.url
+          : "../../../../images/backOfYGOCard.jpg",
+      description: cardDesc,
+      attribute: attribute,
+      race: race,
+      type: cardType,
+      level: monsterLevel,
+      atk: monsterAtk,
+      def: monsterDef,
+      linkval: linkVal,
+      count: cardCount !== "" ? cardCount : 0,
+    };
+
+    console.log(newCard);
+    setGlobalManualEntryCard(newCard);
+  };
+
+  useEffect(() => {
+    if (globalManualEntryCard.name !== "") {
+      const existingInvCardIndex = globalInventoryList.findIndex(
+        (card) =>
+          card.name === globalManualEntryCard.name &&
+          card.set === globalManualEntryCard.set
+      );
+
+      const existingWishCardIndex = globalWishlist.findIndex(
+        (card) =>
+          card.name === globalManualEntryCard.name &&
+          card.set === globalManualEntryCard.set
+      );
+
+      if (!wishlistToggle) {
+        if (existingInvCardIndex !== -1) {
+          const updatedInvCards = [...globalInventoryList];
+          updatedInvCards[existingInvCardIndex].count += Number(
+            globalManualEntryCard.count
+          );
+          setGlobalInventoryList(updatedInvCards);
+        } else {
+          setGlobalInventoryList((prev) => [...prev, globalManualEntryCard]);
+        }
+      } else {
+        if (existingWishCardIndex !== -1) {
+          const updatedWishCards = [...globalWishlist];
+          updatedWishCards[existingWishCardIndex].count += Number(
+            globalManualEntryCard.count
+          );
+          setGlobalWishlist(updatedWishCards);
+        } else {
+          setGlobalWishlist((prev) => [...prev, globalManualEntryCard]);
+        }
+      }
+    }
+    console.log(globalManualEntryCard);
+  }, [globalManualEntryCard]);
+
+  const handleModalWishlistSwitch = () => {
+    setWishlistToggle(!wishlistToggle);
+  }
+
   return (
     <div className="inventoryModeComp">
       <div className="inventorySearch">
@@ -174,16 +299,144 @@ const Inventory = () => {
               }
             }}
           />
+          <div className="globalManualEntry">
+            <button className="modalButton" onClick={handleModal}>
+              Card Entry
+            </button>
+            {modal && (
+              <div
+                className="modalContainer"
+                onClick={closeModal}
+                ref={modalRef}
+              >
+                <div className="modal" onClick={(e) => e.stopPropagation()}>
+                  <div className="modalWishlistSwitch">
+                    <input
+                      type="checkbox"
+                      name="modalWishListToggle"
+                      onClick={handleModalWishlistSwitch}
+                    />
+                  </div>
+                  <img
+                    onClick={closeModal}
+                    className="closeIcon"
+                    src="../../../../images/CloseIcon.svg"
+                    alt="close button"
+                  />
+                  <form onSubmit={handleManualCardEntry}>
+                    <label htmlFor="file">
+                      <img
+                        src={
+                          globalManualEntryCardImage.url || "/images/AddPhotoAlternateNoFill.svg"
+                        }
+                        alt="card image"
+                      />
+                      Upload an Image
+                    </label>
+                    <input
+                      type="file"
+                      id="file"
+                      style={{ display: "none" }}
+                      onChange={handleCardImage}
+                      name="cardImage"
+                    />
+                    <div className="manualCardInfo">
+                      <div className="div1">
+                        <input
+                          type="text"
+                          placeholder="Card Name"
+                          name="cardName"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Set Name"
+                          name="setName"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Rarity"
+                          name="cardRarity"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Set Code"
+                          name="setCode"
+                        />
+                      </div>
+                      <div className="div2">
+                        <input
+                          type="text"
+                          placeholder="Card Type"
+                          name="cardType"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Card Effect (Optional)"
+                          name="cardDesc"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Attribute"
+                          name="attribute"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Monster Type"
+                          name="race"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Count"
+                          name="cardCount"
+                        />
+                      </div>
+                      <div className="div3">
+                        <input
+                          type="text"
+                          placeholder="Monster Level"
+                          name="monsterLevel"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Atk"
+                          name="monsterAtk"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Def"
+                          name="monsterDef"
+                        />
+                        <input
+                          type="text"
+                          placeholder="Link Rating"
+                          name="linkVal"
+                        />
+                      </div>
+                    </div>
+                    <div className="buttons">
+                      <button>Enter</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
       <div className="searchListsSeparator"></div>
       <div className="lists">
         {/* Before Tabs */}
         <div className="tabHeaders">
-          <div className={tabNumber === 1 ? "invTab" : "invTab nonActive"} onClick={() => handleTabNumber(1)}>
+          <div
+            className={tabNumber === 1 ? "invTab" : "invTab nonActive"}
+            onClick={() => handleTabNumber(1)}
+          >
             Inventory
           </div>
-          <div className={tabNumber === 2 ? "wishTab currentTab" : "wishTab"} onClick={() => handleTabNumber(2)}>
+          <div
+            className={tabNumber === 2 ? "wishTab currentTab" : "wishTab"}
+            onClick={() => handleTabNumber(2)}
+          >
             Wishlist
           </div>
         </div>
@@ -243,18 +496,6 @@ const Inventory = () => {
                           }}
                         />
                         <button
-                          className="countAdd"
-                          onClick={() =>
-                            handleInvListCardAdd(
-                              card,
-                              invListCounts[index],
-                              index
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                        <button
                           className="countSubtract"
                           onClick={() =>
                             handleInvListCardSubtract(
@@ -265,6 +506,18 @@ const Inventory = () => {
                           }
                         >
                           -
+                        </button>
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleInvListCardAdd(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
                         </button>
                       </form>
                     </div>
@@ -327,18 +580,6 @@ const Inventory = () => {
                           }}
                         />
                         <button
-                          className="countAdd"
-                          onClick={() =>
-                            handleInvListCardAdd(
-                              card,
-                              invListCounts[index],
-                              index
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                        <button
                           className="countSubtract"
                           onClick={() =>
                             handleInvListCardSubtract(
@@ -349,6 +590,18 @@ const Inventory = () => {
                           }
                         >
                           -
+                        </button>
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleInvListCardAdd(
+                              card,
+                              invListCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
                         </button>
                       </form>
                     </div>
@@ -419,18 +672,6 @@ const Inventory = () => {
                           }}
                         />
                         <button
-                          className="countAdd"
-                          onClick={() =>
-                            handleWishlistCardAdd(
-                              card,
-                              wishistCounts[index],
-                              index
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                        <button
                           className="countSubtract"
                           onClick={() =>
                             handleWishlistCardSubtract(
@@ -441,6 +682,18 @@ const Inventory = () => {
                           }
                         >
                           -
+                        </button>
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleWishlistCardAdd(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
                         </button>
                       </form>
                     </div>
@@ -501,18 +754,6 @@ const Inventory = () => {
                           }}
                         />
                         <button
-                          className="countAdd"
-                          onClick={() =>
-                            handleWishlistCardAdd(
-                              card,
-                              wishistCounts[index],
-                              index
-                            )
-                          }
-                        >
-                          +
-                        </button>
-                        <button
                           className="countSubtract"
                           onClick={() =>
                             handleWishlistCardSubtract(
@@ -523,6 +764,18 @@ const Inventory = () => {
                           }
                         >
                           -
+                        </button>
+                        <button
+                          className="countAdd"
+                          onClick={() =>
+                            handleWishlistCardAdd(
+                              card,
+                              wishistCounts[index],
+                              index
+                            )
+                          }
+                        >
+                          +
                         </button>
                       </form>
                     </div>
