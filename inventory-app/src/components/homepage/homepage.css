@@ -70,196 +70,6 @@
         align-items: center;
         justify-content: center;
         position: relative;
-
-        .modalButton {
-            position: absolute;
-            left: 85%;
-            top: 10.2%;
-            padding: 0.5rem;
-            border: none;
-            background-color: rgba(60, 110, 208, 0.8);
-            color: white;
-            border-radius: 0.3125rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            &:hover {
-                background-color: rgba(60, 110, 208, 1);
-            }
-        }
-
-        .modalContainer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 99;
-
-            .modal {
-                position: absolute;
-                top: 25%;
-                left: 50%;
-                transform: translate(-50%, -25%);
-                background-color: rgba(30, 44, 70, 0.925);
-                border-radius: 0.75rem;
-                width: 50%;
-                height: 85%;
-                display: flex;
-                flex-direction: column;
-
-                .closeIcon {
-                    position: absolute;
-                    left: 92%;
-                    top: 2.3%;
-                    cursor: pointer;
-                }
-
-                .modalWishListSwitch {
-                    position: absolute;
-                    left: 75%;
-                    top: 2%;
-
-                    input {
-                        appearance: none;
-                        position: relative;
-                        width: 6.25rem;
-                        height: 1.875rem;
-                        margin-right: 0.625rem;
-                        border-radius: 1.5625rem;
-                        background-color: rgba(255, 255, 255, 0.125);
-                        transition: background .3s;
-                        outline: none;
-                        cursor: pointer;
-                        font-size: 0.875rem;
-                    }
-
-                    input::before {
-                        content: "";
-                        position: absolute;
-                        top: 50%;
-                        left: 15%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 50%;
-                        height: 1.25rem;
-                        width: 1.25rem;
-                        background-color: white;
-                        transition: left .3s;
-                    }
-
-                    input:checked {
-                        background-color: rgba(60, 110, 208, 1);
-                    }
-
-                    input:checked::before {
-                        left: 85%;
-                    }
-
-                    input::after {
-                        position: absolute;
-                        content: "Inventory";
-                        color: white;
-                        top: 50%;
-                        left: 60%;
-                        transform: translate(-50%, -50%);
-                    }
-            
-                    input:checked::after {
-                        position: absolute;
-                        content: "Wishlist";
-                        color: white;
-                        top: 50%;
-                        left: 40%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-
-                form {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 1.25rem;
-                    flex: 4;
-
-                    input {
-                        padding: 1.25rem;
-                        border: none;
-                        outline: none;
-                        background-color: rgba(17, 25, 40, 0.6);
-                        color: white;
-                        border-radius: 0.3125rem;
-
-                        &:focus {
-                            border: 1px solid rgba(60, 110, 208, 1);
-                        }
-                    }
-
-                    label {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        text-decoration: underline;
-                        gap: 1.25rem;
-
-                        img {
-                            margin-top: 1.25rem;
-                            width: 6.25rem;
-                            height: 6.25rem;
-                            border-radius: 0.625rem;
-                            object-fit: cover;
-                            opacity: 0.6;
-                        }
-                    }
-
-                    .manualCardInfo {
-                        display: flex;
-                        width: 90%;
-                        justify-content: space-between;
-                        
-                        div {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 1.25rem;
-                            
-                            input {
-                                font-size: 0.875rem;
-                            }
-                        }
-                    }
-                }
-
-                .buttons {
-                    flex: 1;
-                    display: flex;
-                    align-items: start;
-                    justify-content: center;
-                    
-                    button {
-                        margin-top: 1.25rem;
-                        text-align: center;
-                        width: 14rem;
-                        height: 35%;
-                        padding: 0.5rem;
-                        border: none;
-                        background-color: rgba(60, 110, 208, 0.8);
-                        color: white;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        font-size: 0.875rem;
-                        font-weight: 500;
-
-                        &:hover {
-                            background-color: rgba(60, 110, 208, 1);
-                        }
-                    }
-                }
-            }
-        }
     }
 
     .cardDetails {
@@ -557,7 +367,8 @@
                                     background-color: rgba(17, 25, 40, 1);
                                     color: white;
                                     border-radius: 0.3125rem;
-                                    width: 30%;
+                                    width: 40%;
+                                    font-size: 0.875rem;
     
                                     &:focus {
                                         border: 1px solid rgba(60, 110, 208, 1);
@@ -572,6 +383,7 @@
                                     color: white;
                                     border-radius: 0.3125rem;
                                     cursor: pointer;
+                                    font-size: 0.875rem;
                                     font-weight: 500;
                                     text-align: center;
     
@@ -605,642 +417,9 @@
         }
     }
 }
-/* .homepage {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-
-    .toggleSwitch {
-        position: absolute;
-        left: 37.5%;
-        top: 2%;
-
-        input {
-            appearance: none;
-            position: relative;
-            width: 100px;
-            height: 30px;
-            border-radius: 25px;
-            background-color: rgba(255, 255, 255, 0.125);
-            transition: background .3s;
-            outline: none;
-            cursor: pointer;
-        }
-
-
-        input::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 15%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            height: 1.25rem;
-            width: 1.25rem;
-            background-color: white;
-            transition: left .3s;
-        }
-
-        input:checked {
-            background-color: rgba(60, 110, 208, 1);
-        }
-
-        input:checked::before {
-            left: 85%;
-        }
-
-        input::after {
-            position: absolute;
-            content: "Home";
-            color: white;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-        }
-
-        input:checked::after {
-            position: absolute;
-            content: "Inventory";
-            color: white;
-            top: 50%;
-            left: 40%;
-            transform: translate(-50%, -50%);
-        }
-    }
-
-    .inventoryMode {
-        flex: 3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .modalButton {
-            position: absolute;
-            left: 63.9%;
-            top: 9.71%;
-
-            padding: 8px;
-            border: none;
-            background-color: rgba(60, 110, 208, 0.8);
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            &:hover {
-                background-color: rgba(60, 110, 208, 1);
-            }
-        }
-
-        .modalContainer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 99;
-
-            .modal {
-                position: absolute;
-                top: 25%;
-                left: 50%;
-                transform: translate(-50%, -25%);
-                background-color: rgba(30, 44, 70, 0.925);
-                border-radius: 12px;
-                width: 50%;
-                height: 85%;
-                display: flex;
-                flex-direction: column;
-
-                .closeIcon {
-                    position: absolute;
-                    left: 92%;
-                    top: 2.3%;
-                    cursor: pointer;
-                }
-
-                .modalWishListSwitch {
-                    position: absolute;
-                    left: 75%;
-                    top: 2%;
-
-                    input {
-                        appearance: none;
-                        position: relative;
-                        width: 100px;
-                        height: 30px;
-                        margin-right: 10px;
-                        border-radius: 25px;
-                        background-color: rgba(255, 255, 255, 0.125);
-                        transition: background .3s;
-                        outline: none;
-                        cursor: pointer;
-                    }
-
-                    input::before {
-                        content: "";
-                        position: absolute;
-                        top: 50%;
-                        left: 15%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 50%;
-                        height: 1.25rem;
-                        width: 1.25rem;
-                        background-color: white;
-                        transition: left .3s;
-                    }
-
-                    input:checked {
-                        background-color: rgba(60, 110, 208, 1);
-                    }
-
-                    input:checked::before {
-                        left: 85%;
-                    }
-
-                    input::after {
-                        position: absolute;
-                        content: "Inventory";
-                        color: white;
-                        top: 50%;
-                        left: 60%;
-                        transform: translate(-50%, -50%);
-                    }
-            
-                    input:checked::after {
-                        position: absolute;
-                        content: "Wishlist";
-                        color: white;
-                        top: 50%;
-                        left: 40%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-
-                form {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 20px;
-                    flex: 4;
-
-                    input {
-                        padding: 20px;
-                        border: none;
-                        outline: none;
-                        background-color: rgba(17, 25, 40, 0.6);
-                        color: white;
-                        border-radius: 5px;
-
-                        &:focus {
-                            border: 1px solid rgba(60, 110, 208, 1);
-                        }
-                    }
-
-                    label {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: center;
-                        cursor: pointer;
-                        text-decoration: underline;
-                        gap: 20px;
-
-                        img {
-                            margin-top: 20px;
-                            width: 100px;
-                            height: 100px;
-                            border-radius: 10px;
-                            object-fit: cover;
-                            opacity: 0.6;
-                        }
-                    }
-
-                    .manualCardInfo {
-                        display: flex;
-                        width: 90%;
-                        justify-content: space-between;
-                        
-                        .div1 {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 20px;
-                        }
-                        
-                        .div2 {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 20px;
-                        }
-                        .div3 {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 20px;
-                        }
-                    }
-                }
-
-                .buttons {
-                    flex: 1;
-                    display: flex;
-                    align-items: start;
-                    justify-content: center;
-                    
-                    button {
-                        margin-top: 20px;
-                        text-align: center;
-                        width: 12rem;
-                        height: 35%;
-                        padding: 8px;
-                        border: none;
-                        background-color: rgba(60, 110, 208, 0.8);
-                        color: white;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        font-weight: 500;
-
-                        &:hover {
-                            background-color: rgba(60, 110, 208, 1);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .cardDetails {
-        flex: 3;
-        display: flex;
-
-        .cardImage {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            .pictureContainer {
-                height: 80%;
-                width: 80%;
-                background-color: rgba(255, 255, 255, 0.125);
-                border-radius: 5%;
-                align-items: center;
-                display: flex;
-                justify-content: center;
-
-                img {
-                    width: 80%;
-                }
-            }
-        }
-
-        .cardDetailsExpanded {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-
-            .description {
-                height: 80%;
-                width: 80%;
-                display: flex;
-                flex-direction: column;
-                margin-top: 100px;
-                text-align: left;
-
-                .header {
-                    flex: 1;
-                    margin-top: 68px;
-                }
-
-                .cardDescription {
-                    flex: 6;
-
-                    h3 {
-                        margin-bottom: 10px;
-                    }
-
-                    .cardAttributes {
-                        margin-top: 10px;
-                    }
-                }
-            }
-        }
-    }
-
-    .mainSeparator {
-        width: 2px;
-        margin: 10px auto;
-        height: 90%;
-        background-color: rgba(255, 255, 255, 0.125);
-    }
-
-    .details {
-        flex: 1;
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        overflow: hidden;
-
-        .utilities {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            flex: 8;
-
-            .cardSearch {
-                flex: 3;
-                padding: 10px;
-                height: 100%;
-                overflow: hidden;
-
-                input {
-                    padding: 8px;
-                    margin-right: 18px;
-                    border: none;
-                    outline: none;
-                    background-color: rgba(17, 25, 40, 1);
-                    color: white;
-                    border-radius: 5px;
-                    width: 98%;
-
-                    &:focus {
-                        border: 1px solid rgba(60, 110, 208, 1);
-                    }
-                }
-
-                .searchResults {
-                    margin: 10px auto;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    width: 100%;
-                    max-height: 100%;
-                    overflow-y: scroll;
-
-                    .result {
-                        display: flex;
-                        height: 15%;
-                        width: 100%;
-                        align-items: center;
-                        justify-content: start;
-                        border: 1px solid rgba(255, 255, 255, 0.125);
-                        border-radius: 2px;
-                        padding: 1.5px;
-                        cursor: pointer;
-
-                        img {
-                            width: 40px;
-                            height: 50px;
-                            object-fit: contain;
-                            margin: none;
-                        }
-
-                        .cardInfo {
-                            display: flex;
-                            flex-direction: column;
-                            padding: 5px;
-                            gap: 2px;
-
-                            span {
-                                font-size: 16px;
-                            }
-
-                            p {
-                                font-size: 10px;
-                                justify-content: start;
-                                padding: 0;
-                                text-align: left;
-                                font-weight: lighter;
-                                color: rgba(255, 255, 255, 0.548);
-                            }
-                        }
-                    }
-
-                }
-
-            }
-            .separator {
-                width: 95%;
-                margin: 10px auto;
-                height: 2px;
-                background-color: rgba(255, 255, 255, 0.125);
-            }
-
-            .infoSwitch {
-                display: flex;
-                align-items: center;
-
-                h3 {
-                    margin: 5px auto;
-                }
-
-                .wishListSwitch {
-                
-                    input {
-                        appearance: none;
-                        position: relative;
-                        width: 100px;
-                        height: 30px;
-                        margin-right: 10px;
-                        border-radius: 25px;
-                        background-color: rgba(255, 255, 255, 0.125);
-                        transition: background .3s;
-                        outline: none;
-                        cursor: pointer;
-                    }
-                
-                
-                    input::before {
-                        content: "";
-                        position: absolute;
-                        top: 50%;
-                        left: 15%;
-                        transform: translate(-50%, -50%);
-                        border-radius: 50%;
-                        height: 1.25rem;
-                        width: 1.25rem;
-                        background-color: white;
-                        transition: left .3s;
-                    }
-                
-                    input:checked {
-                        background-color: rgba(60, 110, 208, 1);
-                    }
-            
-                    input:checked::before {
-                        left: 85%;
-                    }
-            
-                    input::after {
-                        position: absolute;
-                        content: "Inventory";
-                        color: white;
-                        top: 50%;
-                        left: 60%;
-                        transform: translate(-50%, -50%);
-                    }
-            
-                    input:checked::after {
-                        position: absolute;
-                        content: "Wishlist";
-                        color: white;
-                        top: 50%;
-                        left: 40%;
-                        transform: translate(-50%, -50%);
-                    }
-                }
-            }
-
-            .inventory {
-                flex: 2;
-                position: relative;
-                overflow-y: scroll;
-
-
-                .sets {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    overflow-y: scroll;
-
-                    .resultSet {
-                        display: flex;
-                        margin-left: 10px;
-                        padding: 5px;
-                        width: 97%;
-                        align-items: center;
-                        border: 1px solid rgba(255, 255, 255, 0.125);
-                        border-radius: 2px;
-                        cursor: pointer;
-                        justify-content: space-between;
-                        text-align: left;
-
-                        .setInfo {
-                            font-size: 12px;
-                            padding-left: 5px;
-                            display: flex;
-                            flex-direction: column;
-                            overflow-x: hidden;
-                            max-width: 100%;
-
-                            p {
-                                width: 200px;
-                                overflow-x: scroll;
-                                white-space: nowrap;
-
-                                scrollbar-width: none;
-                            }
-                            .set {
-                                width: 200px;
-                                text-wrap: wrap;
-                                color: rgba(255, 255, 255, 0.548);
-                            }
-                        }
-
-                        .setModifying {
-                            display: flex;
-                            justify-content: flex-end;
-                            padding-right: 5px;
-
-                            form {
-                                display: flex;
-                                align-items: center;
-                                justify-content: flex-end;
-                                padding-right: none;
-                                width: 55%;
-                                gap: 8px;
-                                z-index: 1;
-    
-                                input {
-                                    padding: 9px;
-                                    border: none;
-                                    outline: none;
-                                    background-color: rgba(17, 25, 40, 1);
-                                    color: white;
-                                    border-radius: 5px;
-                                    width: 30%;
-    
-                                    &:focus {
-                                        border: 1px solid rgba(60, 110, 208, 1);
-                                    }
-                                }
-    
-                                button {
-                                    width: 20%;
-                                    padding: 8px;
-                                    border: none;
-                                    background-color: rgba(60, 110, 208, 0.8);
-                                    color: white;
-                                    border-radius: 5px;
-                                    cursor: pointer;
-                                    font-weight: 500;
-                                    text-align: center;
-    
-                                    &:hover {
-                                        background-color: rgba(60, 110, 208, 1);
-                                    }
-    
-                                    &.removeButton {
-                                        background-color: rgba(255, 88, 70, 0.8);
-    
-                                        &:hover {
-                                            background-color: rgba(255, 88, 70, 1);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-        .userDetails {
-            position: absolute;
-            flex: 1;
-            height: 100%;
-            width: 25%;
-            top: 92%;
-            z-index: 3;
-        }
-    }
-} */
 
 @media only screen and (max-width: 1440px) {
     .homepage {
-        .inventoryMode {
-            .modalButton {
-                left: 82.78%;
-            }
-
-            .modalContainer {
-                .modal {
-                    width: 70%;
-
-                    .modalWishListSwitch {
-                        left: 77%;
-                    }
-
-                    .closeIcon {
-                        left: 92.5%;
-                    }
-                    form {
-                        .manualCardInfo {
-                            div {
-                                width: 14rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
         .details {
             .utilities {
 
@@ -1263,7 +442,7 @@
             }
 
             .userDetails {
-                top: 82.3vh;
+                top: 83vh;
             }
         }
     }
@@ -1271,38 +450,6 @@
 
 @media only screen and (max-width: 1024px) {
     .homepage {
-        .inventoryMode {
-            .modalButton {
-                left: 78.6%;
-            }
-
-            .modalContainer {
-                .modal {
-                    width: 70%;
-
-                    .modalWishListSwitch {
-                        left: 70%;
-                    }
-
-                    form {
-                        .manualCardInfo {
-                            div {
-                                width: 10rem;
-                            }
-                        }
-                    }
-
-                    .buttons {
-                        button {
-                            margin-top: 0;
-                            width: 10rem;
-                            height: 2.5rem;
-                        }
-                    }
-                }
-            }
-        }
-
         .details {
             .utilities {
                 .cardSearch {
@@ -1385,7 +532,7 @@
             }
 
             .userDetails {
-                top: 91.2%;
+                top: 81.4vh;
             }
         }
 
@@ -1427,38 +574,6 @@
         .inventoryMode {
             flex: 2;
             max-height: 478.39px;
-
-            .modalButton {
-                left: 81.5%;
-                top: 11%;
-            }
-
-            .modalContainer {
-                z-index: 100;
-                .modal {
-                    width: 80%;
-
-                    .modalWishListSwitch {
-                        left: 70%;
-                    }
-
-                    form {
-                        .manualCardInfo {
-                            div {
-                                width: 8rem;
-                            }
-                        }
-                    }
-
-                    .buttons {
-                        button {
-                            margin-top: 0;
-                            width: 8rem;
-                            height: 2rem;
-                        }
-                    }
-                }
-            }
         }
 
         .cardDetails {
@@ -1578,79 +693,11 @@
 
 @media only screen and (max-width: 425px) {
     .homepage {
+        width: 85vw;
         .toggleSwitch {
             left: 40%;
         }
-
-        .inventoryMode {
-            .modalButton {
-                left: 70.5%;
-            }
-
-            .modalContainer {
-                .modal {
-                    .modalWishListSwitch {
-                        left: 85%;
-                        top: 8%;
-
-                        input {
-                            left: -45%;
-                            width: 70px;
-                            font-size: 10px;
-                        }
-    
-                        input::before {
-                            left: 22%
-                        }
-
-                        input:checked::before {
-                            left: 78%;
-                        }
-
-                        input::after {
-                            content: "Inv";
-                        }
-                
-                        input:checked::after {
-                            content: "Wish";
-                        }
-                    }
-
-                    .closeIcon {
-                        left: 89.5%;
-                    }
-                    
-                    form {
-                        .manualCardInfo {
-                            gap: 20px;
-                            width: 90%;
-                            overflow-y: scroll;
-                            overflow-x: hidden;
-                            flex-direction: column;
-                            height: 22rem;
-
-                            div {
-                                margin: 0 auto;
-                                width: 14rem;
-
-                                input {
-                                    height: 2rem;
-                                }
-                            }
-                        }
-
-                        .buttons {
-                            align-items: flex-end;
-
-                            button {
-                                margin-bottom: 2rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
+        
         .cardDetails {
             flex: 2;
 
@@ -1758,6 +805,7 @@
                 .inventory {
                     .sets {
                         .resultSet {
+                            position: relative;
                             width: 90%;
                             .setInfo {
                                 width: 4rem;
@@ -1772,20 +820,78 @@
                             .setModifying {
                                 padding-right: 0px;
                                 form {
-                                    position: absolute;
                                     gap: 4px;
                                     input {
                                         position: absolute;
-                                        width: 2.7rem;
+                                        width: 2.3rem;
                                         height: 1rem;
-                                        top: -110%;
+                                        top: 11%;
+                                        left: 64%;
                                     }
 
                                     button {
                                         padding: 2px;
                                     }
+                                    
+                                    .setListAddButton {
+                                        position: absolute;
+                                        left: 78%;
+                                        top: 45%;
+                                    }
+
+                                    .removeButton {
+                                        position: absolute;
+                                        left: 63%;
+                                        top: 45%;
+                                    }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 415px) {
+    .homepage {
+        .details {
+            .utilities {
+                .infoSwitch {
+                    gap: 0rem;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .homepage {
+        .details {
+            .utilities {
+                .infoSwitch {
+                    gap: 0.5rem;
+                    .wishListSwitch {
+                        input {
+                            width: 3.75rem;
+                        }
+
+                        input::before {
+                            left: 25%;
+                        }
+
+                        input:checked::before {
+                            left: 78%;
+                        }
+
+                        input::after {
+                            font-size: 0.625rem;
+                            content: "Inv";
+                        }
+
+                        input:checked::after {
+                            content: "Wish";
                         }
                     }
                 }
@@ -1802,10 +908,6 @@
 
         .inventoryMode {
             height: 505.86px;
-            .modalButton {
-                left: 67.3%;
-                top: 10.1%
-            }
         }
 
         .cardDetails {
@@ -1814,8 +916,18 @@
 
         .details {
             .utilities {
+                .cardSearch {
+                    .searchResults {
+                        max-height: 69%;
+                    }
+                }
+
+                .separator {
+                    height: 80%;
+                }
                 .infoSwitch {
-                    top: 65.3%;
+                    top: 68.6%;
+
 
                     .wishListSwitch {
                         input {
@@ -1843,10 +955,17 @@
 
                 .inventory {
                     .sets {
+                        height: 75%;
                         .resultSet {
                             width: 92%;
                             .setModifying {
                                 padding-left: 3px;
+
+                                form {
+                                    .setListAddButton {
+                                        left: 80%;
+                                    }
+                                }
                             }
                         }
                     }
@@ -1854,7 +973,78 @@
             }
 
             .userDetails {
-                top: 91.8%
+                top: 96%
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    .homepage {
+        .details {
+            .utilities {
+                .infoSwitch {
+                    gap: 0.5rem;
+                    .wishListSwitch {
+                        input {
+                            width: 2.8125rem;
+                        }
+
+                        input::before {
+                            left: 28%;
+                            width: 1rem;
+                            height: 1rem;
+                        }
+
+                        input:checked::before {
+                            left: 75%;
+                        }
+
+                        input::after {
+                            font-size: 0.625rem;
+                            content: "I";
+                        }
+
+                        input:checked::after {
+                            content: "W";
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 335px) {
+    .homepage {
+        .details {
+            .utilities {
+                .infoSwitch {
+                    gap: 0rem;
+                    .wishListSwitch {
+                        input {
+                            width: 2.8125rem;
+                        }
+
+                        input::before {
+                            left: 28%;
+                            width: 1rem;
+                            height: 1rem;
+                        }
+
+                        input:checked::before {
+                            left: 75%;
+                        }
+
+                        input::after {
+                            font-size: 0.625rem;
+                            content: "I";
+                        }
+
+                        input:checked::after {
+                            content: "W";
+                        }
+                    }
+                }
             }
         }
     }
@@ -1888,10 +1078,10 @@
                 }
 
                 .infoSwitch {
-                    gap: 0.25rem;
+                    gap: 0rem;
                     .wishListSwitch {
                         input {
-                            width: 45px;
+                            width: 2.8125rem;
                         }
 
                         input::before {
@@ -1905,7 +1095,7 @@
                         }
 
                         input::after {
-                            font-size: 10px;
+                            font-size: 0.625rem;
                             content: "I";
                         }
 
@@ -1933,8 +1123,16 @@
                                     left: 35%;
 
                                     input {
-                                        width: 2.7rem;
-                                        top: -108%;
+                                        width: 2.1rem;
+                                        top: 10%;
+                                    }
+
+                                    .removeButton {
+                                        width: 1rem;
+                                    }
+
+                                    .setListAddButton {
+                                        width: 1rem;
                                     }
                                 }
                             }
