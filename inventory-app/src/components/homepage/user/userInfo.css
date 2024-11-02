@@ -40,15 +40,36 @@
     }
 }
 
+@media only screen and (max-width: 1149px) {
+    .userInfo {
+        .user {
+            gap: 0.875rem;
+
+            h3 {
+                font-size: 1rem;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    .userInfo {
+        .user {
+            gap: 0.474rem;
+
+            h3 {
+                font-size: 1rem;
+                margin-right: 0.5rem;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 1024px) {
     .userInfo {
         .user {
             gap: 0.5rem;
-
-            h3 {
-                font-size: 16px;
-                margin-right: 0.5rem;
-            }
         }
     }
 }

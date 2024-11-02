@@ -442,7 +442,240 @@
             }
 
             .userDetails {
-                top: 83vh;
+                top: 82.7vh;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .homepage {
+        .cardDetails {
+            .cardImage {
+                .pictureContainer {
+                    height: 64%;
+                }
+            }
+
+            .cardDetailsExpanded {
+                .description {
+                    margin-top: 6rem;
+                }
+            }
+        }
+
+        .details {
+            .userDetails {
+                top: 82.3vh;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1339px) {
+    .homepage {
+        .details {
+            .utilities {
+                .inventory {
+                    .sets {
+                        .resultSet {
+                            .setInfo {
+                                p {
+                                    width: 9rem;
+                                }
+                                
+                                .set {
+                                    width: 9rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .userDetails {
+                top: 81.4vh;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .homepage {
+        .cardDetails {
+            .cardImage {
+                .pictureContainer {
+                    height: 62%;
+                }
+            }
+
+            .cardDetailsExpanded {
+                .description {
+                    margin-top: 8rem;
+
+                    .cardDescription {
+                        h3 {
+                            margin: 0.5rem auto;
+                        }
+
+                        .effect {
+                            max-height: 6rem;
+                            overflow-y: scroll;
+                        }
+                    }
+                }
+            }
+        }
+
+        .details {
+            .utilities {
+                .cardSearch {
+                    .searchResults {
+                        .result {
+                            .cardInfo {
+                                span {
+                                    font-size: 0.75rem;
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+                .infoSwitch {
+                    .wishListSwitch {
+                        padding-right: 0.25rem;
+                    }
+                }
+            }
+
+            .userDetails {
+                top: 81.4vh;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1149px) {
+    .homepage {
+        .details {
+            .utilities {
+                .infoSwitch {
+                    h3 {
+                        font-size: 0.75rem;
+                    }
+                    .wishListSwitch {
+                        input {
+                            width: 5rem;
+                        }
+
+                        input::before {
+                            left: 21%;
+                        }
+
+                        input:checked::before {
+                            left: 79%;
+                        }
+
+                        input::after {
+                            content: "Inv";
+                        }
+
+                        input:checked::after {
+                            content: "Wish";
+                        }
+                    }
+                }
+
+                .infoSwitch {
+                    .wishListSwitch {
+                        padding-right: 0rem;
+                    }
+                }
+
+                .inventory {
+                    .sets {
+                        .resultSet {
+                            width: 95%;
+                            display: flex;
+
+                            .setInfo {
+                                max-width: 5rem;
+                                font-size: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                padding: 0;
+
+                                p {
+                                    white-space: nowrap;
+                                    overflow-x: auto;
+                                    overflow-y: hidden;
+                                    max-width: 100%;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                            }
+
+                            .setModifying {
+                                form {
+                                    input {
+                                        width: 30px;
+                                    }
+
+                                    button {
+                                        width: 20px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1076px) {
+    .homepage {
+        .details {
+            .utilities {
+                .cardSearch {
+                    .searchResults {
+                        .result {
+                            .cardInfo {
+                                span {
+                                    font-size: 0.74rem;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .infoSwitch {
+                    h3 {
+                        font-size: 0.75rem;
+                    }
+                    .wishListSwitch {
+                        input {
+                            width: 4rem;
+                        }
+
+                        input::before {
+                            left: 25%;
+                        }
+
+                        input:checked::before {
+                            left: 80%;
+                        }
+
+                        input::after {
+                            content: "Inv";
+                        }
+
+                        input:checked::after {
+                            content: "Wish";
+                        }
+                    }
+                }
             }
         }
     }
@@ -467,7 +700,7 @@
 
                 .infoSwitch {
                     h3 {
-                        font-size: 12px;
+                        font-size: 0.75rem;
                     }
                     .wishListSwitch {
                         input {
