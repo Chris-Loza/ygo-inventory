@@ -37,22 +37,24 @@ const Inventory = () => {
       return globalCard.name === card.name && globalCard.set === card.set;
     });
 
-    if (globalIndex !== -1) {
-      const updatedList = [...globalInventoryList];
-      updatedList[globalIndex] = {
-        ...globalInventoryList[globalIndex],
-        count:
-          Number(globalInventoryList[globalIndex].count) + Number(inputCount),
-      };
+    if (inputCount !== "" && !isNaN(inputCount)) {
+      if (globalIndex !== -1) {
+        const updatedList = [...globalInventoryList];
+        updatedList[globalIndex] = {
+          ...globalInventoryList[globalIndex],
+          count:
+            Number(globalInventoryList[globalIndex].count) + Number(inputCount),
+        };
 
-      setGlobalInventoryList(updatedList);
+        setGlobalInventoryList(updatedList);
 
-      if (listsSearchInput.length > 2) {
-        setFilteredInvCards(
-          updatedList.filter((c) =>
-            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-          )
-        );
+        if (listsSearchInput.length > 2) {
+          setFilteredInvCards(
+            updatedList.filter((c) =>
+              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+            )
+          );
+        }
       }
     }
   };
@@ -63,26 +65,28 @@ const Inventory = () => {
         globalCard.name === card.name && globalCard.set === card.set
     );
 
-    if (globalIndex !== -1) {
-      const updatedList = [...globalInventoryList];
-      updatedList[globalIndex] = {
-        ...globalInventoryList[globalIndex],
-        count:
-          Number(globalInventoryList[globalIndex].count) - Number(inputCount),
-      };
+    if (inputCount !== "" && !isNaN(inputCount)) {
+      if (globalIndex !== -1) {
+        const updatedList = [...globalInventoryList];
+        updatedList[globalIndex] = {
+          ...globalInventoryList[globalIndex],
+          count:
+            Number(globalInventoryList[globalIndex].count) - Number(inputCount),
+        };
 
-      if (updatedList[globalIndex].count < 1) {
-        updatedList.splice(globalIndex, 1);
-      }
+        if (updatedList[globalIndex].count < 1) {
+          updatedList.splice(globalIndex, 1);
+        }
 
-      setGlobalInventoryList(updatedList);
+        setGlobalInventoryList(updatedList);
 
-      if (listsSearchInput.length > 2) {
-        setFilteredInvCards(
-          updatedList.filter((c) =>
-            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-          )
-        );
+        if (listsSearchInput.length > 2) {
+          setFilteredInvCards(
+            updatedList.filter((c) =>
+              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+            )
+          );
+        }
       }
     }
   };
@@ -98,21 +102,23 @@ const Inventory = () => {
       return globalCard.name === card.name && globalCard.set === card.set;
     });
 
-    if (globalIndex !== -1) {
-      const updatedList = [...globalWishlist];
-      updatedList[globalIndex] = {
-        ...globalWishlist[globalIndex],
-        count: Number(globalWishlist[globalIndex].count) + Number(inputCount),
-      };
+    if (inputCount !== "" && !isNaN(inputCount)) {
+      if (globalIndex !== -1) {
+        const updatedList = [...globalWishlist];
+        updatedList[globalIndex] = {
+          ...globalWishlist[globalIndex],
+          count: Number(globalWishlist[globalIndex].count) + Number(inputCount),
+        };
 
-      setGlobalWishlist(updatedList);
+        setGlobalWishlist(updatedList);
 
-      if (listsSearchInput.length > 2) {
-        setFilteredWishCards(
-          updatedList.filter((c) =>
-            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-          )
-        );
+        if (listsSearchInput.length > 2) {
+          setFilteredWishCards(
+            updatedList.filter((c) =>
+              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+            )
+          );
+        }
       }
     }
   };
@@ -122,26 +128,27 @@ const Inventory = () => {
       (globalCard) =>
         globalCard.name === card.name && globalCard.set === card.set
     );
+    if (inputCount !== "" && !isNaN(inputCount)) {
+      if (globalIndex !== -1) {
+        const updatedList = [...globalWishlist];
+        updatedList[globalIndex] = {
+          ...globalWishlist[globalIndex],
+          count: Number(globalWishlist[globalIndex].count) - Number(inputCount),
+        };
 
-    if (globalIndex !== -1) {
-      const updatedList = [...globalWishlist];
-      updatedList[globalIndex] = {
-        ...globalWishlist[globalIndex],
-        count: Number(globalWishlist[globalIndex].count) - Number(inputCount),
-      };
+        if (updatedList[globalIndex].count < 1) {
+          updatedList.splice(globalIndex, 1);
+        }
 
-      if (updatedList[globalIndex].count < 1) {
-        updatedList.splice(globalIndex, 1);
-      }
+        setGlobalWishlist(updatedList);
 
-      setGlobalWishlist(updatedList);
-
-      if (listsSearchInput.length > 2) {
-        setFilteredWishCards(
-          updatedList.filter((c) =>
-            c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-          )
-        );
+        if (listsSearchInput.length > 2) {
+          setFilteredWishCards(
+            updatedList.filter((c) =>
+              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+            )
+          );
+        }
       }
     }
   };
@@ -267,7 +274,7 @@ const Inventory = () => {
 
   const handleModalWishlistSwitch = () => {
     setWishlistToggle(!wishlistToggle);
-  }
+  };
 
   return (
     <div className="inventoryModeComp">
@@ -327,7 +334,8 @@ const Inventory = () => {
                     <label htmlFor="file">
                       <img
                         src={
-                          globalManualEntryCardImage.url || "/images/AddPhotoAlternateNoFill.svg"
+                          globalManualEntryCardImage.url ||
+                          "/images/AddPhotoAlternateNoFill.svg"
                         }
                         alt="card image"
                       />
