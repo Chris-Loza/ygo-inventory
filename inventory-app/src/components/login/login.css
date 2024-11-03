@@ -12,6 +12,10 @@
         align-items: center;
         gap: 20px;
 
+        h2 {
+            font-size: 2rem;
+        }
+
         form {
             display: flex;
             flex-direction: column;

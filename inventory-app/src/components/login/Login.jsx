@@ -29,30 +29,37 @@ const Login = ({ onRegister }) => {
     e.preventDefault();
     setLoading(true);
 
-    const formData = new FormData(e.target);
-    const { username, email, password } = Object.fromEntries(formData);
+    if (avatar.file === null) {
+      toast.error("Please provide a Profile Picture!");
+    } else {
+      const formData = new FormData(e.target);
+      const { username, email, password } = Object.fromEntries(formData);
 
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const imageURL = await upload(avatar.file);
+      try {
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const imageURL = await upload(avatar.file);
 
-      await setDoc(doc(db, "users", res.user.uid), {
-        username,
-        email,
-        avatar: imageURL,
-        id: res.user.uid,
-        wishList: [],
-      });
+        await setDoc(doc(db, "users", res.user.uid), {
+          username,
+          email,
+          avatar: imageURL,
+          id: res.user.uid,
+          wishlist: [],
+          inventory: [],
+        });
 
-      onRegister();
+        onRegister();
 
-      toast.success("Account Created!");
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
+        toast.success("Account Created!");
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
     }
+    
+    setLoading(false);
   };
 
   const handleLogin = async (e) => {
@@ -87,7 +94,10 @@ const Login = ({ onRegister }) => {
         <h2>Create an Account</h2>
         <form onSubmit={handleRegister}>
           <label htmlFor="file">
-            <img src={avatar.url || "/images/AddPhotoAlternateNoFill.svg"} alt="user avatar" />
+            <img
+              src={avatar.url || "/images/AddPhotoAlternateNoFill.svg"}
+              alt="user avatar"
+            />
             Upload an Image
           </label>
           <input
