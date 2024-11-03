@@ -7,8 +7,6 @@ import { useGlobalState } from "../../lib/globalState";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
-  // const [wishListToggle, setWishListToggle] = useState(false);
-  // const [prevWishListToggle, setPrevWishListToggle] = useState(null);
   const [searchInput, setSearchInput] = useState("");
   const [cardCounts, setCardCounts] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -43,10 +41,6 @@ const Homepage = () => {
   const handleWishListSwitch = () => {
     setWishlistToggle(!wishlistToggle);
   };
-
-  // const handleModalWishListSwitch = () => {
-  //   setWishListToggle(!wishListToggle);
-  // };
 
   const basicForm = (e) => {
     e.preventDefault();
@@ -116,20 +110,16 @@ const Homepage = () => {
       if (existingInvCardIndex !== -1) {
         const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count += Number(cardCount);
-        // setInvCards(updatedInvCards);
         setGlobalInventoryList(updatedInvCards);
       } else {
-        // setInvCards((prev) => [...prev, newCard]);
         setGlobalInventoryList((prev) => [...prev, newCard]);
       }
     } else {
       if (existingWishCardIndex !== -1) {
         const updatedWishCards = [...globalWishlist];
         updatedWishCards[existingWishCardIndex].count += Number(cardCount);
-        // setWishCards(updatedWishCards);
         setGlobalWishlist(updatedWishCards);
       } else {
-        // setWishCards((prev) => [...prev, newCard]);
         setGlobalWishlist((prev) => [...prev, newCard]);
       }
     }
@@ -153,7 +143,6 @@ const Homepage = () => {
           updatedInvCards.splice(existingInvCardIndex, 1);
         }
 
-        // setInvCards(updatedInvCards);
         setGlobalInventoryList(updatedInvCards);
       }
     } else {
@@ -165,142 +154,10 @@ const Homepage = () => {
           updatedWishCards.splice(existingWishCardIndex, 1);
         }
 
-        // setWishCards(updatedWishCards);
         setGlobalWishlist(updatedWishCards);
       }
     }
   };
-
-  // const [modal, setModal] = useState(false);
-  // const modalRef = useRef();
-  // const [cardImage, setCardImage] = useState({
-  //   file: null,
-  //   url: "",
-  // });
-  // const [manualEntryCard, setManualEntryCard] = useState({
-  //   name: "",
-  //   set: "",
-  //   rarity: "",
-  //   code: "",
-  //   imageURL: "",
-  //   description: "",
-  //   attribute: "",
-  //   race: "",
-  //   type: "",
-  //   level: "",
-  //   atk: "",
-  //   def: "",
-  //   linkval: "",
-  //   count: 0,
-  // });
-
-  // const handleModal = () => {
-  //   setPrevWishListToggle(wishListToggle);
-  //   setModal(true);
-  //   if (wishListToggle) {
-  //     setWishListToggle(false);
-  //   }
-  // };
-
-  // const closeModal = (e) => {
-  //   if (e.target === modalRef.current) {
-  //     setModal(false);
-  //     console.log(wishListToggle);
-  //   } else {
-  //     setModal(false);
-  //   }
-  //   setWishListToggle(prevWishListToggle);
-  // };
-
-  // const handleCardImage = (e) => {
-  //   if (e.target.files[0]) {
-  //     setCardImage({
-  //       file: e.target.files[0],
-  //       url: URL.createObjectURL(e.target.files[0]),
-  //     });
-  //   }
-  // };
-
-  // const handleCardEntry = (e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(e.target);
-  //   const {
-  //     cardName,
-  //     setName,
-  //     cardRarity,
-  //     setCode,
-  //     cardDesc,
-  //     attribute,
-  //     race,
-  //     cardType,
-  //     monsterLevel,
-  //     monsterAtk,
-  //     monsterDef,
-  //     linkVal,
-  //     cardCount,
-  //   } = Object.fromEntries(formData);
-
-  //   const newCard = {
-  //     name: cardName,
-  //     set: setName,
-  //     rarity: cardRarity,
-  //     code: setCode,
-  //     imageURL:
-  //       cardImage.url !== ""
-  //         ? cardImage.url
-  //         : "../../../../images/backOfYGOCard.jpg",
-  //     description: cardDesc,
-  //     attribute: attribute,
-  //     race: race,
-  //     type: cardType,
-  //     level: monsterLevel,
-  //     atk: monsterAtk,
-  //     def: monsterDef,
-  //     linkval: linkVal,
-  //     count: cardCount !== "" ? cardCount : 0,
-  //   };
-
-  //   console.log(newCard);
-  //   setManualEntryCard(newCard);
-  // };
-
-  // useEffect(() => {
-  //   if (manualEntryCard.name !== "") {
-  //     const existingInvCardIndex = globalInventoryList.findIndex(
-  //       (card) =>
-  //         card.name === manualEntryCard.name && card.set === manualEntryCard.set
-  //     );
-
-  //     const existingWishCardIndex = globalWishlist.findIndex(
-  //       (card) =>
-  //         card.name === manualEntryCard.name && card.set === manualEntryCard.set
-  //     );
-
-  //     if (!wishListToggle) {
-  //       if (existingInvCardIndex !== -1) {
-  //         const updatedInvCards = [...globalInventoryList];
-  //         updatedInvCards[existingInvCardIndex].count += Number(
-  //           manualEntryCard.count
-  //         );
-  //         setGlobalInventoryList(updatedInvCards);
-  //       } else {
-  //         setGlobalInventoryList((prev) => [...prev, manualEntryCard]);
-  //       }
-  //     } else {
-  //       if (existingWishCardIndex !== -1) {
-  //         const updatedWishCards = [...globalWishlist];
-  //         updatedWishCards[existingWishCardIndex].count += Number(
-  //           manualEntryCard.count
-  //         );
-  //         setGlobalWishlist(updatedWishCards);
-  //       } else {
-  //         setGlobalWishlist((prev) => [...prev, manualEntryCard]);
-  //       }
-  //     }
-  //   }
-  //   console.log(manualEntryCard);
-  // }, [manualEntryCard]);
 
   return (
     <div className="homepage">
@@ -310,110 +167,6 @@ const Homepage = () => {
       {inventoryMode ? (
         <div className="inventoryMode">
           <Inventory />
-          {/* <button className="modalButton" onClick={handleModal}>
-            Card Entry
-          </button>
-          {modal && (
-            <div className="modalContainer" onClick={closeModal} ref={modalRef}>
-              <div className="modal" onClick={(e) => e.stopPropagation()}>
-                <div className="modalWishListSwitch">
-                  <input
-                    type="checkbox"
-                    name="modalWishListToggle"
-                    onClick={handleModalWishListSwitch}
-                  />
-                </div>
-                <img
-                  onClick={closeModal}
-                  className="closeIcon"
-                  src="../../../../images/CloseIcon.svg"
-                  alt="close button"
-                />
-                <form onSubmit={handleCardEntry}>
-                  <label htmlFor="file">
-                    <img
-                      src={
-                        cardImage.url || "/images/AddPhotoAlternateNoFill.svg"
-                      }
-                      alt="card image"
-                    />
-                    Upload an Image
-                  </label>
-                  <input
-                    type="file"
-                    id="file"
-                    style={{ display: "none" }}
-                    onChange={handleCardImage}
-                    name="cardImage"
-                  />
-                  <div className="manualCardInfo">
-                    <div className="div1">
-                      <input
-                        type="text"
-                        placeholder="Card Name"
-                        name="cardName"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Set Name"
-                        name="setName"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Rarity"
-                        name="cardRarity"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Set Code"
-                        name="setCode"
-                      />
-                    </div>
-                    <div className="div2">
-                      <input
-                        type="text"
-                        placeholder="Card Type"
-                        name="cardType"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Card Effect (Optional)"
-                        name="cardDesc"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Attribute"
-                        name="attribute"
-                      />
-                      <input
-                        type="text"
-                        placeholder="Monster Type"
-                        name="race"
-                      />
-                      <input type="text" placeholder="Count" name="cardCount" />
-                    </div>
-                    <div className="div3">
-                      <input
-                        type="text"
-                        placeholder="Monster Level"
-                        name="monsterLevel"
-                      />
-                      <input type="text" placeholder="Atk" name="monsterAtk" />
-                      <input type="text" placeholder="Def" name="monsterDef" />
-                      <input
-                        type="text"
-                        placeholder="Link Rating"
-                        name="linkVal"
-                      />
-                    </div>
-                  </div>
-                  <div className="buttons">
-                    <button>Enter</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          )} */}
         </div>
       ) : (
         <div className="cardDetails">
