@@ -18,7 +18,7 @@ const UserInfo = () => {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
 
-      // console.log(docSnap.data());
+      console.log(docSnap.data());
       setCurrentUser(docSnap.data());
     };
 

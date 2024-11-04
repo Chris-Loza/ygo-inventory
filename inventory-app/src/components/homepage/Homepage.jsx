@@ -4,6 +4,9 @@ import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
 import { cardList } from "../../lib/cardList";
 import { useGlobalState } from "../../lib/globalState";
+import { useAddToUserLists } from "../../hooks/useAddToUserLists";
+import { auth } from "../../lib/firebase";
+import { useRemoveFromUserLists } from "../../hooks/useRemoveFromUserLists";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
@@ -93,7 +96,7 @@ const Homepage = () => {
       level: selectedCard.level,
       atk: selectedCard.atk,
       def: selectedCard.def,
-      linkval: selectedCard.linkval,
+      linkval: selectedCard.linkval || 0,
       frameType: selectedCard.frameType,
       count: Number(cardCount),
     };
@@ -111,16 +114,20 @@ const Homepage = () => {
         const updatedInvCards = [...globalInventoryList];
         updatedInvCards[existingInvCardIndex].count += Number(cardCount);
         setGlobalInventoryList(updatedInvCards);
+        useAddToUserLists(auth.currentUser.uid, newCard, wishlistToggle);
       } else {
         setGlobalInventoryList((prev) => [...prev, newCard]);
+        useAddToUserLists(auth.currentUser.uid, newCard, wishlistToggle);
       }
     } else {
       if (existingWishCardIndex !== -1) {
         const updatedWishCards = [...globalWishlist];
         updatedWishCards[existingWishCardIndex].count += Number(cardCount);
         setGlobalWishlist(updatedWishCards);
+        useAddToUserLists(auth.currentUser.uid, newCard, wishlistToggle);
       } else {
         setGlobalWishlist((prev) => [...prev, newCard]);
+        useAddToUserLists(auth.currentUser.uid, newCard, wishlistToggle);
       }
     }
   };
@@ -145,6 +152,13 @@ const Homepage = () => {
 
         setGlobalInventoryList(updatedInvCards);
       }
+      useRemoveFromUserLists(
+        auth.currentUser.uid,
+        selectedCard,
+        wishlistToggle,
+        cardCount,
+        setName
+      );
     } else {
       if (existingWishCardIndex !== -1) {
         const updatedWishCards = [...globalWishlist];
@@ -156,9 +170,15 @@ const Homepage = () => {
 
         setGlobalWishlist(updatedWishCards);
       }
+      useRemoveFromUserLists(
+        auth.currentUser.uid,
+        selectedCard,
+        wishlistToggle,
+        cardCount,
+        setName
+      );
     }
   };
-
   return (
     <div className="homepage">
       <div className="toggleSwitch">
