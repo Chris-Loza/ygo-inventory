@@ -18,7 +18,7 @@ export const useAddToUserLists = async (uid, newCard, wishlistToggle) => {
 
         if (cardIndex !== -1) {
           currentInventory[cardIndex].count += Number(newCard.count);
-          toast.info("Card count increased!");
+          toast.info("Card count increased.");
         } else {
           currentInventory.push(newCard);
           toast.success("Card added to Inventory!");
@@ -34,7 +34,7 @@ export const useAddToUserLists = async (uid, newCard, wishlistToggle) => {
 
         if (cardIndex !== -1) {
           currentWishlist[cardIndex].count += Number(newCard.count);
-          toast.info("Card count increased");
+          toast.info("Card count increased.");
         } else {
           currentWishlist.push(newCard);
           toast.success("Card added to Wishlist!");

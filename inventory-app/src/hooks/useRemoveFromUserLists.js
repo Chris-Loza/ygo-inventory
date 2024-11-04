@@ -44,7 +44,7 @@ export const useRemoveFromUserLists = async (
             await updateDoc(docRef, {
               inventory: updatedInventory,
             });
-            toast.info("Card count decreased!");
+            toast.info("Card count decreased.");
           }
         }
       } else {
@@ -68,7 +68,7 @@ export const useRemoveFromUserLists = async (
             await updateDoc(docRef, {
               wishlist: updatedWishlist,
             });
-            toast.info("Card count decreased!");
+            toast.info("Card count decreased.");
           }
         }
       }

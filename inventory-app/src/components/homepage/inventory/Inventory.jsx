@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./inventory.css";
 import { useGlobalState } from "../../../lib/globalState";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../lib/firebase";
 import { toast } from "react-toastify";
 
@@ -35,34 +35,43 @@ const Inventory = () => {
     setInvListCounts(newCounts);
   };
 
-  const handleInvListCardAdd = (card, inputCount) => {
+  const handleInvListCardAdd = async (card, inputCount) => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
     const globalIndex = globalInventoryList.findIndex((globalCard) => {
       return globalCard.name === card.name && globalCard.set === card.set;
     });
 
     if (inputCount !== "" && !isNaN(inputCount)) {
       if (globalIndex !== -1) {
-        const updatedList = [...globalInventoryList];
-        updatedList[globalIndex] = {
-          ...globalInventoryList[globalIndex],
-          count:
-            Number(globalInventoryList[globalIndex].count) + Number(inputCount),
-        };
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const updatedList = [...globalInventoryList];
+          updatedList[globalIndex] = {
+            ...globalInventoryList[globalIndex],
+            count:
+              Number(globalInventoryList[globalIndex].count) +
+              Number(inputCount),
+          };
 
-        setGlobalInventoryList(updatedList);
-
-        if (listsSearchInput.length > 2) {
-          setFilteredInvCards(
-            updatedList.filter((c) =>
-              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-            )
-          );
+          //setGlobalInventoryList(updatedList);
+          await updateDoc(docRef, {
+            inventory: updatedList,
+          });
+          toast.info("Card count increased.");
+          if (listsSearchInput.length > 2) {
+            setFilteredInvCards(
+              updatedList.filter((c) =>
+                c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+              )
+            );
+          }
         }
       }
     }
   };
 
-  const handleInvListCardSubtract = (card, inputCount) => {
+  const handleInvListCardSubtract = async (card, inputCount) => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
     const globalIndex = globalInventoryList.findIndex(
       (globalCard) =>
         globalCard.name === card.name && globalCard.set === card.set
@@ -70,25 +79,35 @@ const Inventory = () => {
 
     if (inputCount !== "" && !isNaN(inputCount)) {
       if (globalIndex !== -1) {
-        const updatedList = [...globalInventoryList];
-        updatedList[globalIndex] = {
-          ...globalInventoryList[globalIndex],
-          count:
-            Number(globalInventoryList[globalIndex].count) - Number(inputCount),
-        };
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const updatedList = [...globalInventoryList];
+          updatedList[globalIndex] = {
+            ...globalInventoryList[globalIndex],
+            count:
+              Number(globalInventoryList[globalIndex].count) -
+              Number(inputCount),
+          };
 
-        if (updatedList[globalIndex].count < 1) {
-          updatedList.splice(globalIndex, 1);
-        }
+          if (updatedList[globalIndex].count < 1) {
+            updatedList.splice(globalIndex, 1);
+            toast.warning("Card removed from Inventory!");
+          } else {
+            toast.info("Card count decreased.");
+          }
 
-        setGlobalInventoryList(updatedList);
+          //setGlobalInventoryList(updatedList);
+          await updateDoc(docRef, {
+            inventory: updatedList,
+          });
 
-        if (listsSearchInput.length > 2) {
-          setFilteredInvCards(
-            updatedList.filter((c) =>
-              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-            )
-          );
+          if (listsSearchInput.length > 2) {
+            setFilteredInvCards(
+              updatedList.filter((c) =>
+                c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+              )
+            );
+          }
         }
       }
     }
@@ -100,57 +119,76 @@ const Inventory = () => {
     setWishlistCounts(newCounts);
   };
 
-  const handleWishlistCardAdd = (card, inputCount) => {
+  const handleWishlistCardAdd = async (card, inputCount) => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
     const globalIndex = globalWishlist.findIndex((globalCard) => {
       return globalCard.name === card.name && globalCard.set === card.set;
     });
 
     if (inputCount !== "" && !isNaN(inputCount)) {
       if (globalIndex !== -1) {
-        const updatedList = [...globalWishlist];
-        updatedList[globalIndex] = {
-          ...globalWishlist[globalIndex],
-          count: Number(globalWishlist[globalIndex].count) + Number(inputCount),
-        };
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const updatedList = [...globalWishlist];
+          updatedList[globalIndex] = {
+            ...globalWishlist[globalIndex],
+            count:
+              Number(globalWishlist[globalIndex].count) + Number(inputCount),
+          };
 
-        setGlobalWishlist(updatedList);
-
-        if (listsSearchInput.length > 2) {
-          setFilteredWishCards(
-            updatedList.filter((c) =>
-              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-            )
-          );
+          //setGlobalWishlist(updatedList);
+          await updateDoc(docRef, {
+            wishlist: updatedList,
+          });
+          toast.info("Card count increased");
+          if (listsSearchInput.length > 2) {
+            setFilteredWishCards(
+              updatedList.filter((c) =>
+                c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+              )
+            );
+          }
         }
       }
     }
   };
 
-  const handleWishlistCardSubtract = (card, inputCount) => {
+  const handleWishlistCardSubtract = async (card, inputCount) => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
     const globalIndex = globalWishlist.findIndex(
       (globalCard) =>
         globalCard.name === card.name && globalCard.set === card.set
     );
     if (inputCount !== "" && !isNaN(inputCount)) {
       if (globalIndex !== -1) {
-        const updatedList = [...globalWishlist];
-        updatedList[globalIndex] = {
-          ...globalWishlist[globalIndex],
-          count: Number(globalWishlist[globalIndex].count) - Number(inputCount),
-        };
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const updatedList = [...globalWishlist];
+          updatedList[globalIndex] = {
+            ...globalWishlist[globalIndex],
+            count:
+              Number(globalWishlist[globalIndex].count) - Number(inputCount),
+          };
 
-        if (updatedList[globalIndex].count < 1) {
-          updatedList.splice(globalIndex, 1);
-        }
+          if (updatedList[globalIndex].count < 1) {
+            updatedList.splice(globalIndex, 1);
+            toast.warning("Card removed from Wishlist!")
+          } else {
+            toast.info("Card count decreased.")
+          }
 
-        setGlobalWishlist(updatedList);
+          // setGlobalWishlist(updatedList);
+          await updateDoc(docRef, {
+            wishlist: updatedList,
+          });
 
-        if (listsSearchInput.length > 2) {
-          setFilteredWishCards(
-            updatedList.filter((c) =>
-              c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
-            )
-          );
+          if (listsSearchInput.length > 2) {
+            setFilteredWishCards(
+              updatedList.filter((c) =>
+                c.name.toLowerCase().includes(listsSearchInput.toLowerCase())
+              )
+            );
+          }
         }
       }
     }
