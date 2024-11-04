@@ -172,9 +172,9 @@ const Inventory = () => {
 
           if (updatedList[globalIndex].count < 1) {
             updatedList.splice(globalIndex, 1);
-            toast.warning("Card removed from Wishlist!")
+            toast.warning("Card removed from Wishlist!");
           } else {
-            toast.info("Card count decreased.")
+            toast.info("Card count decreased.");
           }
 
           // setGlobalWishlist(updatedList);
@@ -267,49 +267,82 @@ const Inventory = () => {
       atk: monsterAtk,
       def: monsterDef,
       linkval: linkVal,
-      count: cardCount !== "" ? cardCount : 0,
+      count: cardCount !== "" ? Number(cardCount) : 0,
     };
 
     setGlobalManualEntryCard(newCard);
   };
 
   useEffect(() => {
-    if (globalManualEntryCard.name !== "") {
-      const existingInvCardIndex = globalInventoryList.findIndex(
-        (card) =>
-          card.name === globalManualEntryCard.name &&
-          card.set === globalManualEntryCard.set
-      );
+    const handleManualCardUpdate = async () => {
+      const docRef = doc(db, "users", auth.currentUser.uid);
 
-      const existingWishCardIndex = globalWishlist.findIndex(
-        (card) =>
-          card.name === globalManualEntryCard.name &&
-          card.set === globalManualEntryCard.set
-      );
+      if (globalManualEntryCard.name !== "") {
+        const docSnap = await getDoc(docRef);
+        const currentInventory = docSnap.exists()
+          ? docSnap.data().inventory
+          : [];
+        const currentWishlist = docSnap.exists() ? docSnap.data().wishlist : [];
 
-      if (!wishlistToggle) {
-        if (existingInvCardIndex !== -1) {
-          const updatedInvCards = [...globalInventoryList];
-          updatedInvCards[existingInvCardIndex].count += Number(
-            globalManualEntryCard.count
-          );
-          setGlobalInventoryList(updatedInvCards);
+        const existingInvCardIndex = currentInventory.findIndex(
+          (card) =>
+            card.name === globalManualEntryCard.name &&
+            card.set === globalManualEntryCard.set
+        );
+
+        const existingWishCardIndex = currentWishlist.findIndex(
+          (card) =>
+            card.name === globalManualEntryCard.name &&
+            card.set === globalManualEntryCard.set
+        );
+
+        if (!wishlistToggle) {
+          if (existingInvCardIndex !== -1) {
+            const updatedInvCards = [...currentInventory];
+            updatedInvCards[existingInvCardIndex].count += Number(
+              globalManualEntryCard.count
+            );
+            setGlobalInventoryList(updatedInvCards);
+            await updateDoc(docRef, {
+              inventory: updatedInvCards,
+            });
+            toast.info("Card count increased.")
+          } else {
+            const newInventoryList = [
+              ...currentInventory,
+              globalManualEntryCard,
+            ];
+            setGlobalInventoryList(newInventoryList);
+            await updateDoc(docRef, {
+              inventory: newInventoryList,
+            });
+            toast.success("Card added to Inventory!")
+          }
         } else {
-          setGlobalInventoryList((prev) => [...prev, globalManualEntryCard]);
-        }
-      } else {
-        if (existingWishCardIndex !== -1) {
-          const updatedWishCards = [...globalWishlist];
-          updatedWishCards[existingWishCardIndex].count += Number(
-            globalManualEntryCard.count
-          );
-          setGlobalWishlist(updatedWishCards);
-        } else {
-          setGlobalWishlist((prev) => [...prev, globalManualEntryCard]);
+          if (existingWishCardIndex !== -1) {
+            const updatedWishCards = [...currentWishlist];
+            updatedWishCards[existingWishCardIndex].count += Number(
+              globalManualEntryCard.count
+            );
+            setGlobalWishlist(updatedWishCards);
+            await updateDoc(docRef, {
+              wishlist: updatedWishCards,
+            });
+            toast.info("Card count increased.")
+          } else {
+            const newWishlist = [...currentWishlist, globalManualEntryCard];
+            setGlobalWishlist(newWishlist);
+            await updateDoc(docRef, {
+              wishlist: newWishlist,
+            });
+            toast.success("Card added to Wishlist!")
+          }
         }
       }
-    }
-    console.log(globalManualEntryCard);
+      // console.log(globalManualEntryCard);
+    };
+
+    handleManualCardUpdate();
   }, [globalManualEntryCard]);
 
   const handleModalWishlistSwitch = () => {
