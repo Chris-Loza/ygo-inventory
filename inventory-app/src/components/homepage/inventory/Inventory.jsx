@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./inventory.css";
 import { useGlobalState } from "../../../lib/globalState";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { auth, db } from "../../../lib/firebase";
+import { toast } from "react-toastify";
 
 const Inventory = () => {
   const {
@@ -229,7 +232,6 @@ const Inventory = () => {
       count: cardCount !== "" ? cardCount : 0,
     };
 
-    console.log(newCard);
     setGlobalManualEntryCard(newCard);
   };
 
@@ -275,6 +277,27 @@ const Inventory = () => {
   const handleModalWishlistSwitch = () => {
     setWishlistToggle(!wishlistToggle);
   };
+
+  useEffect(() => {
+    const docRef = doc(db, "users", auth.currentUser.uid);
+    const unSub = onSnapshot(
+      docRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          const inventoryData = docSnap.data().inventory || [];
+          const wishlistData = docSnap.data().wishlist || [];
+          setGlobalInventoryList(inventoryData);
+          setGlobalWishlist(wishlistData);
+        } else {
+          toast.error("No Document found!");
+        }
+      },
+      (error) => {
+        toast.error(error.message);
+      }
+    );
+    return () => unSub();
+  }, []);
 
   return (
     <div className="inventoryModeComp">

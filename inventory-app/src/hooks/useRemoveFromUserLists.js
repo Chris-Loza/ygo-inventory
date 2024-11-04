@@ -38,11 +38,11 @@ export const useRemoveFromUserLists = async (
             });
             toast.warning("Card removed from Inventory!");
           } else {
+            const updatedInventory = [...currentInventory];
+            updatedInventory[cardIndex] = updatedCard;
+
             await updateDoc(docRef, {
-              inventory: arrayRemove(currentInventory[cardIndex]),
-            });
-            await updateDoc(docRef, {
-              inventory: arrayUnion(updatedCard),
+              inventory: updatedInventory,
             });
             toast.info("Card count decreased!");
           }
@@ -62,11 +62,11 @@ export const useRemoveFromUserLists = async (
             });
             toast.warning("Card removed from Wishlist!");
           } else {
+            const updatedWishlist = [...currentWishlist];
+            updatedWishlist[cardIndex] = updatedCard;
+
             await updateDoc(docRef, {
-              wishlist: arrayRemove(currentWishlist[cardIndex]),
-            });
-            await updateDoc(docRef, {
-              wishlist: arrayUnion(updatedCard),
+              wishlist: updatedWishlist,
             });
             toast.info("Card count decreased!");
           }
