@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import "./homepage.css";
 import UserInfo from "./user/UserInfo";
 import Inventory from "./inventory/Inventory";
-import { cardList } from "../../lib/cardList";
+import { fullCardList } from "../../lib/fullCardList.min.js";
 import { useGlobalState } from "../../lib/globalState";
 import { useAddToUserLists } from "../../hooks/useAddToUserLists";
-import { auth } from "../../lib/firebase";
+import { auth, storage } from "../../lib/firebase";
 import { useRemoveFromUserLists } from "../../hooks/useRemoveFromUserLists";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const Homepage = () => {
   const [inventoryMode, setInventoryMode] = useState(false);
@@ -179,8 +180,10 @@ const Homepage = () => {
       );
     }
   };
+
   return (
     <div className="homepage">
+      {/* <div className="myLinks">Created and Developed by Christian Loza </div> */}
       <div className="toggleSwitch">
         <input type="checkbox" name="inventory" onClick={handleSwitch} />
       </div>
@@ -295,7 +298,7 @@ const Homepage = () => {
                   setFilteredCards([]);
                 } else if (newSearchInput.length > 2) {
                   setFilteredCards(
-                    cardList.data.filter((c) =>
+                    fullCardList.data.filter((c) =>
                       c.name
                         .toLowerCase()
                         .includes(newSearchInput.toLowerCase())

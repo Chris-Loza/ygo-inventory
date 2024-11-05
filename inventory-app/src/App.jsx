@@ -42,7 +42,13 @@ function App() {
   return (
     <GlobalStateProvider>
       <div className="container">
-        {isLoadingUserData ? <Login onRegister={handleSuccessfulRegistration} /> : isLoggedIn ? <Homepage /> : <Login onRegister={handleSuccessfulRegistration} />}
+        {isLoadingUserData ? (
+          <Login onRegister={handleSuccessfulRegistration} />
+        ) : isLoggedIn ? (
+          <Homepage />
+        ) : (
+          <Login onRegister={handleSuccessfulRegistration} />
+        )}
         <Notifications />
       </div>
     </GlobalStateProvider>

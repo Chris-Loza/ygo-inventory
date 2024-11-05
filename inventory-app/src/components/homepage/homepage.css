@@ -4,6 +4,13 @@
     height: 90vh;
     position: relative;
 
+    .myLinks {
+        position: absolute;
+        top: 91vh;
+        left: 32vw;
+        color: black;
+    }
+
     .toggleSwitch {
         position: absolute;
         left: 37.5vw;
@@ -181,7 +188,7 @@
                     flex-direction: column;
                     gap: 0.9375rem;
                     width: 100%;
-                    max-height: 100%;
+                    max-height: 90%;
                     overflow-y: scroll;
 
                     .result {
@@ -311,6 +318,7 @@
                     flex-direction: column;
                     gap: 0.9375rem;
                     overflow-y: scroll;
+                    max-height: 75%;
 
                     .resultSet {
                         display: flex;
@@ -442,7 +450,7 @@
             }
 
             .userDetails {
-                top: 82.7vh;
+                top: 81.9vh;
             }
         }
     }
@@ -466,7 +474,7 @@
 
         .details {
             .userDetails {
-                top: 82.3vh;
+                top: 81.9vh;
             }
         }
     }
@@ -860,8 +868,8 @@
 
                     .searchResults {
                         flex-direction: column;
-                        max-height: 60%;
-                        gap: 10px;
+                        max-height: 55%;
+                        gap: 0.625rem;
                     }
                 }
 
@@ -874,7 +882,7 @@
                     position: absolute;
                     left: 53.5%;
                     top: 69%;
-                    gap: 3.3rem;
+                    gap: 1rem;
 
                     .wishListSwitch {
                         z-index: 99;
@@ -911,13 +919,24 @@
 
                         .resultSet {
                             min-height: 55px;
+
+                            .setInfo {
+                                p {
+                                    font-size: 0.75rem;
+                                }
+
+                                .set {
+                                    font-size: 0.625rem;
+                                }
+                            }
                         }
                     }
                 }
             }
 
             .userDetails {
-                left: 0%;
+                top: 82vh;
+                left: 0vw;
                 width: 100%;
             }
         }
@@ -984,6 +1003,7 @@
                     }
 
                     .searchResults {
+                        max-height: 53%;
                         .result {
                             .cardInfo {
                                 span {
@@ -1037,6 +1057,7 @@
 
                 .inventory {
                     .sets {
+                        height: 60%;
                         .resultSet {
                             position: relative;
                             width: 90%;
@@ -1083,6 +1104,11 @@
                     }
                 }
             }
+
+            .userDetails {
+                top: 81.4vh;
+                width: 99.7%;
+            }
         }
     }
 }
@@ -1093,6 +1119,10 @@
             .utilities {
                 .infoSwitch {
                     gap: 0rem;
+
+                    h3 {
+                        font-size: 0.5625rem;
+                    }
                 }
             }
         }
@@ -1101,6 +1131,13 @@
 
 @media only screen and (max-width: 390px) {
     .homepage {
+        .cardDetails {
+            .cardDetailsExpanded {
+                .description {
+                    margin-top: 0rem;
+                }
+            }
+        }
         .details {
             .utilities {
                 .infoSwitch {
