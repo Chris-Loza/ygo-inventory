@@ -4,6 +4,7 @@ import { useGlobalState } from "../../../lib/globalState";
 import { doc, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../../lib/firebase";
 import { toast } from "react-toastify";
+import upload from "../../../lib/upload";
 
 const Inventory = () => {
   const {
@@ -40,7 +41,7 @@ const Inventory = () => {
     const globalIndex = globalInventoryList.findIndex((globalCard) => {
       return globalCard.name === card.name && globalCard.set === card.set;
     });
-
+    //random
     if (inputCount !== "" && !isNaN(inputCount)) {
       if (globalIndex !== -1) {
         const docSnap = await getDoc(docRef);
@@ -229,10 +230,11 @@ const Inventory = () => {
     }
   };
 
-  const handleManualCardEntry = (e) => {
+  const handleManualCardEntry = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
+    // const imageURL = await upload(globalManualEntryCardImage.file)
 
     const {
       cardName,
@@ -257,7 +259,7 @@ const Inventory = () => {
       code: setCode,
       imageURL:
         globalManualEntryCardImage.url !== ""
-          ? globalManualEntryCardImage.url
+          ? await upload(globalManualEntryCardImage.file)
           : "../../../../images/backOfYGOCard.jpg",
       description: cardDesc,
       attribute: attribute,
@@ -269,7 +271,7 @@ const Inventory = () => {
       linkval: linkVal,
       count: cardCount !== "" ? Number(cardCount) : 0,
     };
-
+    setManualCardName(newCard.name);
     setGlobalManualEntryCard(newCard);
   };
 
@@ -277,7 +279,7 @@ const Inventory = () => {
     const handleManualCardUpdate = async () => {
       const docRef = doc(db, "users", auth.currentUser.uid);
 
-      if (globalManualEntryCard.name !== "") {
+      if (manualCardName !== "") {
         const docSnap = await getDoc(docRef);
         const currentInventory = docSnap.exists()
           ? docSnap.data().inventory
@@ -306,7 +308,7 @@ const Inventory = () => {
             await updateDoc(docRef, {
               inventory: updatedInvCards,
             });
-            toast.info("Card count increased.")
+            toast.info("Card count increased.");
           } else {
             const newInventoryList = [
               ...currentInventory,
@@ -316,7 +318,7 @@ const Inventory = () => {
             await updateDoc(docRef, {
               inventory: newInventoryList,
             });
-            toast.success("Card added to Inventory!")
+            toast.success("Card added to Inventory!");
           }
         } else {
           if (existingWishCardIndex !== -1) {
@@ -328,18 +330,19 @@ const Inventory = () => {
             await updateDoc(docRef, {
               wishlist: updatedWishCards,
             });
-            toast.info("Card count increased.")
+            toast.info("Card count increased.");
           } else {
             const newWishlist = [...currentWishlist, globalManualEntryCard];
             setGlobalWishlist(newWishlist);
             await updateDoc(docRef, {
               wishlist: newWishlist,
             });
-            toast.success("Card added to Wishlist!")
+            toast.success("Card added to Wishlist!");
           }
         }
       }
       // console.log(globalManualEntryCard);
+      setManualCardName("");
     };
 
     handleManualCardUpdate();
@@ -348,7 +351,7 @@ const Inventory = () => {
   const handleModalWishlistSwitch = () => {
     setWishlistToggle(!wishlistToggle);
   };
-
+//randodd
   useEffect(() => {
     const docRef = doc(db, "users", auth.currentUser.uid);
     const unSub = onSnapshot(
@@ -370,6 +373,8 @@ const Inventory = () => {
     return () => unSub();
   }, []);
 
+  const [manualCardName, setManualCardName] = useState("");
+  const [manualCardImage, setManualCardImage] = useState("");
   return (
     <div className="inventoryModeComp">
       <div className="inventorySearch">
@@ -448,6 +453,8 @@ const Inventory = () => {
                           type="text"
                           placeholder="Card Name"
                           name="cardName"
+                          value={manualCardName}
+                          onChange={(e) => setManualCardName(e.target.value)}
                         />
                         <input
                           type="text"

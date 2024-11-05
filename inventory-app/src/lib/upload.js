@@ -1,9 +1,14 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { storage } from "./firebase";
+import { auth, db, storage } from "./firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const upload = async (file) => {
+  const docRef = doc(db, "users", auth.currentUser.uid);
+  const docSnap = await getDoc(docRef);
+  const currentUserData = docSnap.exists() ? docSnap.data() : null;
+  const currentUser = currentUserData !== null ? currentUserData.username : currentUserData;
   const date = new Date();
-  const storageRef = ref(storage, `images/${date + file.name}`);
+  const storageRef = ref(storage, `images/${currentUser + date + file.name}`);
 
   const uploadTask = uploadBytesResumable(storageRef, file);
 
